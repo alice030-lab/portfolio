@@ -6,20 +6,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 <Layout>
   <section class="container hero">
-    <div class="eyebrow">Alice Office — Est. 2018 · Taipei</div>
-    <h1>Brand systems<br/>built for the <em>long read.</em></h1>
-    <p class="lead">A design practice working at the seam between brand identity, packaging, and product interfaces — for studios, manufacturers, and operators who care about the small stuff.</p>
+    <div class="eyebrow">Alice Office — 創立於 2018 · 台北</div>
+    <h1>為品牌打造<br/>能<em>被細讀</em>的視覺系統</h1>
+    <p class="lead">一間專注在品牌識別、包裝設計、與產品介面之間交會處的設計工作室。服務在乎細節的品牌、製造業者、與營運團隊。</p>
     <div class="meta-row">
-      <div><strong>Practice</strong>Identity · Editorial · Product</div>
-      <div><strong>Selected</strong>14 brand systems<br/>since 2018</div>
-      <div><strong>Available</strong>Q3 — accepting briefs</div>
+      <div><strong>專業領域</strong>品牌識別 · 編輯設計 · 產品介面</div>
+      <div><strong>累積案例</strong>14 套品牌系統<br/>自 2018 年起</div>
+      <div><strong>檔期</strong>第三季 — 開放洽談</div>
     </div>
   </section>
 
   <section class="container">
     <div class="section-head">
-      <h2>Selected Work</h2>
-      <span class="num">— 01 / Index</span>
+      <h2>精選作品</h2>
+      <span class="num">— 01 / 索引</span>
     </div>
     <div class="featured">
       {featured.map((w, i) => (
@@ -37,16 +37,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   <section class="container">
     <div class="section-head">
-      <h2>Practice</h2>
-      <span class="num">— 02 / Services</span>
+      <h2>服務項目</h2>
+      <span class="num">— 02 / 服務</span>
     </div>
     <div class="services">
       {[
-        { n: "01", name: "Brand Identity", tags: "VI · Logotype · Guidelines" },
-        { n: "02", name: "Editorial & Print", tags: "Books · DM · Manuals" },
-        { n: "03", name: "Packaging", tags: "Structure · Surface · System" },
-        { n: "04", name: "Product Interfaces", tags: "UI · UX · Design Systems" },
-        { n: "05", name: "Content Systems", tags: "Social · Templates · Direction" },
+        { n: "01", name: "品牌識別", tags: "VI · 標準字 · 規範手冊" },
+        { n: "02", name: "編輯與印刷設計", tags: "書籍 · DM · 操作手冊" },
+        { n: "03", name: "包裝設計", tags: "結構 · 平面 · 系統" },
+        { n: "04", name: "產品介面", tags: "UI · UX · 設計系統" },
+        { n: "05", name: "內容系統", tags: "社群 · 模板 · 視覺指導" },
       ].map(s => (
         <div class="service-row reveal">
           <span class="num">{s.n}</span>
@@ -59,10 +59,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   <section class="container">
     <div class="two-col reveal">
-      <h2>A small studio<br/>by design.</h2>
+      <h2>一間刻意<br/>維持小規模的<em>工作室</em></h2>
       <div>
-        <p>Alice Office is the practice of Wu Zhi-Ling, working with a tight rotation of collaborators in production, photography, and frontend. We take on a small number of projects each year so we can be the people doing the work, not just selling it.</p>
-        <p>We're at our best on briefs that span a couple of disciplines — an identity that has to land equally on a 5cm package and a product dashboard, a manual that has to read like a book.</p>
+        <p>Alice Office 是設計師吳芝淩的個人實踐，與一群長期合作的印刷、攝影、前端夥伴一起運作。我們每年只接少量案子，因為我們希望由真正動手的人陪你走完整段過程，而不是把工作交給一層又一層的轉手。</p>
+        <p>我們最擅長的是橫跨幾個領域的案子 — 一套同時要落地在 5 公分包裝與產品儀表板的識別、一本要像書一樣讀的操作手冊。</p>
       </div>
     </div>
   </section>

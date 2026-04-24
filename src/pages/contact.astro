@@ -1,30 +1,30 @@
 ---
 import Layout from "../layouts/Layout.astro";
 ---
-<Layout title="Contact — Alice Office">
+<Layout title="聯絡 — Alice Office">
   <section class="container hero contact">
-    <div class="eyebrow">— Start a conversation</div>
-    <h1>Tell us<br/>about the <em>brief.</em></h1>
-    <p class="lead" style="margin-bottom: 60px;">The more honest the brief, the better the work. We read everything that comes through and respond within two business days.</p>
+    <div class="eyebrow">— 開始一場對話</div>
+    <h1>聊聊你的<br/><em>需求。</em></h1>
+    <p class="lead" style="margin-bottom: 60px;">需求說得越誠實、設計就越能對上。我們會看完每一封來信，並在兩個工作日內回覆。</p>
 
     <form class="contact-form" action="mailto:hello@aliceoffice.studio" method="post" enctype="text/plain">
       <div class="field">
-        <label for="name">Your name</label>
+        <label for="name">姓名</label>
         <input id="name" name="name" type="text" required />
       </div>
       <div class="field">
-        <label for="email">Email</label>
+        <label for="email">電子郵件</label>
         <input id="email" name="email" type="email" required />
       </div>
       <div class="field">
-        <label for="company">Company / Project</label>
+        <label for="company">公司 / 案子名稱</label>
         <input id="company" name="company" type="text" />
       </div>
       <div class="field">
-        <label for="brief">The brief, in your own words</label>
+        <label for="brief">用你自己的話說說這個案子</label>
         <textarea id="brief" name="brief" required></textarea>
       </div>
-      <button class="btn" type="submit">Send brief</button>
+      <button class="btn" type="submit">送出</button>
     </form>
   </section>
 </Layout>

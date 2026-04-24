@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-const { title = "Alice Office — Brand & Editorial Design", description = "Brand visual systems, packaging, and digital interfaces by Wu Zhi-Ling." } = Astro.props;
+const { title = "Alice Office — 品牌與編輯設計", description = "吳芝淩的設計實踐：品牌識別、包裝、產品介面。" } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const path = Astro.url.pathname.replace(base, "") || "/";
 const isActive = (p: string) => path === p || (p !== "/" && path.startsWith(p));
@@ -20,13 +20,13 @@ const link = (p: string) => `${base}${p}`;
 <body>
   <header class="site-header">
     <div class="inner">
-      <a href={link("/")} class="brand">Alice Office<small>WU ZHI-LING</small></a>
+      <a href={link("/")} class="brand">Alice Office<small>吳芝淩</small></a>
       <nav class="nav">
-        <a href={link("/")} class={isActive("/") ? "active" : ""}>Index</a>
-        <a href={link("/work")} class={isActive("/work") ? "active" : ""}>Work</a>
-        <a href={link("/about")} class={isActive("/about") ? "active" : ""}>About</a>
-        <a href={link("/pricing")} class={isActive("/pricing") ? "active" : ""}>Pricing</a>
-        <a href={link("/contact")} class={isActive("/contact") ? "active" : ""}>Contact</a>
+        <a href={link("/")} class={isActive("/") ? "active" : ""}>首頁</a>
+        <a href={link("/work")} class={isActive("/work") ? "active" : ""}>作品</a>
+        <a href={link("/about")} class={isActive("/about") ? "active" : ""}>關於</a>
+        <a href={link("/pricing")} class={isActive("/pricing") ? "active" : ""}>方案</a>
+        <a href={link("/contact")} class={isActive("/contact") ? "active" : ""}>聯絡</a>
       </nav>
     </div>
   </header>
@@ -35,10 +35,10 @@ const link = (p: string) => `${base}${p}`;
 
   <footer class="site-footer">
     <div class="inner">
-      <div class="big">Let's make<br/>something <em style="font-style:italic;color:#6b6b6b">considered.</em></div>
+      <div class="big">一起做出<br/><em style="font-style:italic;color:#6b6b6b">值得細看的設計。</em></div>
       <div class="meta">
         <span>© {new Date().getFullYear()} Alice Office</span>
-        <span>Taipei · Taiwan</span>
+        <span>台北 · 台灣</span>
         <a href="mailto:hello@aliceoffice.studio">hello@aliceoffice.studio</a>
       </div>
     </div>

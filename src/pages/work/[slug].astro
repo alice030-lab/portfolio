@@ -18,10 +18,10 @@ const next = works[(i + 1) % works.length];
       <h1 style="margin-top: 24px;">{work.title}</h1>
       <p class="lead" style="margin-top: 32px; max-width: 60ch;">{work.summary}</p>
       <div class="meta">
-        <div><strong>Client</strong>{work.client}</div>
-        <div><strong>Year</strong>{work.year}</div>
-        <div><strong>Role</strong>{work.role}</div>
-        <div><strong>Scope</strong>{work.scope.join(" · ")}</div>
+        <div><strong>客戶</strong>{work.client}</div>
+        <div><strong>年份</strong>{work.year}</div>
+        <div><strong>角色</strong>{work.role}</div>
+        <div><strong>工作範圍</strong>{work.scope.join(" · ")}</div>
       </div>
     </section>
 
@@ -40,7 +40,7 @@ const next = works[(i + 1) % works.length];
 
     <section class="container">
       <a href={`${base}/work/${next.slug}`} class="work-card reveal" style="border-top: 1px solid var(--line); padding-top: 60px; display: block;">
-        <div class="eyebrow" style="margin-bottom: 16px;">Next project</div>
+        <div class="eyebrow" style="margin-bottom: 16px;">下一個案例</div>
         <h2 style="margin-bottom: 24px;">{next.title} →</h2>
         <div class="frame" style="aspect-ratio: 16 / 9;"><img src={next.cover} alt={next.title} loading="lazy" /></div>
       </a>
