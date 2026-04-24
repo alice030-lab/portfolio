@@ -476,8 +476,32 @@ h3 { font-size: clamp(22px, 2.4vw, 36px); }
 .about-stamp svg { width: 48px; height: 48px; }
 .about-stamp strong { color: var(--pop-red); font-weight: 700; }
 
+/* Cloud divider — overlaps up into the hero */
+.cloud-divider {
+  position: relative;
+  height: 120px;
+  margin-top: -110px;
+  pointer-events: none;
+  z-index: 3;
+}
+.cloud-divider > svg:first-of-type {
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 100%;
+  height: 160px;
+  display: block;
+}
+.cloud-divider .puff {
+  position: absolute;
+  height: auto;
+  filter: drop-shadow(3px 3px 0 rgba(26,26,26,0.1));
+}
+.cloud-divider .puff.p1 { top: -40px; left: 8%; width: 180px; transform: rotate(-4deg); }
+.cloud-divider .puff.p2 { top: -20px; left: 46%; width: 220px; transform: rotate(2deg); }
+.cloud-divider .puff.p3 { top: -50px; right: 10%; width: 160px; transform: rotate(5deg); }
+
 /* Expertise grid */
-.expertise { padding-top: 40px; }
+.expertise { padding-top: 20px; position: relative; z-index: 2; background: var(--paper); }
 .expertise-grid {
   display: grid;
   grid-template-columns: 1fr;
