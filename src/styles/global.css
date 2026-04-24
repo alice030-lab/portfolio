@@ -24,9 +24,9 @@
   /* Thin hairline outline — signature of this style */
   --hair: 1px solid var(--ink);
 
-  /* Grid pattern backdrop — black bg + lilac grid lines */
-  --grid-bg: #0a0a0a;
-  --grid-line: rgba(216, 180, 254, 0.45);
+  /* Grid pattern backdrop — white bg + thin grid lines */
+  --grid-bg: #FFFFFF;
+  --grid-line: rgba(26, 26, 26, 0.12);
   --grid-size: 32px;
 
   /* Legacy tokens kept for backward compatibility inside existing components */
