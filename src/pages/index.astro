@@ -1,50 +1,63 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Clouds from "../components/Clouds.astro";
-import { works } from "../data/works";
 import { categories } from "../data/gallery";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 <Layout>
-  <section class="pop-hero">
-    <Clouds />
-    <div class="pop-inner centered">
-      <div class="speech-bubble">哈囉，我是 Alice！</div>
-      <div class="sticker-row">
-        <span class="sticker">Est. 2018</span>
-        <span class="sticker red tilt-right">現正接案中</span>
+  <section class="ed-hero">
+    <div class="ed-hero-inner">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 32px;">— Alice Office · Est. 2018 · Taipei</div>
+        <h1>
+          設計<span class="reg">，</span><br/>
+          是一種思考<br/>
+          的<em>總和。</em>
+        </h1>
+        <p class="sub">Alice Office 是設計師吳芝淩的個人實踐 — 在品牌識別、編輯設計、與產品介面之間工作，服務認真對待細節的團隊。</p>
+        <div class="cta-row">
+          <a href={`${base}/work`} class="btn-pill">看作品</a>
+          <a href={`${base}/contact`} class="btn-pill light">聊聊合作</a>
+        </div>
       </div>
-      <h1 class="pop-title">Alice<br/><em>Office</em></h1>
-      <p class="pop-sub">一間在品牌識別、編輯設計、與產品介面之間跳來跳去的小工作室。做的東西要耐看，也要好玩。</p>
-      <a href={`${base}/work`} class="pop-cta">看看作品 →</a>
+      <div class="hero-collage">
+        <div class="hero-block rose tall">
+          <div class="tag">Identity</div>
+          <div>
+            <div class="num">01</div>
+            <div class="label">VI 規劃 & 主視覺</div>
+          </div>
+        </div>
+        <div class="hero-block sage">
+          <div class="tag">Print</div>
+          <div class="num">02</div>
+          <div class="label">DM & 平面</div>
+        </div>
+        <div class="hero-block lavender">
+          <div class="tag">Editorial</div>
+          <div class="num">03</div>
+          <div class="label">說明書設計</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 雲朵分隔：把 expertise 區塊的上緣咬進 hero 裡 -->
-  <div class="cloud-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,80 C60,20 120,30 180,60 C230,90 280,50 340,40 C400,30 440,70 500,80 C560,92 620,40 690,30 C760,20 810,70 880,75 C950,80 1000,30 1070,25 C1140,20 1190,65 1260,70 C1320,74 1380,40 1440,55 L1440,160 L0,160 Z"
-        fill="var(--paper)"/>
-      <path d="M0,80 C60,20 120,30 180,60 C230,90 280,50 340,40 C400,30 440,70 500,80 C560,92 620,40 690,30 C760,20 810,70 880,75 C950,80 1000,30 1070,25 C1140,20 1190,65 1260,70 C1320,74 1380,40 1440,55"
-        fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <!-- 擅長什麼 -->
   <section class="container expertise">
     <div class="section-head">
-      <h2>擅長什麼</h2>
-      <span class="num">— 01 / 專業領域</span>
+      <div>
+        <div class="eyebrow">Skills</div>
+        <h2>擅長<em>什麼</em></h2>
+      </div>
+      <span class="num">— 01</span>
     </div>
     <div class="expertise-grid">
       <div class="exp-tile reveal">
         <div class="exp-num">01</div>
-        <h3>VI 規劃 &amp; 主視覺</h3>
+        <h3>VI 規劃 & 主視覺</h3>
         <p>標準字、識別系統、年度主視覺、活動延伸應用。從 logo 到整套品牌資產一次到位。</p>
       </div>
       <div class="exp-tile reveal">
         <div class="exp-num">02</div>
-        <h3>DM &amp; 平面設計</h3>
+        <h3>DM & 平面設計</h3>
         <p>DM 改版、宣傳單張、Banner、海報。專門處理資訊量大、要在小篇幅內說清楚的案子。</p>
       </div>
       <div class="exp-tile reveal">
@@ -70,41 +83,33 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     </div>
   </section>
 
-  <!-- 實績 -->
   <section class="container track-record">
     <div class="section-head">
-      <h2>實績</h2>
-      <span class="num">— 02 / 這些年累積</span>
+      <div>
+        <div class="eyebrow">Numbers</div>
+        <h2><em>實績</em></h2>
+      </div>
+      <span class="num">— 02</span>
     </div>
     <div class="stats-grid">
-      <div class="stat reveal">
-        <div class="stat-num">20<span>+</span></div>
-        <div class="stat-label">品牌識別案例</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-num">6</div>
-        <div class="stat-label">完整包裝系列</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-num">3</div>
-        <div class="stat-label">產品介面系統</div>
-      </div>
-      <div class="stat reveal">
-        <div class="stat-num">60<span>+</span></div>
-        <div class="stat-label">單張視覺作品</div>
-      </div>
+      <div class="stat reveal"><div class="stat-num">20<span>+</span></div><div class="stat-label">品牌識別案例</div></div>
+      <div class="stat reveal"><div class="stat-num">6</div><div class="stat-label">完整包裝系列</div></div>
+      <div class="stat reveal"><div class="stat-num">3</div><div class="stat-label">產品介面系統</div></div>
+      <div class="stat reveal"><div class="stat-num">60<span>+</span></div><div class="stat-label">單張視覺作品</div></div>
     </div>
     <div class="client-types reveal">
-      <div class="eyebrow" style="margin-bottom: 16px;">服務過的客戶類型</div>
+      <div class="eyebrow" style="margin-bottom: 14px;">服務過的客戶類型</div>
       <p>地方社區發展協會 · 製造業集團 · 私人會員制俱樂部 · 電動車充電網營運商 · 食品與農特產品牌 · 生活風格品牌 · 文化展覽機構</p>
     </div>
   </section>
 
-  <!-- 分類作品預覽 -->
   <section class="container">
     <div class="section-head">
-      <h2>作品分類</h2>
-      <span class="num">— 03 / 作品</span>
+      <div>
+        <div class="eyebrow">Work</div>
+        <h2>作品<em>分類</em></h2>
+      </div>
+      <span class="num">— 03</span>
     </div>
     <div class="category-list">
       {categories.map(c => {
