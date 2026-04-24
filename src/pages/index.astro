@@ -100,31 +100,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     </div>
   </section>
 
-  <!-- 精選完整專案 -->
-  <section class="container">
-    <div class="section-head">
-      <h2>精選完整專案</h2>
-      <span class="num">— 03 / 案例研究</span>
-    </div>
-    <div class="featured">
-      {works.map((w, i) => (
-        <a href={`${base}/work/${w.slug}`} class={`work-card reveal ${w.span ?? ""}`}>
-          <div class="frame"><img src={w.cover} alt={w.title} loading={i === 0 ? "eager" : "lazy"} /></div>
-          <div class="meta">
-            <span class="tag">{w.tag}</span>
-            <span class="title">{w.title}</span>
-            <span class="year">{w.year}</span>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-
   <!-- 分類作品預覽 -->
   <section class="container">
     <div class="section-head">
       <h2>作品分類</h2>
-      <span class="num">— 04 / 更多作品</span>
+      <span class="num">— 03 / 作品</span>
     </div>
     <div class="category-list">
       {categories.map(c => {
