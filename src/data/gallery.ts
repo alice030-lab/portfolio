@@ -23,31 +23,23 @@ export const categories: GalleryCategory[] = [
     desc: "標準字、識別系統、年度主視覺、活動延伸應用。從 logo 到整套品牌資產一次到位。",
     subsections: [
       {
-        title: "企業形象與年度主視覺",
-        note: "為週年、企業形象所做的主視覺規劃 — 融合圖像與版面排版，兼顧識別性與科技感。",
+        title: "主視覺",
+        note: "為企業、週年活動所做的整體主視覺規劃 — 融合圖像、排版與色彩語彙。",
         images: [
-          { src: img("hero-vi-01.png"), caption: "60 週年主視覺 — 完整構圖" },
-          { src: img("hero-vi-03.png"), caption: "週年延伸應用" },
+          { src: img("hero-vi-01.png"), caption: "整體主視覺 01" },
+          { src: img("hero-vi-03.png"), caption: "整體主視覺 03" },
           { src: img("feature-01.png"), caption: "年度主視覺 A" },
           { src: img("feature-02.png"), caption: "年度主視覺 B" },
         ],
       },
       {
-        title: "VI 識別系統延伸",
-        note: "識別系統的應用設計 — 印刷品、展示物、品牌周邊的統一視覺語彙。",
+        title: "VI 規劃與識別應用",
+        note: "識別系統的核心規劃與應用設計 — 印刷品、周邊、品牌延伸的統一視覺語彙。",
         images: [
           { src: img("work-vi-1.png"), caption: "識別應用 01" },
           { src: img("work-vi-2.png"), caption: "識別應用 02" },
           { src: img("work-vi-3.png"), caption: "識別應用 03" },
           { src: img("work-vi-4.png"), caption: "識別應用 04" },
-        ],
-      },
-      {
-        title: "展覽主視覺",
-        note: "主導日本、台灣、美國的展覽設計規劃，從空間動線到視覺輸出。",
-        images: [
-          { src: img("work-poster.jpg"), caption: "A0 展覽主視覺" },
-          { src: img("work-detail.jpg"), caption: "展場細節" },
         ],
       },
     ],
@@ -56,10 +48,24 @@ export const categories: GalleryCategory[] = [
     key: "dm",
     name: "DM & 平面設計",
     tagline: "02 — Print",
-    desc: "DM 改版、宣傳單張、Banner、海報。專門處理資訊量大、要在小篇幅內說清楚的案子。",
-    images: [
-      { src: img("work-dm-1.png"), caption: "DM 改善前後對照" },
-      { src: img("work-dm-2.png"), caption: "DM 重新設計" },
+    desc: "DM 改版、宣傳單張、Banner、海報、展覽邀請函。專門處理資訊量大、要在小篇幅內說清楚的案子。",
+    subsections: [
+      {
+        title: "DM 改善與設計",
+        note: "從結構、字型到圖文節奏的 DM 改版案例。",
+        images: [
+          { src: img("work-dm-1.png"), caption: "DM 改善前後對照" },
+          { src: img("work-dm-2.png"), caption: "DM 重新設計" },
+        ],
+      },
+      {
+        title: "海報 / Banner / 展覽",
+        note: "大尺寸印刷物、展場背板、活動主視覺。",
+        images: [
+          { src: img("work-poster.jpg"), caption: "A0 海報版型" },
+          { src: img("work-detail.jpg"), caption: "展場背板細節" },
+        ],
+      },
     ],
   },
   {
