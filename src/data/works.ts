@@ -21,21 +21,33 @@ export const works: Work[] = [
     client: "礁坑社區發展協會",
     year: "2023",
     tag: "包裝設計",
-    cover: img("work-package-1.png"),
+    cover: img("pkg-drink-1.jpg"),
     span: "span-7",
-    summary: "為礁坑社區的錫蘭橄欖產業做的完整包裝再造，從氣泡飲、菜單、展版到社群行銷圖一貫串起。",
+    summary: "為礁坑社區做的完整包裝再造 — 從橄欖氣泡飲、菜單、展版到社群行銷圖一貫串起。",
     role: "包裝設計 · 插畫 · 視覺統籌",
-    scope: ["橄欖氣泡飲包裝", "橄欖菜單", "展版設計", "社群行銷圖"],
+    scope: ["橄欖氣泡飲", "橄欖菜單", "展版設計", "社群行銷圖"],
     body: [
-      { type: "p", text: "礁坑是一個以農業為主的社區，當地的錫蘭橄欖有一段曾經失傳、又被重新復育的故事。客戶希望這套包裝能把「產地」的感覺誠實地傳出來，不是刻意包裝成文創樣板。" },
-      { type: "p", text: "我們親手繪製橄欖與橄欖花的插圖，用於氣泡飲外包裝，呈現清爽、不做作的手感。" },
+      { type: "p", text: "礁坑社區為典型的農村社區，社區老化嚴重再加上年輕人外移，社區中剩下的多是沒有經濟基礎的老人。日治時期種植的錫蘭橄欖經過復育後發展觀光，成為社區重新被看見的契機。" },
+
+      { type: "p", text: "── 橄欖氣泡飲設計" },
+      { type: "p", text: "自行繪製橄欖與橄欖花插圖呈現清爽感。" },
       { type: "pair", pair: [
-        { src: img("work-package-1.png"), alt: "氣泡飲包裝 1" },
-        { src: img("work-package-2.png"), alt: "氣泡飲包裝 2" },
+        { src: img("pkg-drink-1.jpg"), alt: "橄欖氣泡飲包裝 1" },
+        { src: img("pkg-drink-2.jpg"), alt: "橄欖氣泡飲包裝 2" },
       ] },
-      { type: "p", text: "菜單設計採中式風格、放大字體，讓長輩也能看清楚 — 這是現場實際觀察後做的取捨。" },
-      { type: "full", src: img("work-poster.jpg"), alt: "展版設計" },
-      { type: "p", text: "展版與社群行銷圖延續包裝的視覺語彙，讓整個系列從產品、線下活動、到線上貼文都能辨認出是同一個品牌。" },
+
+      { type: "p", text: "── 橄欖菜單設計" },
+      { type: "p", text: "使用中式風格並加大文字，使老年人較易看清楚。" },
+      { type: "pair", pair: [
+        { src: img("pkg-menu-1.png"), alt: "橄欖菜單設計 1" },
+        { src: img("pkg-menu-2.jpg"), alt: "橄欖菜單設計 2" },
+      ] },
+
+      { type: "p", text: "── 展版設計" },
+      { type: "full", src: img("pkg-board.jpg"), alt: "展版設計" },
+
+      { type: "p", text: "── 社群行銷圖" },
+      { type: "full", src: img("pkg-social.jpg"), alt: "社群行銷圖" },
     ],
   },
   {
