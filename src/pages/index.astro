@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Mascot from "../components/Mascot.astro";
 import Clouds from "../components/Clouds.astro";
 import { works } from "../data/works";
 const featured = works.slice(0, 4);
@@ -9,24 +8,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 <Layout>
   <section class="pop-hero">
     <Clouds />
-    <div class="pop-inner">
-      <div>
-        <div class="speech-bubble">哈囉，我是 Alice！</div>
-        <div>
-          <span class="sticker">Est. 2018</span>
-          <span class="sticker red tilt-right">現正接案中</span>
-        </div>
-        <h1 class="pop-title">Alice<br/><em>Office</em></h1>
-        <p class="pop-sub">一間在品牌識別、編輯設計、與產品介面之間跳來跳去的小工作室。做的東西要耐看，也要好玩。</p>
-        <a href={`${base}/work`} class="pop-cta">看看作品 →</a>
-        <div class="pop-meta">
-          <div><strong>14</strong>品牌系統</div>
-          <div><strong>06</strong>產品介面</div>
-          <div><strong>2018</strong>創立至今</div>
-        </div>
+    <div class="pop-inner centered">
+      <div class="speech-bubble">哈囉，我是 Alice！</div>
+      <div class="sticker-row">
+        <span class="sticker">Est. 2018</span>
+        <span class="sticker red tilt-right">現正接案中</span>
       </div>
-      <div class="mascot-wrap">
-        <Mascot size={340} />
+      <h1 class="pop-title">Alice<br/><em>Office</em></h1>
+      <p class="pop-sub">一間在品牌識別、編輯設計、與產品介面之間跳來跳去的小工作室。做的東西要耐看，也要好玩。</p>
+      <a href={`${base}/work`} class="pop-cta">看看作品 →</a>
+      <div class="pop-meta">
+        <div><strong>14</strong>品牌系統</div>
+        <div><strong>06</strong>產品介面</div>
+        <div><strong>2018</strong>創立至今</div>
       </div>
     </div>
   </section>

@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Mascot from "../components/Mascot.astro";
 import Clouds from "../components/Clouds.astro";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
@@ -8,9 +7,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   <section class="not-found">
     <Clouds />
     <div style="position:relative;z-index:2;">
-      <Mascot size={180} />
       <h1>404</h1>
-      <p>兔子也找不到這頁了。要不要回家喝杯茶？</p>
+      <p>這條路走丟了。要不要回家喝杯茶？</p>
       <a href={`${base}/`} class="pop-cta">回首頁 →</a>
     </div>
   </section>

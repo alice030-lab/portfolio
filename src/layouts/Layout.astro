@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import Mascot from "../components/Mascot.astro";
 const { title = "Alice Office — 品牌與編輯設計", description = "吳芝淩的設計實踐：品牌識別、包裝、產品介面。" } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const path = Astro.url.pathname.replace(base, "") || "/";
@@ -36,10 +35,7 @@ const link = (p: string) => `${base}${p}`;
 
   <footer class="site-footer">
     <div class="inner">
-      <div>
-        <div class="big">一起做出<br/><em style="font-style:italic;color:#6b6b6b">值得細看的設計。</em></div>
-        <div class="footer-rabbit"><Mascot size={32} /><span>Made with 🥕 by Alice</span></div>
-      </div>
+      <div class="big">一起做出<br/><em style="font-style:italic;color:#6b6b6b">值得細看的設計。</em></div>
       <div class="meta">
         <span>© {new Date().getFullYear()} Alice Office</span>
         <span>台北 · 台灣</span>

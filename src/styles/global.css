@@ -266,6 +266,22 @@ h3 { font-size: clamp(22px, 2.4vw, 36px); }
   .pop-inner { grid-template-columns: 1.3fr 1fr; gap: 60px; }
 }
 
+/* Centered variant */
+.pop-inner.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+}
+.pop-inner.centered .pop-title { text-align: center; }
+.pop-inner.centered .pop-sub { margin-left: auto; margin-right: auto; }
+.pop-inner.centered .pop-meta { justify-content: center; }
+.sticker-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 24px; }
+.sticker-row .sticker { margin-bottom: 0; }
+.pop-inner.centered .speech-bubble { align-self: center; }
+.pop-inner.centered .speech-bubble::after { left: 50%; transform: translateX(-50%) rotate(45deg); }
+
 /* Stickers */
 .sticker {
   display: inline-block;
