@@ -184,6 +184,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .work-nav a,
 .contact-form {
   position: relative;
+  isolation: isolate;
   transition: transform 0.25s ease;
 }
 .blk::before,
