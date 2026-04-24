@@ -170,7 +170,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   gap: 10px;
   min-height: 420px;
 }
-/* Shared "lift" interaction — applied to every card/block across the site */
+/* Shared "lift" interaction — box-shadow draws OUTSIDE the element, no z-index issues */
 .blk,
 .exp-tile,
 .stat,
@@ -181,33 +181,10 @@ em, .italic { font-style: italic; font-weight: 500; }
 .work-card .frame,
 .gallery-item .frame,
 .case-hero .meta,
-.work-nav a,
-.contact-form {
+.work-nav a {
   position: relative;
-  isolation: isolate;
-  transition: transform 0.25s ease;
-}
-.blk::before,
-.exp-tile::before,
-.stat::before,
-.client-types::before,
-.category-row::before,
-.pricing-card::before,
-.service-row::before,
-.work-card .frame::before,
-.gallery-item .frame::before,
-.case-hero .meta::before,
-.work-nav a::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--ink);
-  border-radius: inherit;
-  z-index: -1;
-  transform: translate(0, 0);
-  opacity: 0;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-  pointer-events: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 0 0 var(--ink);
 }
 .blk:hover,
 .exp-tile:hover,
@@ -221,21 +198,8 @@ em, .italic { font-style: italic; font-weight: 500; }
 .case-hero .meta:hover,
 .work-nav a:hover {
   transform: translate(-6px, -6px);
+  box-shadow: 10px 10px 0 var(--ink);
   z-index: 2;
-}
-.blk:hover::before,
-.exp-tile:hover::before,
-.stat:hover::before,
-.client-types:hover::before,
-.category-row:hover::before,
-.pricing-card:hover::before,
-.service-row:hover::before,
-.work-card:hover .frame::before,
-.gallery-item:hover .frame::before,
-.case-hero .meta:hover::before,
-.work-nav a:hover::before {
-  transform: translate(10px, 10px);
-  opacity: 1;
 }
 
 /* Make sure cards with overflow:hidden can still show the underlay */
