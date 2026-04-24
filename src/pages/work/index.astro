@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { works } from "../../data/works";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+<Layout title="Work — Alice Office">
+  <section class="container hero" style="padding-bottom: 40px;">
+    <div class="eyebrow">— Index of Work</div>
+    <h1>Work, in <em>full.</em></h1>
+    <p class="lead">A complete index of selected projects across identity, editorial, packaging, and product. Most are released; a few are under wraps and noted as such.</p>
+  </section>
+
+  <section class="container">
+    <div class="featured" style="grid-template-columns: 1fr;">
+      {works.map((w) => (
+        <a href={`${base}/work/${w.slug}`} class="work-card reveal">
+          <div class="frame" style="aspect-ratio: 16 / 9;"><img src={w.cover} alt={w.title} loading="lazy" /></div>
+          <div class="meta">
+            <span class="tag">{w.tag}</span>
+            <span class="title">{w.title}</span>
+            <span class="year">{w.year}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

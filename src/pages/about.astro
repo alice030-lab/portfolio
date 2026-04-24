@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+<Layout title="About — Alice Office">
+  <section class="container hero">
+    <div class="eyebrow">— About</div>
+    <h1>A practice<br/>in <em>three voices.</em></h1>
+    <p class="lead">Brand, editorial, and product — distinct disciplines that sharpen each other when held in the same studio.</p>
+  </section>
+
+  <section class="container">
+    <div class="full" style="margin: 0 calc(-1 * var(--gutter)) 60px;">
+      <img src={`${base}/images/feature-01.png`} alt="Studio work in progress" />
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="two-col reveal">
+      <h2>Approach</h2>
+      <div>
+        <p>We start with a long conversation. Most briefs we take on aren't fully formed — they're a sense that something isn't sitting right, and a hunch about what could. We do the work to translate that into something the team can build against.</p>
+        <p>Once a direction is set, we move quickly and visibly. Weekly checkpoints, working files in your hands, and no surprise reveals at the end. Design that sits in a black box for six weeks and lands as a 90-page deck is design we don't make.</p>
+      </div>
+    </div>
+    <div class="two-col reveal">
+      <h2>Disciplines</h2>
+      <div>
+        <p><strong>Identity & Editorial.</strong> Logotypes, type systems, guidelines, books, manuals, and the long-form artifacts a brand actually lives inside.</p>
+        <p><strong>Packaging.</strong> Structural design and surface graphics for products that have to read on shelf, in hand, and in a phone screen.</p>
+        <p><strong>Product Interfaces.</strong> UI and UX work for operators, members, and admins — the screens that get used every day, not the marketing site.</p>
+      </div>
+    </div>
+    <div class="two-col reveal">
+      <h2>Selected Clients</h2>
+      <div>
+        <p>Manufacturing groups celebrating long anniversaries; private members' clubs; EV infrastructure operators; food and lifestyle brands building shelf presence; cultural institutions producing exhibitions and books.</p>
+        <p>Most engagements run from a focused six-week sprint to multi-quarter retainers for ongoing systems work. We don't take more than a handful of clients at any given time.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

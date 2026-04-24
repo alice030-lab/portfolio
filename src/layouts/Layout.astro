@@ -1,0 +1,54 @@
+---
+import "../styles/global.css";
+const { title = "Alice Office — Brand & Editorial Design", description = "Brand visual systems, packaging, and digital interfaces by Wu Zhi-Ling." } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const path = Astro.url.pathname.replace(base, "") || "/";
+const isActive = (p: string) => path === p || (p !== "/" && path.startsWith(p));
+const link = (p: string) => `${base}${p}`;
+---
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a href={link("/")} class="brand">Alice Office<small>WU ZHI-LING</small></a>
+      <nav class="nav">
+        <a href={link("/")} class={isActive("/") ? "active" : ""}>Index</a>
+        <a href={link("/work")} class={isActive("/work") ? "active" : ""}>Work</a>
+        <a href={link("/about")} class={isActive("/about") ? "active" : ""}>About</a>
+        <a href={link("/pricing")} class={isActive("/pricing") ? "active" : ""}>Pricing</a>
+        <a href={link("/contact")} class={isActive("/contact") ? "active" : ""}>Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main><slot /></main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <div class="big">Let's make<br/>something <em style="font-style:italic;color:#6b6b6b">considered.</em></div>
+      <div class="meta">
+        <span>© {new Date().getFullYear()} Alice Office</span>
+        <span>Taipei · Taiwan</span>
+        <a href="mailto:hello@aliceoffice.studio">hello@aliceoffice.studio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { works } from "../data/works";
+const featured = works.slice(0, 4);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+<Layout>
+  <section class="container hero">
+    <div class="eyebrow">Alice Office — Est. 2018 · Taipei</div>
+    <h1>Brand systems<br/>built for the <em>long read.</em></h1>
+    <p class="lead">A design practice working at the seam between brand identity, packaging, and product interfaces — for studios, manufacturers, and operators who care about the small stuff.</p>
+    <div class="meta-row">
+      <div><strong>Practice</strong>Identity · Editorial · Product</div>
+      <div><strong>Selected</strong>14 brand systems<br/>since 2018</div>
+      <div><strong>Available</strong>Q3 — accepting briefs</div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-head">
+      <h2>Selected Work</h2>
+      <span class="num">— 01 / Index</span>
+    </div>
+    <div class="featured">
+      {featured.map((w, i) => (
+        <a href={`${base}/work/${w.slug}`} class={`work-card reveal ${w.span ?? ""}`}>
+          <div class="frame"><img src={w.cover} alt={w.title} loading={i === 0 ? "eager" : "lazy"} /></div>
+          <div class="meta">
+            <span class="tag">{w.tag}</span>
+            <span class="title">{w.title}</span>
+            <span class="year">{w.year}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-head">
+      <h2>Practice</h2>
+      <span class="num">— 02 / Services</span>
+    </div>
+    <div class="services">
+      {[
+        { n: "01", name: "Brand Identity", tags: "VI · Logotype · Guidelines" },
+        { n: "02", name: "Editorial & Print", tags: "Books · DM · Manuals" },
+        { n: "03", name: "Packaging", tags: "Structure · Surface · System" },
+        { n: "04", name: "Product Interfaces", tags: "UI · UX · Design Systems" },
+        { n: "05", name: "Content Systems", tags: "Social · Templates · Direction" },
+      ].map(s => (
+        <div class="service-row reveal">
+          <span class="num">{s.n}</span>
+          <span class="name">{s.name}</span>
+          <span class="tags">{s.tags}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="two-col reveal">
+      <h2>A small studio<br/>by design.</h2>
+      <div>
+        <p>Alice Office is the practice of Wu Zhi-Ling, working with a tight rotation of collaborators in production, photography, and frontend. We take on a small number of projects each year so we can be the people doing the work, not just selling it.</p>
+        <p>We're at our best on briefs that span a couple of disciplines — an identity that has to land equally on a 5cm package and a product dashboard, a manual that has to read like a book.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
