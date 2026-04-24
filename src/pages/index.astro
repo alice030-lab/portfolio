@@ -1,20 +1,50 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Mascot from "../components/Mascot.astro";
+import Clouds from "../components/Clouds.astro";
 import { works } from "../data/works";
 const featured = works.slice(0, 4);
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 <Layout>
-  <section class="container hero">
-    <div class="eyebrow">Alice Office — 創立於 2018 · 台北</div>
-    <h1>為品牌打造<br/>能<em>被細讀</em>的視覺系統</h1>
-    <p class="lead">一間專注在品牌識別、包裝設計、與產品介面之間交會處的設計工作室。服務在乎細節的品牌、製造業者、與營運團隊。</p>
-    <div class="meta-row">
-      <div><strong>專業領域</strong>品牌識別 · 編輯設計 · 產品介面</div>
-      <div><strong>累積案例</strong>14 套品牌系統<br/>自 2018 年起</div>
-      <div><strong>檔期</strong>第三季 — 開放洽談</div>
+  <section class="pop-hero">
+    <Clouds />
+    <div class="pop-inner">
+      <div>
+        <div class="speech-bubble">哈囉，我是 Alice！</div>
+        <div>
+          <span class="sticker">Est. 2018</span>
+          <span class="sticker red tilt-right">現正接案中</span>
+        </div>
+        <h1 class="pop-title">Alice<br/><em>Office</em></h1>
+        <p class="pop-sub">一間在品牌識別、編輯設計、與產品介面之間跳來跳去的小工作室。做的東西要耐看，也要好玩。</p>
+        <a href={`${base}/work`} class="pop-cta">看看作品 →</a>
+        <div class="pop-meta">
+          <div><strong>14</strong>品牌系統</div>
+          <div><strong>06</strong>產品介面</div>
+          <div><strong>2018</strong>創立至今</div>
+        </div>
+      </div>
+      <div class="mascot-wrap">
+        <Mascot size={340} />
+      </div>
     </div>
   </section>
+
+  <div class="pop-marquee">
+    <div class="track">
+      <span>品牌識別</span><span class="star">✦</span>
+      <span>編輯設計</span><span class="star">✦</span>
+      <span>包裝</span><span class="star">✦</span>
+      <span>UI / UX</span><span class="star">✦</span>
+      <span>社群內容</span><span class="star">✦</span>
+      <span>插畫</span><span class="star">✦</span>
+      <span>品牌識別</span><span class="star">✦</span>
+      <span>編輯設計</span><span class="star">✦</span>
+      <span>包裝</span><span class="star">✦</span>
+      <span>UI / UX</span><span class="star">✦</span>
+    </div>
+  </div>
 
   <section class="container">
     <div class="section-head">
@@ -54,16 +84,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
           <span class="tags">{s.tags}</span>
         </div>
       ))}
-    </div>
-  </section>
-
-  <section class="container">
-    <div class="two-col reveal">
-      <h2>一間刻意<br/>維持小規模的<em>工作室</em></h2>
-      <div>
-        <p>Alice Office 是設計師吳芝淩的個人實踐，與一群長期合作的印刷、攝影、前端夥伴一起運作。我們每年只接少量案子，因為我們希望由真正動手的人陪你走完整段過程，而不是把工作交給一層又一層的轉手。</p>
-        <p>我們最擅長的是橫跨幾個領域的案子 — 一套同時要落地在 5 公分包裝與產品儀表板的識別、一本要像書一樣讀的操作手冊。</p>
-      </div>
     </div>
   </section>
 </Layout>

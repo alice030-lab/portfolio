@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Mascot from "../components/Mascot.astro";
 const { title = "Alice Office — 品牌與編輯設計", description = "吳芝淩的設計實踐：品牌識別、包裝、產品介面。" } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const path = Astro.url.pathname.replace(base, "") || "/";
@@ -15,7 +16,7 @@ const link = (p: string) => `${base}${p}`;
   <meta name="description" content={description} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <header class="site-header">
@@ -35,7 +36,10 @@ const link = (p: string) => `${base}${p}`;
 
   <footer class="site-footer">
     <div class="inner">
-      <div class="big">一起做出<br/><em style="font-style:italic;color:#6b6b6b">值得細看的設計。</em></div>
+      <div>
+        <div class="big">一起做出<br/><em style="font-style:italic;color:#6b6b6b">值得細看的設計。</em></div>
+        <div class="footer-rabbit"><Mascot size={32} /><span>Made with 🥕 by Alice</span></div>
+      </div>
       <div class="meta">
         <span>© {new Date().getFullYear()} Alice Office</span>
         <span>台北 · 台灣</span>

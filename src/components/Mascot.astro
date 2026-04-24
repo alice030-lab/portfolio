@@ -1,0 +1,31 @@
+---
+const { size = 240, class: className = "" } = Astro.props;
+---
+<svg class={className} width={size} height={size} viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Alice 兔子">
+  <!-- ears (outer) -->
+  <path d="M80 70 Q72 20 92 10 Q108 25 100 75 Z" fill="#FFF8E7" stroke="#1A1A1A" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M160 70 Q168 20 148 10 Q132 25 140 75 Z" fill="#FFF8E7" stroke="#1A1A1A" stroke-width="3" stroke-linejoin="round"/>
+  <!-- ears (inner pink) -->
+  <path d="M87 62 Q82 28 94 22 Q102 36 96 66 Z" fill="#FFB8B8"/>
+  <path d="M153 62 Q158 28 146 22 Q138 36 144 66 Z" fill="#FFB8B8"/>
+  <!-- head -->
+  <ellipse cx="120" cy="135" rx="70" ry="62" fill="#FFF8E7" stroke="#1A1A1A" stroke-width="3"/>
+  <!-- cheek blush -->
+  <ellipse cx="72" cy="152" rx="10" ry="6" fill="#FFB8B8" opacity="0.9"/>
+  <ellipse cx="168" cy="152" rx="10" ry="6" fill="#FFB8B8" opacity="0.9"/>
+  <!-- eyes -->
+  <circle cx="95" cy="130" r="6" fill="#1A1A1A"/>
+  <circle cx="145" cy="130" r="6" fill="#1A1A1A"/>
+  <circle cx="97" cy="127" r="2" fill="#FFFFFF"/>
+  <circle cx="147" cy="127" r="2" fill="#FFFFFF"/>
+  <!-- nose -->
+  <path d="M117 148 L123 148 L120 153 Z" fill="#E63B2E" stroke="#1A1A1A" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- mouth -->
+  <path d="M120 153 Q120 160 112 162" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M120 153 Q120 160 128 162" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- whiskers -->
+  <path d="M70 148 L50 145 M70 152 L50 155 M170 148 L190 145 M170 152 L190 155" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- red bow tie -->
+  <path d="M105 195 L95 205 L95 225 L105 215 L120 220 L135 215 L145 225 L145 205 L135 195 L120 200 Z" fill="#E63B2E" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle cx="120" cy="210" r="4" fill="#1A1A1A"/>
+</svg>

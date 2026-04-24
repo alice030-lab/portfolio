@@ -204,3 +204,287 @@ h3 { font-size: clamp(22px, 2.4vw, 36px); }
 /* Reveal on scroll */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
 .reveal.in { opacity: 1; transform: none; }
+
+/* =========================================
+   POP THEME — Home hero & playful accents
+   ========================================= */
+:root {
+  --pop-sky: #A8D8EA;
+  --pop-sky-deep: #7BB8D9;
+  --pop-red: #E63B2E;
+  --pop-red-deep: #C1272D;
+  --pop-yellow: #F4C430;
+  --pop-cream: #FFF8E7;
+  --pop-ink: #1A1A1A;
+}
+
+/* Pop hero container */
+.pop-hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--pop-sky) 0%, #C9E4F0 100%);
+  min-height: 92vh;
+  padding: 100px 0 120px;
+  color: var(--pop-ink);
+}
+
+/* Halftone dots overlay */
+.pop-hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: radial-gradient(var(--pop-ink) 1px, transparent 1.5px);
+  background-size: 14px 14px;
+  opacity: 0.08;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Clouds */
+.clouds { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.cloud { position: absolute; height: auto; opacity: 0.95; filter: drop-shadow(3px 3px 0 rgba(26,26,26,0.08)); }
+.cloud.c1 { top: 8%; left: -8%; width: 280px; animation: drift 60s linear infinite; }
+.cloud.c2 { top: 22%; right: -10%; width: 340px; animation: drift 80s linear infinite reverse; }
+.cloud.c3 { top: 58%; left: 10%; width: 220px; animation: drift 70s linear infinite; animation-delay: -20s; }
+.cloud.c4 { bottom: 8%; right: 8%; width: 260px; animation: drift 90s linear infinite reverse; animation-delay: -40s; }
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(40px); }
+}
+
+/* Pop content layout */
+.pop-inner {
+  position: relative; z-index: 2;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .pop-inner { grid-template-columns: 1.3fr 1fr; gap: 60px; }
+}
+
+/* Stickers */
+.sticker {
+  display: inline-block;
+  background: var(--pop-yellow);
+  color: var(--pop-ink);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 2.5px solid var(--pop-ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--pop-ink);
+  transform: rotate(-3deg);
+  margin-bottom: 28px;
+}
+.sticker.red { background: var(--pop-red); color: var(--pop-cream); }
+.sticker.tilt-right { transform: rotate(4deg); }
+
+/* Speech bubble */
+.speech-bubble {
+  position: relative;
+  display: inline-block;
+  background: var(--pop-cream);
+  color: var(--pop-ink);
+  padding: 14px 22px;
+  border: 2.5px solid var(--pop-ink);
+  border-radius: 20px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 15px;
+  box-shadow: 4px 4px 0 var(--pop-ink);
+  margin-bottom: 16px;
+  transform: rotate(-2deg);
+}
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -14px; left: 36px;
+  width: 20px; height: 20px;
+  background: var(--pop-cream);
+  border-right: 2.5px solid var(--pop-ink);
+  border-bottom: 2.5px solid var(--pop-ink);
+  transform: rotate(45deg);
+}
+
+/* Big pop title */
+.pop-title {
+  font-family: "Fraunces", var(--serif);
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(64px, 14vw, 200px);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: var(--pop-red);
+  text-shadow: 5px 5px 0 var(--pop-ink);
+  -webkit-text-stroke: 2px var(--pop-ink);
+  margin: 12px 0 20px;
+}
+.pop-title em {
+  font-style: italic;
+  color: var(--pop-cream);
+  -webkit-text-stroke: 2px var(--pop-ink);
+}
+
+.pop-sub {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(16px, 1.6vw, 20px);
+  color: var(--pop-ink);
+  max-width: 40ch;
+  margin-bottom: 36px;
+  line-height: 1.5;
+}
+
+/* CTA pill */
+.pop-cta {
+  display: inline-block;
+  background: var(--pop-red);
+  color: var(--pop-cream);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 18px 36px;
+  border: 2.5px solid var(--pop-ink);
+  border-radius: 999px;
+  box-shadow: 5px 5px 0 var(--pop-ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.pop-cta:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--pop-ink); }
+.pop-cta:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--pop-ink); }
+
+/* Mascot positioning */
+.mascot-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mascot-wrap svg {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  filter: drop-shadow(6px 6px 0 rgba(26,26,26,0.15));
+  animation: hop 3s ease-in-out infinite;
+}
+@keyframes hop {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+/* Halftone ring behind mascot */
+.mascot-wrap::before {
+  content: "";
+  position: absolute;
+  width: 360px; height: 360px;
+  background: radial-gradient(var(--pop-ink) 1.5px, transparent 2px);
+  background-size: 10px 10px;
+  border-radius: 50%;
+  opacity: 0.2;
+  z-index: 0;
+  -webkit-mask: radial-gradient(circle, #000 40%, transparent 72%);
+          mask: radial-gradient(circle, #000 40%, transparent 72%);
+}
+.mascot-wrap svg { position: relative; z-index: 1; }
+
+/* Meta row on pop hero */
+.pop-meta {
+  display: flex; gap: 32px; flex-wrap: wrap;
+  margin-top: 40px;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pop-ink);
+}
+.pop-meta div strong { display: block; font-size: 20px; font-family: "Fraunces", var(--serif); font-weight: 700; letter-spacing: -0.01em; text-transform: none; color: var(--pop-red); }
+
+/* Scrollable tag marquee */
+.pop-marquee {
+  position: relative; z-index: 2;
+  background: var(--pop-red);
+  color: var(--pop-cream);
+  border-top: 3px solid var(--pop-ink);
+  border-bottom: 3px solid var(--pop-ink);
+  padding: 18px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "Fraunces", var(--serif);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(20px, 3vw, 36px);
+  letter-spacing: -0.01em;
+  margin-top: 40px;
+}
+.pop-marquee .track { display: inline-block; animation: marquee 30s linear infinite; padding-left: 100%; }
+.pop-marquee .track span { margin: 0 24px; }
+.pop-marquee .track .star { color: var(--pop-yellow); }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* Footer rabbit accent */
+.footer-rabbit {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--pop-red);
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+.footer-rabbit svg { width: 32px; height: 32px; }
+
+/* About page accent */
+.about-stamp {
+  display: inline-flex; align-items: center; gap: 14px;
+  background: var(--pop-cream);
+  border: 2.5px solid var(--pop-ink);
+  border-radius: 20px;
+  padding: 14px 22px 14px 18px;
+  margin: 24px 0 48px;
+  box-shadow: 4px 4px 0 var(--pop-red);
+  transform: rotate(-1.5deg);
+  font-family: var(--sans);
+  font-size: 14px;
+}
+.about-stamp svg { width: 48px; height: 48px; }
+.about-stamp strong { color: var(--pop-red); font-weight: 700; }
+
+/* 404 */
+.not-found {
+  min-height: 80vh;
+  background: var(--pop-sky);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.not-found::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(var(--pop-ink) 1px, transparent 1.5px);
+  background-size: 14px 14px; opacity: 0.1;
+  pointer-events: none;
+}
+.not-found svg { width: 200px; height: auto; position: relative; z-index: 1; }
+.not-found h1 {
+  font-family: "Fraunces", var(--serif);
+  font-weight: 900; font-style: italic;
+  font-size: clamp(80px, 16vw, 200px);
+  color: var(--pop-red);
+  -webkit-text-stroke: 2px var(--pop-ink);
+  text-shadow: 5px 5px 0 var(--pop-ink);
+  margin: 20px 0;
+  position: relative; z-index: 1;
+}
+.not-found p { font-size: 18px; margin-bottom: 32px; position: relative; z-index: 1; }
