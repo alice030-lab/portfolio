@@ -34,21 +34,47 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     </div>
   </section>
 
-  {categories.map(c => (
-    <section class="container gallery-section" id={c.key}>
-      <div class="section-head">
-        <h2>{c.name}</h2>
-        <span class="num">— {c.images.length} 件</span>
-      </div>
-      <p class="gallery-desc">{c.desc}</p>
-      <div class="gallery-grid">
-        {c.images.map(im => (
-          <figure class="gallery-item reveal">
-            <div class="frame"><img src={im.src} alt={im.caption ?? c.name} loading="lazy" /></div>
-            {im.caption && <figcaption>{im.caption}</figcaption>}
-          </figure>
-        ))}
-      </div>
-    </section>
-  ))}
+  {categories.map(c => {
+    const count = c.subsections ? c.subsections.reduce((n, s) => n + s.images.length, 0) : (c.images?.length ?? 0);
+    return (
+      <section class="container gallery-section" id={c.key}>
+        <div class="section-head">
+          <div>
+            <div class="eyebrow" style="margin-bottom: 10px;">{c.tagline}</div>
+            <h2>{c.name}</h2>
+          </div>
+          <span class="num">— {count} 件</span>
+        </div>
+        <p class="gallery-desc">{c.desc}</p>
+
+        {c.subsections ? (
+          c.subsections.map(sub => (
+            <div class="subsection">
+              <div class="subsection-head">
+                <h3>{sub.title}</h3>
+                {sub.note && <p class="sub-note">{sub.note}</p>}
+              </div>
+              <div class="gallery-grid">
+                {sub.images.map(im => (
+                  <figure class="gallery-item reveal">
+                    <div class="frame"><img src={im.src} alt={im.caption ?? sub.title} loading="lazy" /></div>
+                    {im.caption && <figcaption>{im.caption}</figcaption>}
+                  </figure>
+                ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          <div class="gallery-grid">
+            {c.images?.map(im => (
+              <figure class="gallery-item reveal">
+                <div class="frame"><img src={im.src} alt={im.caption ?? c.name} loading="lazy" /></div>
+                {im.caption && <figcaption>{im.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )}
+      </section>
+    );
+  })}
 </Layout>

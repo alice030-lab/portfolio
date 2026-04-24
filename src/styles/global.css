@@ -618,6 +618,29 @@ h3 { font-size: clamp(22px, 2.4vw, 36px); }
   letter-spacing: 0.06em;
 }
 
+/* Subsection within a gallery category */
+.subsection { margin-bottom: 60px; }
+.subsection-head {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 24px 0 20px;
+  border-top: 1px solid var(--line);
+  margin-bottom: 28px;
+}
+.subsection-head h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 32px);
+  color: var(--pop-red);
+  font-style: italic;
+}
+.subsection-head .sub-note {
+  max-width: 65ch;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0;
+}
+
 /* 404 */
 .not-found {
   min-height: 80vh;
