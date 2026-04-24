@@ -16,6 +16,24 @@ const img = (n: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "")}/image
 
 export const works: Work[] = [
   {
+    slug: "anniversary-vi",
+    title: "60 週年企業識別主視覺",
+    client: "保密客戶",
+    year: "2024",
+    tag: "VI 規劃 & 主視覺",
+    cover: img("hero-vi-01.png"),
+    span: "span-7",
+    summary: "為企業六十週年規劃的年度主視覺，融合圖像與版面排版，兼顧識別性與科技感。",
+    role: "藝術指導 · 主視覺規劃 · 識別延伸",
+    scope: ["主視覺構圖", "識別延伸應用", "活動物料"],
+    body: [
+      { type: "p", text: "客戶要的是一套能承載六十年品牌資產、但又不被過去困住的主視覺。我們在完整構圖與延伸應用之間取得平衡，讓年度活動素材既有識別度、又能支援未來多場次的靈活調整。" },
+      { type: "full", src: img("hero-vi-01.png"), alt: "60 週年主視覺" },
+      { type: "p", text: "延伸版本把主視覺拆解成模組化素材，讓現場製作端能隨時替換資訊層，不必每場活動都回頭找設計師重做。" },
+      { type: "full", src: img("hero-vi-03.png"), alt: "週年延伸應用" },
+    ],
+  },
+  {
     slug: "packaging-series",
     title: "礁坑社區包裝再造",
     client: "礁坑社區發展協會",
