@@ -476,6 +476,124 @@ h3 { font-size: clamp(22px, 2.4vw, 36px); }
 .about-stamp svg { width: 48px; height: 48px; }
 .about-stamp strong { color: var(--pop-red); font-weight: 700; }
 
+/* Expertise grid */
+.expertise { padding-top: 40px; }
+.expertise-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin: 40px 0 80px;
+}
+@media (min-width: 700px) { .expertise-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .expertise-grid { grid-template-columns: repeat(3, 1fr); } }
+.exp-tile {
+  background: var(--paper);
+  padding: 40px 32px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: background 0.25s ease;
+}
+.exp-tile:hover { background: var(--pop-cream); }
+.exp-num {
+  font-family: var(--serif); font-style: italic; color: var(--pop-red);
+  font-size: 20px;
+}
+.exp-tile h3 { font-size: 26px; }
+.exp-tile p { font-size: 15px; color: #3a3a3a; line-height: 1.7; }
+
+/* Track record / stats */
+.track-record { padding-bottom: 40px; }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+  margin: 40px 0 48px;
+}
+@media (min-width: 800px) { .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 40px; } }
+.stat { padding: 24px 0; border-top: 2px solid var(--ink); }
+.stat-num {
+  font-family: "Fraunces", var(--serif);
+  font-weight: 900; font-style: italic;
+  font-size: clamp(56px, 7vw, 96px);
+  color: var(--pop-red);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.stat-num span { font-size: 0.5em; vertical-align: super; color: var(--ink); -webkit-text-stroke: 0; }
+.stat-label {
+  font-family: var(--sans); font-size: 13px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); margin-top: 8px;
+}
+.client-types {
+  background: var(--pop-cream);
+  border: 2px solid var(--ink);
+  padding: 32px;
+  border-radius: 4px;
+  margin-bottom: 80px;
+}
+.client-types p { font-size: 16px; line-height: 1.7; }
+
+/* Category list on home */
+.category-list {
+  margin: 40px 0 60px;
+  border-top: 1px solid var(--line);
+}
+.category-row {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 24px; align-items: center;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+  transition: padding 0.25s ease, background 0.25s ease;
+}
+.category-row:hover { padding-left: 16px; background: var(--pop-cream); }
+.cat-info h3 { font-size: clamp(24px, 3vw, 40px); margin-bottom: 6px; }
+.cat-info p { font-size: 14px; color: var(--muted); max-width: 60ch; }
+.cat-count {
+  font-family: "Fraunces", var(--serif);
+  font-style: italic;
+  color: var(--pop-red);
+  font-size: clamp(18px, 2vw, 24px);
+  white-space: nowrap;
+}
+
+/* Work page anchor nav */
+.work-nav {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 48px;
+}
+.work-nav a {
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 10px 16px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.work-nav a:hover { background: var(--ink); color: var(--paper); }
+
+/* Gallery grid */
+.gallery-section { scroll-margin-top: 80px; padding-top: 40px; }
+.gallery-desc { max-width: 60ch; color: var(--muted); margin: -16px 0 32px; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 60px;
+}
+@media (min-width: 700px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
+@media (min-width: 1100px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
+.gallery-item { display: flex; flex-direction: column; gap: 12px; }
+.gallery-item .frame {
+  background: #f0f0ec;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 240px;
+}
+.gallery-item .frame img { display: block; width: auto; height: auto; max-width: 100%; max-height: 420px; }
+.gallery-item figcaption {
+  font-size: 13px; color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
 /* 404 */
 .not-found {
   min-height: 80vh;

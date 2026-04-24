@@ -1,19 +1,28 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { works } from "../../data/works";
+import { categories } from "../../data/gallery";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 <Layout title="作品 — Alice Office">
   <section class="container hero" style="padding-bottom: 40px;">
-    <div class="eyebrow">— 作品索引</div>
-    <h1>完整<em>作品集</em></h1>
-    <p class="lead">橫跨品牌識別、編輯設計、包裝、與產品介面的精選案例。多數已公開發表，少數因簽約限制以代稱呈現。</p>
+    <div class="eyebrow">— 作品集</div>
+    <h1>完整<em>作品</em></h1>
+    <p class="lead">分為兩部分：需要完整脈絡說明的案例研究，以及依類別整理的單件作品集錦。</p>
+    <div class="work-nav">
+      <a href="#case-studies">案例研究</a>
+      {categories.map(c => <a href={`#${c.key}`}>{c.name}</a>)}
+    </div>
   </section>
 
-  <section class="container">
-    <div class="featured" style="grid-template-columns: 1fr;">
+  <section class="container" id="case-studies">
+    <div class="section-head">
+      <h2>案例研究</h2>
+      <span class="num">— 完整專案</span>
+    </div>
+    <div class="featured">
       {works.map((w) => (
-        <a href={`${base}/work/${w.slug}`} class="work-card reveal">
+        <a href={`${base}/work/${w.slug}`} class={`work-card reveal ${w.span ?? ""}`}>
           <div class="frame"><img src={w.cover} alt={w.title} loading="lazy" /></div>
           <div class="meta">
             <span class="tag">{w.tag}</span>
@@ -24,4 +33,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       ))}
     </div>
   </section>
+
+  {categories.map(c => (
+    <section class="container gallery-section" id={c.key}>
+      <div class="section-head">
+        <h2>{c.name}</h2>
+        <span class="num">— {c.images.length} 件</span>
+      </div>
+      <p class="gallery-desc">{c.desc}</p>
+      <div class="gallery-grid">
+        {c.images.map(im => (
+          <figure class="gallery-item reveal">
+            <div class="frame"><img src={im.src} alt={im.caption ?? c.name} loading="lazy" /></div>
+            {im.caption && <figcaption>{im.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    </section>
+  ))}
 </Layout>

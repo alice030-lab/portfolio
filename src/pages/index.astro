@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Clouds from "../components/Clouds.astro";
 import { works } from "../data/works";
-const featured = works.slice(0, 4);
+import { categories } from "../data/gallery";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 <Layout>
@@ -17,36 +17,87 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       <h1 class="pop-title">Alice<br/><em>Office</em></h1>
       <p class="pop-sub">一間在品牌識別、編輯設計、與產品介面之間跳來跳去的小工作室。做的東西要耐看，也要好玩。</p>
       <a href={`${base}/work`} class="pop-cta">看看作品 →</a>
-      <div class="pop-meta">
-        <div><strong>14</strong>品牌系統</div>
-        <div><strong>06</strong>產品介面</div>
-        <div><strong>2018</strong>創立至今</div>
+    </div>
+  </section>
+
+  <!-- 擅長什麼 -->
+  <section class="container expertise">
+    <div class="section-head">
+      <h2>擅長什麼</h2>
+      <span class="num">— 01 / 專業領域</span>
+    </div>
+    <div class="expertise-grid">
+      <div class="exp-tile reveal">
+        <div class="exp-num">01</div>
+        <h3>VI 規劃 &amp; 主視覺</h3>
+        <p>標準字、識別系統、年度主視覺、活動延伸應用。從 logo 到整套品牌資產一次到位。</p>
+      </div>
+      <div class="exp-tile reveal">
+        <div class="exp-num">02</div>
+        <h3>DM &amp; 平面設計</h3>
+        <p>DM 改版、宣傳單張、Banner、海報。專門處理資訊量大、要在小篇幅內說清楚的案子。</p>
+      </div>
+      <div class="exp-tile reveal">
+        <div class="exp-num">03</div>
+        <h3>說明書與編輯設計</h3>
+        <p>長篇資訊的分層、圖示重繪、閱讀動線。讓厚手冊也能被讀完。</p>
+      </div>
+      <div class="exp-tile reveal">
+        <div class="exp-num">04</div>
+        <h3>包裝設計</h3>
+        <p>從結構、平面到插畫一次完成的包裝系列。擅長處理在地品牌、文創、農特產。</p>
+      </div>
+      <div class="exp-tile reveal">
+        <div class="exp-num">05</div>
+        <h3>UI / UX 設計</h3>
+        <p>訂位系統、營運後台、會員介面。不只是美，更要好用、能解決真的問題。</p>
+      </div>
+      <div class="exp-tile reveal">
+        <div class="exp-num">06</div>
+        <h3>社群內容</h3>
+        <p>貼文模板系統、節慶活動圖、品牌日常內容。建一套工具讓團隊能持續產出。</p>
       </div>
     </div>
   </section>
 
-  <div class="pop-marquee">
-    <div class="track">
-      <span>品牌識別</span><span class="star">✦</span>
-      <span>編輯設計</span><span class="star">✦</span>
-      <span>包裝</span><span class="star">✦</span>
-      <span>UI / UX</span><span class="star">✦</span>
-      <span>社群內容</span><span class="star">✦</span>
-      <span>插畫</span><span class="star">✦</span>
-      <span>品牌識別</span><span class="star">✦</span>
-      <span>編輯設計</span><span class="star">✦</span>
-      <span>包裝</span><span class="star">✦</span>
-      <span>UI / UX</span><span class="star">✦</span>
+  <!-- 實績 -->
+  <section class="container track-record">
+    <div class="section-head">
+      <h2>實績</h2>
+      <span class="num">— 02 / 這些年累積</span>
     </div>
-  </div>
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="stat-num">20<span>+</span></div>
+        <div class="stat-label">品牌識別案例</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">6</div>
+        <div class="stat-label">完整包裝系列</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">3</div>
+        <div class="stat-label">產品介面系統</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">60<span>+</span></div>
+        <div class="stat-label">單張視覺作品</div>
+      </div>
+    </div>
+    <div class="client-types reveal">
+      <div class="eyebrow" style="margin-bottom: 16px;">服務過的客戶類型</div>
+      <p>地方社區發展協會 · 製造業集團 · 私人會員制俱樂部 · 電動車充電網營運商 · 食品與農特產品牌 · 生活風格品牌 · 文化展覽機構</p>
+    </div>
+  </section>
 
+  <!-- 精選完整專案 -->
   <section class="container">
     <div class="section-head">
-      <h2>精選作品</h2>
-      <span class="num">— 01 / 索引</span>
+      <h2>精選完整專案</h2>
+      <span class="num">— 03 / 案例研究</span>
     </div>
     <div class="featured">
-      {featured.map((w, i) => (
+      {works.map((w, i) => (
         <a href={`${base}/work/${w.slug}`} class={`work-card reveal ${w.span ?? ""}`}>
           <div class="frame"><img src={w.cover} alt={w.title} loading={i === 0 ? "eager" : "lazy"} /></div>
           <div class="meta">
@@ -59,24 +110,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     </div>
   </section>
 
+  <!-- 分類作品預覽 -->
   <section class="container">
     <div class="section-head">
-      <h2>服務項目</h2>
-      <span class="num">— 02 / 服務</span>
+      <h2>作品分類</h2>
+      <span class="num">— 04 / 更多作品</span>
     </div>
-    <div class="services">
-      {[
-        { n: "01", name: "品牌識別", tags: "VI · 標準字 · 規範手冊" },
-        { n: "02", name: "編輯與印刷設計", tags: "書籍 · DM · 操作手冊" },
-        { n: "03", name: "包裝設計", tags: "結構 · 平面 · 系統" },
-        { n: "04", name: "產品介面", tags: "UI · UX · 設計系統" },
-        { n: "05", name: "內容系統", tags: "社群 · 模板 · 視覺指導" },
-      ].map(s => (
-        <div class="service-row reveal">
-          <span class="num">{s.n}</span>
-          <span class="name">{s.name}</span>
-          <span class="tags">{s.tags}</span>
-        </div>
+    <div class="category-list">
+      {categories.map(c => (
+        <a href={`${base}/work#${c.key}`} class="category-row reveal">
+          <div class="cat-info">
+            <h3>{c.name}</h3>
+            <p>{c.desc}</p>
+          </div>
+          <div class="cat-count">{c.images.length} 件 →</div>
+        </a>
       ))}
     </div>
   </section>
