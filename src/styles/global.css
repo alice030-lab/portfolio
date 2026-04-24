@@ -170,35 +170,81 @@ em, .italic { font-style: italic; font-weight: 500; }
   gap: 10px;
   min-height: 420px;
 }
-.blk {
-  border-radius: 4px;
-  border: var(--hair);
-  padding: 16px 18px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  font-family: var(--serif);
-  line-height: 1.1;
+/* Shared "lift" interaction — applied to every card/block across the site */
+.blk,
+.exp-tile,
+.stat,
+.client-types,
+.category-row,
+.pricing-card,
+.service-row,
+.work-card .frame,
+.gallery-item .frame,
+.case-hero .meta,
+.work-nav a,
+.contact-form {
   position: relative;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 0 0 rgba(26, 26, 26, 0);
+  transition: transform 0.25s ease;
 }
-.blk::before {
+.blk::before,
+.exp-tile::before,
+.stat::before,
+.client-types::before,
+.category-row::before,
+.pricing-card::before,
+.service-row::before,
+.work-card .frame::before,
+.gallery-item .frame::before,
+.case-hero .meta::before,
+.work-nav a::before {
   content: "";
   position: absolute;
   inset: 0;
   background: var(--ink);
-  border-radius: 4px;
+  border-radius: inherit;
   z-index: -1;
   transform: translate(0, 0);
   opacity: 0;
   transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
 }
-.blk:hover {
+.blk:hover,
+.exp-tile:hover,
+.stat:hover,
+.client-types:hover,
+.category-row:hover,
+.pricing-card:hover,
+.service-row:hover,
+.work-card:hover .frame,
+.gallery-item:hover .frame,
+.case-hero .meta:hover,
+.work-nav a:hover {
   transform: translate(-6px, -6px);
   z-index: 2;
 }
-.blk:hover::before {
+.blk:hover::before,
+.exp-tile:hover::before,
+.stat:hover::before,
+.client-types:hover::before,
+.category-row:hover::before,
+.pricing-card:hover::before,
+.service-row:hover::before,
+.work-card:hover .frame::before,
+.gallery-item:hover .frame::before,
+.case-hero .meta:hover::before,
+.work-nav a:hover::before {
   transform: translate(10px, 10px);
   opacity: 1;
+}
+
+/* Make sure cards with overflow:hidden can still show the underlay */
+.work-card .frame,
+.gallery-item .frame {
+  overflow: visible;
+}
+.work-card .frame img,
+.gallery-item .frame img {
+  border-radius: 4px;
 }
 .blk .tag {
   font-family: var(--sans);
@@ -302,7 +348,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .exp-tile:nth-child(4) { background: var(--g-peach); }
 .exp-tile:nth-child(5) { background: var(--g-cream); }
 .exp-tile:nth-child(6) { background: var(--g-rose); }
-.exp-tile:hover { transform: translateY(-4px); }
+/* hover handled by shared lift rule */
 .exp-num { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink); opacity: 0.6; }
 .exp-tile h3 { font-size: 28px; font-style: italic; font-weight: 500; }
 .exp-tile p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
@@ -361,7 +407,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .category-row:nth-child(2) { background: var(--g-sage); }
 .category-row:nth-child(3) { background: var(--g-lavender); }
 .category-row:nth-child(4) { background: var(--g-peach); }
-.category-row:hover { transform: translateX(6px); }
+/* hover handled by shared lift rule */
 .cat-info h3 { font-size: clamp(24px, 3vw, 40px); font-style: italic; font-weight: 500; margin-bottom: 6px; }
 .cat-info p { font-size: 14px; color: var(--ink-soft); max-width: 60ch; }
 .cat-count {
@@ -493,7 +539,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   background: var(--g-cream);
   transition: background 0.25s ease, transform 0.25s ease;
 }
-.service-row:hover { background: var(--g-rose); transform: translateX(4px); }
+.service-row:hover { background: var(--g-rose); }
 .service-row .num { font-family: var(--serif); font-style: italic; color: var(--muted); }
 .service-row .name { font-family: var(--serif); font-style: italic; font-size: clamp(24px, 3vw, 44px); }
 .service-row .tags { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-align: right; }
