@@ -127,15 +127,18 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       <span class="num">— 04 / 更多作品</span>
     </div>
     <div class="category-list">
-      {categories.map(c => (
-        <a href={`${base}/work#${c.key}`} class="category-row reveal">
-          <div class="cat-info">
-            <h3>{c.name}</h3>
-            <p>{c.desc}</p>
-          </div>
-          <div class="cat-count">{c.images.length} 件 →</div>
-        </a>
-      ))}
+      {categories.map(c => {
+        const count = c.subsections ? c.subsections.reduce((n, s) => n + s.images.length, 0) : (c.images?.length ?? 0);
+        return (
+          <a href={`${base}/work#${c.key}`} class="category-row reveal">
+            <div class="cat-info">
+              <h3>{c.name}</h3>
+              <p>{c.desc}</p>
+            </div>
+            <div class="cat-count">{count} 件 →</div>
+          </a>
+        );
+      })}
     </div>
   </section>
 </Layout>
