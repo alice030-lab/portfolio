@@ -55,7 +55,14 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
 body {
-  background: var(--cream);
+  background-color: var(--cream);
+  background-image: linear-gradient(
+    180deg,
+    rgba(242, 181, 176, 0.95) 0px,
+    rgba(242, 181, 176, 0.55) 240px,
+    rgba(242, 181, 176, 0) 560px
+  );
+  background-repeat: no-repeat;
   color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
