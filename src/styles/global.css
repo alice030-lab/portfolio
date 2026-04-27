@@ -987,15 +987,25 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .phi-back:hover { background: var(--ink); color: var(--cream); }
 
-/* Visual feedback when an image is selected */
+/* Visual feedback when an image is selected — turn the lift shadow green */
 [data-img] {
   cursor: pointer;
   position: relative;
 }
-[data-img].is-active .frame,
-[data-img].is-active .demo-frame {
-  outline: 2px solid var(--ink);
-  outline-offset: 4px;
+.gallery-item[data-img].is-active .frame {
+  transform: translate(-6px, -6px);
+  box-shadow: 10px 10px 0 var(--sage-deep);
+  z-index: 2;
+}
+.case-image[data-img].is-active {
+  transform: translate(-6px, -6px);
+  box-shadow: 10px 10px 0 var(--sage-deep);
+  z-index: 2;
+}
+.demo-card[data-img].is-active {
+  transform: translate(-6px, -6px);
+  box-shadow: 10px 10px 0 var(--sage-deep);
+  z-index: 2;
 }
 
 /* ========== Work index & Gallery ========== */
