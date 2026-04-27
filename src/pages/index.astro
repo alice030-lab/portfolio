@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { categories } from "../data/gallery";
+import { demos } from "../data/demos";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 <Layout>
@@ -113,13 +114,38 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     </div>
   </section>
 
+  <section class="container demos">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">UI / UX & Frontend</div>
+        <h2>互動<em>展示</em></h2>
+      </div>
+      <span class="num">— 03</span>
+    </div>
+    <p class="demo-intro">不只設計畫面，也親手寫前端。下方是可以直接操作的線上展示。</p>
+    <div class="demo-grid">
+      {demos.map(d => (
+        <article class="demo-card reveal">
+          <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 11"};`}>
+            <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+          </div>
+          <div class="demo-meta">
+            <span class="tag">{d.tag}</span>
+            <h3>{d.title}</h3>
+            <p>{d.desc}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
   <section class="container">
     <div class="section-head">
       <div>
         <div class="eyebrow">Work</div>
         <h2>作品<em>分類</em></h2>
       </div>
-      <span class="num">— 03</span>
+      <span class="num">— 04</span>
     </div>
     <div class="category-list">
       {categories.map(c => {
