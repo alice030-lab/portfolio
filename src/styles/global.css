@@ -581,7 +581,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .tab-pane {
   display: none;
   padding: 48px 0 80px;
-  background: var(--cream);
+  background: transparent;
 }
 .tab-pane.active { display: block; animation: fade-in 0.3s ease both; }
 @keyframes fade-in {
