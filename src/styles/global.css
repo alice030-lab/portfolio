@@ -56,13 +56,18 @@ html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
 body {
   background-color: var(--cream);
-  background-image: linear-gradient(
-    180deg,
-    rgba(242, 181, 176, 0.95) 0px,
-    rgba(242, 181, 176, 0.55) 240px,
-    rgba(242, 181, 176, 0) 560px
-  );
-  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(242, 181, 176, 0.95) 0px,
+      rgba(242, 181, 176, 0.55) 240px,
+      rgba(242, 181, 176, 0) 560px
+    ),
+    url("/portfolio/images/paper-texture.png");
+  background-repeat: no-repeat, repeat;
+  background-size: auto, 700px 700px;
+  background-attachment: scroll, fixed;
+  background-blend-mode: multiply, multiply;
   color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
@@ -163,14 +168,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background-color: var(--cream);
-  background-image: linear-gradient(
-    180deg,
-    rgba(242, 181, 176, 0.95) 0px,
-    rgba(242, 181, 176, 0.55) 240px,
-    rgba(242, 181, 176, 0) 560px
-  );
-  background-repeat: no-repeat;
+  background: transparent; /* let body's paper + pink gradient show through */
   --open: 0;
 }
 .entrance-stage::before {
@@ -248,7 +246,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .box-body {
   position: absolute;
   inset: 0;
-  background: var(--cream);
+  background: transparent;
   border: calc((1 - var(--o)) * 2.5px) solid var(--ink);
   border-radius: calc((1 - var(--o)) * 8px);
   overflow: hidden;
@@ -261,13 +259,17 @@ em, .italic { font-style: italic; font-weight: 500; }
   height: 100vh;
   display: flex; align-items: center; justify-content: center;
   background-color: var(--cream);
-  background-image: linear-gradient(
-    180deg,
-    rgba(242, 181, 176, 0.95) 0px,
-    rgba(242, 181, 176, 0.55) 240px,
-    rgba(242, 181, 176, 0) 560px
-  );
-  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(242, 181, 176, 0.95) 0px,
+      rgba(242, 181, 176, 0.55) 240px,
+      rgba(242, 181, 176, 0) 560px
+    ),
+    url("/portfolio/images/paper-texture.png");
+  background-repeat: no-repeat, repeat;
+  background-size: auto, 700px 700px;
+  background-blend-mode: multiply, multiply;
 }
 .box-interior .ed-hero-inner {
   width: 100%;
