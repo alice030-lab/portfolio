@@ -278,13 +278,17 @@ em, .italic { font-style: italic; font-weight: 500; }
   opacity: calc(max(0, var(--o) - 0.45) * 2);
 }
 @media (min-width: 900px) {
-  .box-interior .ed-hero-inner { grid-template-columns: 3fr 2fr; gap: 56px; align-items: center; }
+  .box-interior .ed-hero-inner { grid-template-columns: 2fr 3fr; gap: 56px; align-items: center; }
 }
 .box-interior .ed-hero-inner h1 {
   font-family: var(--serif);
   font-style: normal; font-weight: 500;
-  font-size: clamp(40px, 6.5vw, 96px);
-  line-height: 1.05; letter-spacing: -0.02em;
+  font-size: clamp(32px, 4.6vw, 64px);
+  line-height: 1.1; letter-spacing: -0.02em;
+}
+.box-interior .ed-hero-inner .sub {
+  font-size: clamp(14px, 1.2vw, 16px);
+  max-width: 40ch;
 }
 
 /* Box lid — hinged at the back-top, rotates up & away */
@@ -326,25 +330,25 @@ em, .italic { font-style: italic; font-weight: 500; }
   align-items: start;
 }
 @media (min-width: 900px) {
-  .ed-hero-inner { grid-template-columns: 3fr 2fr; gap: 56px; }
+  .ed-hero-inner { grid-template-columns: 2fr 3fr; gap: 56px; }
 }
 .ed-hero h1 {
   font-family: var(--serif);
   font-style: normal;
   font-weight: 500;
-  font-size: clamp(40px, 6.5vw, 96px);
-  line-height: 1.05;
+  font-size: clamp(32px, 4.6vw, 64px);
+  line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--ink);
 }
 .ed-hero h1 .reg { font-style: normal; }
 .ed-hero .sub {
   font-family: var(--sans);
-  font-size: clamp(16px, 1.5vw, 18px);
+  font-size: clamp(14px, 1.2vw, 16px);
   color: var(--ink-soft);
-  max-width: 44ch;
-  margin-top: 28px;
-  line-height: 1.6;
+  max-width: 40ch;
+  margin-top: 22px;
+  line-height: 1.55;
 }
 .ed-hero .cta-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 40px; }
 
@@ -353,15 +357,15 @@ em, .italic { font-style: italic; font-weight: 500; }
   position: relative;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 52px);
-  gap: 10px;
-  min-height: 420px;
+  grid-template-rows: repeat(6, 78px);
+  gap: 12px;
+  min-height: 540px;
 }
 /* Hero block base — individual styling */
 .blk {
   border-radius: var(--r-card);
   border: var(--hair);
-  padding: 16px 18px;
+  padding: 22px 24px;
   display: flex; flex-direction: column; justify-content: space-between;
   font-family: var(--serif);
   line-height: 1.1;
@@ -467,15 +471,15 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .blk .tag {
   font-family: var(--sans);
-  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--ink); opacity: 0.75;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink); opacity: 0.78;
 }
 .blk .num {
-  font-size: clamp(28px, 3.2vw, 44px);
+  font-size: clamp(36px, 4vw, 56px);
   font-style: italic; font-weight: 500;
 }
 .blk .label {
-  font-family: var(--sans); font-size: 12px;
+  font-family: var(--sans); font-size: 13px;
   color: var(--ink-soft); font-style: normal;
 }
 .blk.rose { background: var(--g-rose); }
