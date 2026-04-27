@@ -94,6 +94,13 @@ export const categories: GalleryCategory[] = [
     desc: "訂位系統、營運後台、會員介面、響應式網站。不只是設計畫面，也親手寫前端。",
     demos: [
       {
+        title: "Solo Sync — Discovery 探索頁",
+        tag: "Web App · UI Design",
+        desc: "音樂創作者協作平台的探索頁面 — 分類瀏覽、搜尋、即時互動。",
+        src: "https://solo-sync.vercel.app/discovery",
+        ratio: "16 / 11",
+      },
+      {
         title: "TFA Redesign — 前端重製案",
         tag: "HTML · CSS · JS",
         desc: "親手刻的響應式網站重製案，從版型結構、互動到動效全程實作。",
