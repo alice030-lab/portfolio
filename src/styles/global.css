@@ -1355,7 +1355,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   background: var(--g-sage);
   border: var(--hair);
   padding: 14px 22px;
-  border-radius: 999px;
+  border-radius: 0;
   margin: 24px 0 48px;
   font-family: var(--sans); font-size: 14px;
 }
