@@ -107,6 +107,10 @@ export const categories: GalleryCategory[] = [
         ratio: "16 / 9",
       },
     ],
+    images: [
+      { src: img("case-golf.png"), caption: "時時夠夫 — 場地預約系統 Venue Booking System" },
+      { src: img("case-charging.png"), caption: "汽機車充電站 — 預約充電系統 Pre-View" },
+    ],
   },
   {
     key: "social",

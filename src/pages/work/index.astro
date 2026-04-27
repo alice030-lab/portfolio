@@ -10,7 +10,7 @@ type Tab = {
   desc: string;
   catName: string;
   catTag: string;
-  type: "images" | "demos" | "cases";
+  type: "images" | "demos" | "cases" | "mixed";
   images?: GalleryItem[];
   demos?: GalleryDemo[];
 };
@@ -30,6 +30,8 @@ for (const c of categories) {
         images: sub.images,
       });
     });
+  } else if (c.demos && c.images) {
+    tabs.push({ id: c.key, name: c.name, desc: c.desc, catName: c.name, catTag: c.tagline, type: "mixed", demos: c.demos, images: c.images });
   } else if (c.demos) {
     tabs.push({ id: c.key, name: c.name, desc: c.desc, catName: c.name, catTag: c.tagline, type: "demos", demos: c.demos });
   } else if (c.images) {
@@ -66,13 +68,18 @@ tabs.push({ id: "cases", name: "案例研究", desc: "需要完整脈絡說明�
             <div class="eyebrow" style="margin-bottom: 10px;">{t.catTag} · {t.catName}</div>
             <h2>{t.name}</h2>
           </div>
-          <span class="num">— {t.type === "demos" ? t.demos!.length : t.type === "cases" ? works.length : t.images!.length} 件</span>
+          <span class="num">— {
+            t.type === "demos" ? t.demos!.length
+              : t.type === "cases" ? works.length
+              : t.type === "mixed" ? (t.demos!.length + t.images!.length)
+              : t.images!.length
+          } 件</span>
         </div>
         {t.desc && <p class="gallery-desc">{t.desc}</p>}
 
-        {t.type === "demos" ? (
+        {(t.type === "demos" || t.type === "mixed") && t.demos && (
           <div class="demo-grid">
-            {t.demos!.map(d => (
+            {t.demos.map(d => (
               <article class="demo-card reveal">
                 <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 9"};`}>
                   <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
@@ -85,7 +92,18 @@ tabs.push({ id: "cases", name: "案例研究", desc: "需要完整脈絡說明�
               </article>
             ))}
           </div>
-        ) : t.type === "cases" ? (
+        )}
+        {t.type === "mixed" && t.images && (
+          <div class="case-image-stack">
+            {t.images.map(im => (
+              <figure class="case-image reveal">
+                <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
+                {im.caption && <figcaption>{im.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )}
+        {t.type === "cases" && (
           <div class="featured">
             {works.map((w) => (
               <a href={`${base}/work/${w.slug}`} class={`work-card reveal ${w.span ?? ""}`}>
@@ -98,9 +116,10 @@ tabs.push({ id: "cases", name: "案例研究", desc: "需要完整脈絡說明�
               </a>
             ))}
           </div>
-        ) : (
+        )}
+        {t.type === "images" && t.images && (
           <div class="gallery-grid">
-            {t.images!.map(im => (
+            {t.images.map(im => (
               <figure class="gallery-item reveal">
                 <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
                 {im.caption && <figcaption>{im.caption}</figcaption>}

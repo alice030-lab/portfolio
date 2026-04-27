@@ -388,6 +388,37 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .client-types p { font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
 
+/* ========== Long-image case stack (UI/UX pitch decks) ========== */
+.case-image-stack {
+  display: grid; grid-template-columns: 1fr; gap: 60px;
+  max-width: 1280px;
+  margin: 60px auto 80px;
+}
+.case-image {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.case-image .frame {
+  background-color: var(--grid-bg);
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  border: var(--hair);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  padding: 24px;
+  display: flex; justify-content: center;
+  box-shadow: var(--shadow-soft);
+}
+.case-image .frame img {
+  display: block; max-width: 100%; height: auto; border-radius: 4px;
+}
+.case-image figcaption {
+  font-size: 14px; color: var(--ink-soft);
+  font-style: italic;
+  padding: 0 8px;
+}
+
 /* ========== Interactive Demos ========== */
 .demos { padding-top: 20px; }
 .demo-intro {
