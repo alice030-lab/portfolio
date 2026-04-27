@@ -388,35 +388,52 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .client-types p { font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
 
-/* ========== Long-image case stack (UI/UX pitch decks) ========== */
+/* ========== Long-image case stack — same window style as embedded demos ========== */
 .case-image-stack {
   display: grid; grid-template-columns: 1fr; gap: 60px;
   max-width: 1280px;
   margin: 60px auto 80px;
 }
 .case-image {
-  display: flex; flex-direction: column; gap: 14px;
+  background: var(--g-cream);
+  border: var(--hair);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: var(--shadow-soft);
+  display: flex; flex-direction: column;
+}
+.case-image:hover {
+  transform: translate(-6px, -6px);
+  box-shadow: 10px 10px 0 var(--ink);
+  z-index: 2;
 }
 .case-image .frame {
+  width: 100%;
   background-color: var(--grid-bg);
   background-image:
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
-  border: var(--hair);
-  border-radius: var(--r-card);
+  border: 0;
+  border-bottom: var(--hair);
+  border-radius: 0;
+  padding: 0;
   overflow: hidden;
-  padding: 24px;
+  box-shadow: none;
   display: flex; justify-content: center;
-  box-shadow: var(--shadow-soft);
 }
 .case-image .frame img {
-  display: block; max-width: 100%; height: auto; border-radius: 4px;
+  display: block; max-width: 100%; height: auto; border-radius: 0;
 }
 .case-image figcaption {
-  font-size: 14px; color: var(--ink-soft);
-  font-style: italic;
-  padding: 0 8px;
+  padding: 22px 28px;
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 500;
+  color: var(--ink);
+  font-style: normal;
 }
 
 /* ========== Interactive Demos ========== */
