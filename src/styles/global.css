@@ -534,8 +534,9 @@ em, .italic { font-style: italic; font-weight: 500; }
   position: sticky;
   top: 60px; /* below site header */
   z-index: 30;
-  background: rgba(251, 250, 245, 0.95);
-  backdrop-filter: blur(8px);
+  background: transparent;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
   padding: 24px 0 0;
   margin-bottom: 0;
 }
