@@ -764,65 +764,145 @@ em, .italic { font-style: italic; font-weight: 500; }
   font-size: clamp(20px, 2vw, 28px); white-space: nowrap;
 }
 
-/* ========== Book-tab navigation ========== */
-.tabs-bar {
-  position: sticky;
-  top: 60px; /* below site header */
-  z-index: 30;
-  background: transparent;
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  padding: 24px 0 0;
-  margin-bottom: 0;
+/* ========== Work layout: vertical tabs + content + philosophy ========== */
+.work-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  margin-top: 24px;
 }
-.tabs-nav {
+@media (min-width: 900px) {
+  .work-layout { grid-template-columns: 220px 1fr; }
+}
+@media (min-width: 1280px) {
+  .work-layout { grid-template-columns: 220px 1fr 320px; }
+}
+
+/* Vertical tabs sidebar */
+.work-tabs-vertical {
   display: flex;
-  gap: 0;
+  flex-direction: row;
   overflow-x: auto;
   scrollbar-width: none;
   border-bottom: 1px solid var(--ink);
-  padding: 0 var(--gutter);
-  margin: 0 calc(-1 * var(--gutter));
-}
-.tabs-nav::-webkit-scrollbar { display: none; }
-.tab-btn {
-  flex-shrink: 0;
-  padding: 12px 22px 14px;
-  background: var(--cream-deep);
-  color: var(--ink);
-  border: 1px solid var(--ink);
-  border-bottom: none;
-  border-radius: 8px 8px 0 0;
-  font-family: inherit;
-  font-size: 12px; letter-spacing: 0.08em;
-  cursor: pointer;
-  white-space: nowrap;
-  position: relative;
-  bottom: -1px; /* sit on the page edge line */
-  margin-right: -1px; /* overlap borders so tabs share a single line */
-  transition: background 0.2s ease, padding 0.2s ease;
-}
-.tab-btn:not(.active):hover {
-  background: var(--cream);
-  padding-top: 10px;
-}
-.tab-btn.active {
-  background: var(--cream);
-  z-index: 1;
-  /* Hide the bottom border by overlapping the bar's line with cream background */
-  box-shadow: 0 1px 0 var(--cream);
-  font-weight: 500;
-}
-
-.tab-pane {
-  display: none;
-  padding: 48px 0 80px;
   background: transparent;
 }
+.work-tabs-vertical::-webkit-scrollbar { display: none; }
+@media (min-width: 900px) {
+  .work-tabs-vertical {
+    flex-direction: column;
+    border-right: 1px solid var(--ink);
+    border-bottom: 0;
+    overflow-x: visible;
+    overflow-y: auto;
+    position: sticky;
+    top: 60px;
+    align-self: start;
+    max-height: calc(100vh - 60px);
+  }
+}
+.vtab {
+  flex-shrink: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px 20px;
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--line);
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: left;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+@media (min-width: 900px) {
+  .vtab {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    white-space: normal;
+  }
+}
+.vtab:hover { background: var(--cream-deep); }
+.vtab.active {
+  background: var(--ink);
+  color: var(--cream);
+}
+.vtab.active .vtab-num { color: rgba(255,255,255,0.6); }
+.vtab-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.vtab-name { font-weight: 500; }
+
+/* Content area */
+.work-content {
+  padding: 32px clamp(20px, 3vw, 40px);
+  min-width: 0;
+}
+@media (min-width: 1280px) {
+  .work-content { border-right: 1px solid var(--ink); }
+}
+.tab-pane { display: none; }
 .tab-pane.active { display: block; animation: fade-in 0.3s ease both; }
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
+}
+
+/* Philosophy panel — far right */
+.work-philosophy {
+  padding: 32px 28px;
+  border-top: 1px solid var(--ink);
+  background: transparent;
+  position: relative;
+}
+@media (min-width: 1280px) {
+  .work-philosophy {
+    border-top: 0;
+    position: sticky;
+    top: 60px;
+    align-self: start;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+}
+.phi { display: none; }
+.phi.active { display: block; animation: fade-in 0.3s ease both; }
+.phi-eyebrow {
+  font-family: var(--sans);
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.phi-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 28px;
+  color: var(--rose-deep);
+  margin-bottom: 20px;
+}
+.phi p {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin-bottom: 1em;
+}
+.phi-desc {
+  font-size: 12px !important;
+  color: var(--muted) !important;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  margin-top: 24px !important;
+  font-style: italic;
 }
 
 /* ========== Work index & Gallery ========== */

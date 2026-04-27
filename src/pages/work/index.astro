@@ -8,6 +8,7 @@ type Tab = {
   id: string;
   name: string;
   desc: string;
+  philosophy?: string;
   catName: string;
   catTag: string;
   type: "images" | "demos" | "cases" | "mixed";
@@ -15,7 +16,6 @@ type Tab = {
   demos?: GalleryDemo[];
 };
 
-// Flatten categories into tabs (subsections become individual tabs)
 const tabs: Tab[] = [];
 for (const c of categories) {
   if (c.subsections) {
@@ -24,6 +24,7 @@ for (const c of categories) {
         id: `${c.key}-${i}`,
         name: sub.title,
         desc: sub.note ?? c.desc,
+        philosophy: c.philosophy,
         catName: c.name,
         catTag: c.tagline,
         type: "images",
@@ -31,15 +32,22 @@ for (const c of categories) {
       });
     });
   } else if (c.demos && c.images) {
-    tabs.push({ id: c.key, name: c.name, desc: c.desc, catName: c.name, catTag: c.tagline, type: "mixed", demos: c.demos, images: c.images });
+    tabs.push({ id: c.key, name: c.name, desc: c.desc, philosophy: c.philosophy, catName: c.name, catTag: c.tagline, type: "mixed", demos: c.demos, images: c.images });
   } else if (c.demos) {
-    tabs.push({ id: c.key, name: c.name, desc: c.desc, catName: c.name, catTag: c.tagline, type: "demos", demos: c.demos });
+    tabs.push({ id: c.key, name: c.name, desc: c.desc, philosophy: c.philosophy, catName: c.name, catTag: c.tagline, type: "demos", demos: c.demos });
   } else if (c.images) {
-    tabs.push({ id: c.key, name: c.name, desc: c.desc, catName: c.name, catTag: c.tagline, type: "images", images: c.images });
+    tabs.push({ id: c.key, name: c.name, desc: c.desc, philosophy: c.philosophy, catName: c.name, catTag: c.tagline, type: "images", images: c.images });
   }
 }
-// Append case studies tab at the end
-tabs.push({ id: "cases", name: "案例研究", desc: "需要完整脈絡說明的長篇案例。", catName: "Case Studies", catTag: "— Projects", type: "cases" });
+tabs.push({
+  id: "cases",
+  name: "案例研究",
+  desc: "需要完整脈絡說明的長篇案例。",
+  philosophy: "完整案例需要的是脈絡 — 為什麼開始、走過哪些彎路、最後留下什麼。\n\n每一個案例研究都是一次完整的設計思考紀錄。包裝、產品、識別 — 形式不同，但思考的方式一致。",
+  catName: "Case Studies",
+  catTag: "— Projects",
+  type: "cases",
+});
 ---
 <Layout title="作品 — Alice Office">
   <section class="container hero" style="padding-bottom: 24px;">
@@ -48,93 +56,103 @@ tabs.push({ id: "cases", name: "案例研究", desc: "需要完整脈絡說明�
     <p class="lead">分類整理的單件作品與完整案例研究，依主題切換瀏覽。</p>
   </section>
 
-  <div class="tabs-bar">
-    <div class="container">
-      <div class="tabs-nav" role="tablist">
-        {tabs.map((t, i) => (
-          <button class={`tab-btn ${i === 0 ? "active" : ""}`} data-tab={t.id} role="tab" aria-selected={i === 0 ? "true" : "false"}>
-            {t.name}
-          </button>
-        ))}
-      </div>
-    </div>
+  <div class="work-layout">
+    <aside class="work-tabs-vertical" role="tablist">
+      {tabs.map((t, i) => (
+        <button class={`vtab ${i === 0 ? "active" : ""}`} data-tab={t.id} role="tab" aria-selected={i === 0 ? "true" : "false"}>
+          <span class="vtab-num">{String(i + 1).padStart(2, "0")}</span>
+          <span class="vtab-name">{t.name}</span>
+        </button>
+      ))}
+    </aside>
+
+    <main class="work-content">
+      {tabs.map((t, i) => (
+        <section class={`tab-pane ${i === 0 ? "active" : ""}`} id={t.id} role="tabpanel">
+          <div class="section-head" style="padding-top: 0;">
+            <div>
+              <div class="eyebrow" style="margin-bottom: 10px;">{t.catTag} · {t.catName}</div>
+              <h2>{t.name}</h2>
+            </div>
+            <span class="num">— {
+              t.type === "demos" ? t.demos!.length
+                : t.type === "cases" ? works.length
+                : t.type === "mixed" ? (t.demos!.length + t.images!.length)
+                : t.images!.length
+            } 件</span>
+          </div>
+
+          {(t.type === "demos" || t.type === "mixed") && t.demos && (
+            <div class="demo-grid">
+              {t.demos.map(d => (
+                <article class="demo-card">
+                  <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 9"};`}>
+                    <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                  </div>
+                  <div class="demo-meta">
+                    <span class="tag">{d.tag}</span>
+                    <h3>{d.title}</h3>
+                    {d.desc && <p>{d.desc}</p>}
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+          {t.type === "mixed" && t.images && (
+            <div class="case-image-stack">
+              {t.images.map(im => (
+                <figure class="case-image">
+                  <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
+                  {im.caption && <figcaption>{im.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          )}
+          {t.type === "cases" && (
+            <div class="featured">
+              {works.map((w) => (
+                <a href={`${base}/work/${w.slug}`} class={`work-card ${w.span ?? ""}`}>
+                  <div class="frame"><img src={w.cover} alt={w.title} loading="lazy" /></div>
+                  <div class="meta">
+                    <span class="tag">{w.tag}</span>
+                    <span class="title">{w.title}</span>
+                    <span class="year">{w.year}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+          {t.type === "images" && t.images && (
+            <div class="gallery-grid">
+              {t.images.map(im => (
+                <figure class="gallery-item">
+                  <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
+                  {im.caption && <figcaption>{im.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          )}
+        </section>
+      ))}
+    </main>
+
+    <aside class="work-philosophy">
+      {tabs.map((t, i) => (
+        <article class={`phi ${i === 0 ? "active" : ""}`} data-pane={t.id}>
+          <div class="phi-eyebrow">{t.catTag}</div>
+          <h3 class="phi-title">作品理念</h3>
+          {t.philosophy && t.philosophy.split("\n\n").map(p => <p>{p}</p>)}
+          <p class="phi-desc">{t.desc}</p>
+        </article>
+      ))}
+    </aside>
   </div>
-
-  {tabs.map((t, i) => (
-    <section class={`tab-pane ${i === 0 ? "active" : ""}`} id={t.id} role="tabpanel" aria-labelledby={t.id}>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow" style="margin-bottom: 10px;">{t.catTag} · {t.catName}</div>
-            <h2>{t.name}</h2>
-          </div>
-          <span class="num">— {
-            t.type === "demos" ? t.demos!.length
-              : t.type === "cases" ? works.length
-              : t.type === "mixed" ? (t.demos!.length + t.images!.length)
-              : t.images!.length
-          } 件</span>
-        </div>
-        {t.desc && <p class="gallery-desc">{t.desc}</p>}
-
-        {(t.type === "demos" || t.type === "mixed") && t.demos && (
-          <div class="demo-grid">
-            {t.demos.map(d => (
-              <article class="demo-card reveal">
-                <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 9"};`}>
-                  <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
-                </div>
-                <div class="demo-meta">
-                  <span class="tag">{d.tag}</span>
-                  <h3>{d.title}</h3>
-                  {d.desc && <p>{d.desc}</p>}
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
-        {t.type === "mixed" && t.images && (
-          <div class="case-image-stack">
-            {t.images.map(im => (
-              <figure class="case-image">
-                <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
-                {im.caption && <figcaption>{im.caption}</figcaption>}
-              </figure>
-            ))}
-          </div>
-        )}
-        {t.type === "cases" && (
-          <div class="featured">
-            {works.map((w) => (
-              <a href={`${base}/work/${w.slug}`} class={`work-card reveal ${w.span ?? ""}`}>
-                <div class="frame"><img src={w.cover} alt={w.title} loading="lazy" /></div>
-                <div class="meta">
-                  <span class="tag">{w.tag}</span>
-                  <span class="title">{w.title}</span>
-                  <span class="year">{w.year}</span>
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
-        {t.type === "images" && t.images && (
-          <div class="gallery-grid">
-            {t.images.map(im => (
-              <figure class="gallery-item reveal">
-                <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
-                {im.caption && <figcaption>{im.caption}</figcaption>}
-              </figure>
-            ))}
-          </div>
-        )}
-      </div>
-    </section>
-  ))}
 
   <script is:inline>
     (function () {
-      const buttons = document.querySelectorAll(".tab-btn");
+      const buttons = document.querySelectorAll(".vtab");
       const panes = document.querySelectorAll(".tab-pane");
+      const phis = document.querySelectorAll(".phi");
       buttons.forEach(btn => {
         btn.addEventListener("click", () => {
           const target = btn.getAttribute("data-tab");
@@ -144,15 +162,12 @@ tabs.push({ id: "cases", name: "案例研究", desc: "需要完整脈絡說明�
             b.setAttribute("aria-selected", on ? "true" : "false");
           });
           panes.forEach(p => p.classList.toggle("active", p.id === target));
-          // optional: scroll into view
-          const main = document.querySelector(".tabs-bar");
-          if (main) main.scrollIntoView({ behavior: "smooth", block: "start" });
+          phis.forEach(p => p.classList.toggle("active", p.dataset.pane === target));
         });
       });
-      // Allow URL hash (#vi-0) to deep-link
       const hash = window.location.hash.replace("#", "");
       if (hash) {
-        const btn = document.querySelector(`.tab-btn[data-tab="${hash}"]`);
+        const btn = document.querySelector(`.vtab[data-tab="${hash}"]`);
         if (btn) btn.click();
       }
     })();
