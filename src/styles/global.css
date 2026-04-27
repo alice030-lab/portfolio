@@ -390,10 +390,10 @@ em, .italic { font-style: italic; font-weight: 500; }
   margin-bottom: 32px;
 }
 .demo-grid {
-  display: grid; grid-template-columns: 1fr; gap: 32px;
-  margin-bottom: 80px;
+  display: grid; grid-template-columns: 1fr; gap: 60px;
+  max-width: 1280px;
+  margin: 0 auto 80px;
 }
-@media (min-width: 900px) { .demo-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
 .demo-card {
   background: var(--g-cream);
   border: var(--hair);
