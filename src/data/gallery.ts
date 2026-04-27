@@ -33,12 +33,8 @@ export const categories: GalleryCategory[] = [
     subsections: [
       {
         title: "主視覺",
-        note: "為企業、週年活動所做的整體主視覺規劃 — 融合圖像、排版與色彩語彙，含規範手冊與大尺寸海報延伸。",
+        note: "為企業所做的主視覺規劃 — 規範手冊與大尺寸海報應用。",
         images: [
-          { src: img("hero-vi-01.png"), caption: "整體主視覺 01" },
-          { src: img("hero-vi-03.png"), caption: "整體主視覺 03" },
-          { src: img("feature-01.png"), caption: "年度主視覺 A" },
-          { src: img("feature-02.png"), caption: "年度主視覺 B" },
           { src: img("work-manual-1.png"), caption: "VI 規範手冊封面" },
           { src: img("work-poster.jpg"), caption: "A0 海報版型" },
         ],
@@ -63,17 +59,20 @@ export const categories: GalleryCategory[] = [
     subsections: [
       {
         title: "DM 改善與設計",
-        note: "從結構、字型到圖文節奏的 DM 改版案例。",
+        note: "從結構、字型到圖文節奏的 DM 案例。",
         images: [
-          { src: img("work-dm-1.png"), caption: "DM 改善前後對照" },
-          { src: img("work-dm-2.png"), caption: "DM 重新設計" },
+          { src: img("work-dm-1.png"), caption: "DM" },
+          { src: img("work-manual-2.png"), caption: "規範手冊內頁" },
+          { src: img("work-social-1.png"), caption: "DM 1" },
+          { src: img("work-social-2.png"), caption: "DM 2" },
+          { src: img("feature-02.png"), caption: "DM 3" },
         ],
       },
       {
         title: "海報 / Banner / 展覽",
         note: "大尺寸印刷物、展場背板、活動主視覺。",
         images: [
-          { src: img("work-detail.jpg"), caption: "展場背板細節" },
+          { src: img("work-detail.jpg"), caption: "展場背板細節（舊設計）" },
         ],
       },
     ],
@@ -84,7 +83,7 @@ export const categories: GalleryCategory[] = [
     tagline: "03 — Editorial",
     desc: "長篇資訊的分層、圖示重繪、閱讀動線。讓厚手冊也能被讀完。",
     images: [
-      { src: img("work-manual-2.png"), caption: "規範手冊內頁" },
+      { src: img("work-dm-2.png"), caption: "說明書" },
     ],
   },
   {
@@ -113,11 +112,11 @@ export const categories: GalleryCategory[] = [
     key: "social",
     name: "社群內容",
     tagline: "06 — Social",
-    // (numbering aligns with homepage expertise grid)
     desc: "貼文模板系統、節慶活動圖、品牌日常內容。建一套工具讓團隊能持續產出。",
     images: [
-      { src: img("work-social-1.png"), caption: "社群系列 A" },
-      { src: img("work-social-2.png"), caption: "社群系列 B" },
+      { src: img("hero-vi-01.png"), caption: "社群主視覺 01" },
+      { src: img("hero-vi-03.png"), caption: "社群主視覺 03" },
+      { src: img("feature-01.png"), caption: "社群主視覺" },
     ],
   },
 ];
