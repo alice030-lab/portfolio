@@ -1,59 +1,80 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { works } from "../../data/works";
-import { categories } from "../../data/gallery";
+import { categories, type GalleryItem, type GalleryDemo } from "../../data/gallery";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+type Tab = {
+  id: string;
+  name: string;
+  desc: string;
+  catName: string;
+  catTag: string;
+  type: "images" | "demos" | "cases";
+  images?: GalleryItem[];
+  demos?: GalleryDemo[];
+};
+
+// Flatten categories into tabs (subsections become individual tabs)
+const tabs: Tab[] = [];
+for (const c of categories) {
+  if (c.subsections) {
+    c.subsections.forEach((sub, i) => {
+      tabs.push({
+        id: `${c.key}-${i}`,
+        name: sub.title,
+        desc: sub.note ?? c.desc,
+        catName: c.name,
+        catTag: c.tagline,
+        type: "images",
+        images: sub.images,
+      });
+    });
+  } else if (c.demos) {
+    tabs.push({ id: c.key, name: c.name, desc: c.desc, catName: c.name, catTag: c.tagline, type: "demos", demos: c.demos });
+  } else if (c.images) {
+    tabs.push({ id: c.key, name: c.name, desc: c.desc, catName: c.name, catTag: c.tagline, type: "images", images: c.images });
+  }
+}
+// Append case studies tab at the end
+tabs.push({ id: "cases", name: "案例研究", desc: "需要完整脈絡說明的長篇案例。", catName: "Case Studies", catTag: "— Projects", type: "cases" });
 ---
 <Layout title="作品 — Alice Office">
-  <section class="container hero" style="padding-bottom: 40px;">
+  <section class="container hero" style="padding-bottom: 24px;">
     <div class="eyebrow">— 作品集</div>
     <h1>完整<em>作品</em></h1>
-    <p class="lead">分為兩部分：需要完整脈絡說明的案例研究，以及依類別整理的單件作品集錦。</p>
-    <div class="work-nav">
-      <a href="#case-studies">案例研究</a>
-      {categories.map(c => <a href={`#${c.key}`}>{c.name}</a>)}
-    </div>
+    <p class="lead">分類整理的單件作品與完整案例研究，依主題切換瀏覽。</p>
   </section>
 
-  <section class="container" id="case-studies">
-    <div class="section-head">
-      <h2>案例研究</h2>
-      <span class="num">— 完整專案</span>
+  <div class="tabs-bar">
+    <div class="container">
+      <div class="tabs-nav" role="tablist">
+        {tabs.map((t, i) => (
+          <button class={`tab-btn ${i === 0 ? "active" : ""}`} data-tab={t.id} role="tab" aria-selected={i === 0 ? "true" : "false"}>
+            {t.name}
+          </button>
+        ))}
+      </div>
     </div>
-    <div class="featured">
-      {works.map((w) => (
-        <a href={`${base}/work/${w.slug}`} class={`work-card reveal ${w.span ?? ""}`}>
-          <div class="frame"><img src={w.cover} alt={w.title} loading="lazy" /></div>
-          <div class="meta">
-            <span class="tag">{w.tag}</span>
-            <span class="title">{w.title}</span>
-            <span class="year">{w.year}</span>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
+  </div>
 
-  {categories.map(c => {
-    const count = c.demos ? c.demos.length
-      : c.subsections ? c.subsections.reduce((n, s) => n + s.images.length, 0)
-      : (c.images?.length ?? 0);
-    return (
-      <section class="container gallery-section" id={c.key}>
+  {tabs.map((t, i) => (
+    <section class={`tab-pane ${i === 0 ? "active" : ""}`} id={t.id} role="tabpanel" aria-labelledby={t.id}>
+      <div class="container">
         <div class="section-head">
           <div>
-            <div class="eyebrow" style="margin-bottom: 10px;">{c.tagline}</div>
-            <h2>{c.name}</h2>
+            <div class="eyebrow" style="margin-bottom: 10px;">{t.catTag} · {t.catName}</div>
+            <h2>{t.name}</h2>
           </div>
-          <span class="num">— {count} 件</span>
+          <span class="num">— {t.type === "demos" ? t.demos!.length : t.type === "cases" ? works.length : t.images!.length} 件</span>
         </div>
-        <p class="gallery-desc">{c.desc}</p>
+        {t.desc && <p class="gallery-desc">{t.desc}</p>}
 
-        {c.demos ? (
+        {t.type === "demos" ? (
           <div class="demo-grid">
-            {c.demos.map(d => (
+            {t.demos!.map(d => (
               <article class="demo-card reveal">
-                <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 11"};`}>
+                <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 9"};`}>
                   <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
                 </div>
                 <div class="demo-meta">
@@ -64,34 +85,57 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
               </article>
             ))}
           </div>
-        ) : c.subsections ? (
-          c.subsections.map(sub => (
-            <div class="subsection">
-              <div class="subsection-head">
-                <h3>{sub.title}</h3>
-                {sub.note && <p class="sub-note">{sub.note}</p>}
-              </div>
-              <div class="gallery-grid">
-                {sub.images.map(im => (
-                  <figure class="gallery-item reveal">
-                    <div class="frame"><img src={im.src} alt={im.caption ?? sub.title} loading="lazy" /></div>
-                    {im.caption && <figcaption>{im.caption}</figcaption>}
-                  </figure>
-                ))}
-              </div>
-            </div>
-          ))
+        ) : t.type === "cases" ? (
+          <div class="featured">
+            {works.map((w) => (
+              <a href={`${base}/work/${w.slug}`} class={`work-card reveal ${w.span ?? ""}`}>
+                <div class="frame"><img src={w.cover} alt={w.title} loading="lazy" /></div>
+                <div class="meta">
+                  <span class="tag">{w.tag}</span>
+                  <span class="title">{w.title}</span>
+                  <span class="year">{w.year}</span>
+                </div>
+              </a>
+            ))}
+          </div>
         ) : (
           <div class="gallery-grid">
-            {c.images?.map(im => (
+            {t.images!.map(im => (
               <figure class="gallery-item reveal">
-                <div class="frame"><img src={im.src} alt={im.caption ?? c.name} loading="lazy" /></div>
+                <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
                 {im.caption && <figcaption>{im.caption}</figcaption>}
               </figure>
             ))}
           </div>
         )}
-      </section>
-    );
-  })}
+      </div>
+    </section>
+  ))}
+
+  <script is:inline>
+    (function () {
+      const buttons = document.querySelectorAll(".tab-btn");
+      const panes = document.querySelectorAll(".tab-pane");
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-tab");
+          buttons.forEach(b => {
+            const on = b === btn;
+            b.classList.toggle("active", on);
+            b.setAttribute("aria-selected", on ? "true" : "false");
+          });
+          panes.forEach(p => p.classList.toggle("active", p.id === target));
+          // optional: scroll into view
+          const main = document.querySelector(".tabs-bar");
+          if (main) main.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+      // Allow URL hash (#vi-0) to deep-link
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        const btn = document.querySelector(`.tab-btn[data-tab="${hash}"]`);
+        if (btn) btn.click();
+      }
+    })();
+  </script>
 </Layout>
