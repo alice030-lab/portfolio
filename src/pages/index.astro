@@ -33,13 +33,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
                   <a href={`${base}/contact`} class="btn-pill light">聊聊合作</a>
                 </div>
               </div>
-              <div class="hero-stack">
+              <div class="hero-stack" id="hero-stack">
                 <div class="blk b1 rose"><div class="tag">Identity</div><div class="num">01</div><div class="label">VI 規劃</div></div>
                 <div class="blk b2 sage"><div class="tag">Print</div><div class="num">02</div><div class="label">DM & 平面</div></div>
                 <div class="blk b3 lavender"><div class="tag">Editorial</div><div class="num">03</div><div class="label">說明書</div></div>
                 <div class="blk b4 peach"><div class="tag">Package</div><div class="num">04</div></div>
                 <div class="blk b5 cream"><div class="tag">UI / UX</div><div class="num">05</div></div>
                 <div class="blk b6 rose-deep"><div class="tag">Social</div><div class="num">06</div></div>
+                <button type="button" class="stack-reset" id="stack-reset" aria-label="重新堆好">↺ 重新整理</button>
+                <div class="stack-hint">↑ 試著拖拉看看</div>
               </div>
             </div>
           </div>
@@ -137,6 +139,70 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
         window.addEventListener("scroll", update, { passive: true });
         window.addEventListener("resize", update);
         update();
+      })();
+
+      // Draggable hero blocks
+      (function () {
+        const stack = document.getElementById("hero-stack");
+        if (!stack) return;
+        const blocks = stack.querySelectorAll(".blk");
+        const reset = document.getElementById("stack-reset");
+        const state = new WeakMap();
+
+        blocks.forEach((blk) => {
+          state.set(blk, { x: 0, y: 0, rot: 0 });
+
+          const apply = (dragging) => {
+            const s = state.get(blk);
+            const scale = dragging ? 1.06 : 1;
+            blk.style.transform = `translate(${s.x}px, ${s.y}px) rotate(${s.rot}deg) scale(${scale})`;
+          };
+
+          let startX = 0, startY = 0, baseX = 0, baseY = 0;
+
+          blk.addEventListener("pointerdown", (e) => {
+            const s = state.get(blk);
+            startX = e.clientX; startY = e.clientY;
+            baseX = s.x; baseY = s.y;
+            blk.classList.add("dragging", "has-moved");
+            blk.setPointerCapture(e.pointerId);
+            reset?.classList.add("show");
+            apply(true);
+          });
+
+          blk.addEventListener("pointermove", (e) => {
+            if (!blk.classList.contains("dragging")) return;
+            const s = state.get(blk);
+            s.x = baseX + (e.clientX - startX);
+            s.y = baseY + (e.clientY - startY);
+            s.rot = Math.max(-12, Math.min(12, ((e.clientX - startX) + (e.clientY - startY)) * 0.04));
+            state.set(blk, s);
+            apply(true);
+          });
+
+          const release = () => {
+            if (!blk.classList.contains("dragging")) return;
+            const s = state.get(blk);
+            // settle slight rotation halved for a relaxed look
+            s.rot = s.rot * 0.5;
+            state.set(blk, s);
+            blk.classList.remove("dragging");
+            apply(false);
+          };
+          blk.addEventListener("pointerup", release);
+          blk.addEventListener("pointercancel", release);
+          blk.addEventListener("lostpointercapture", release);
+        });
+
+        reset?.addEventListener("click", () => {
+          blocks.forEach((blk) => {
+            state.set(blk, { x: 0, y: 0, rot: 0 });
+            blk.classList.remove("dragging");
+            blk.classList.remove("has-moved");
+            blk.style.transform = "";
+          });
+          reset.classList.remove("show");
+        });
       })();
     </script>
     <div class="category-list">
