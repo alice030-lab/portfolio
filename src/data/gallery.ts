@@ -77,17 +77,17 @@ export const categories: GalleryCategory[] = [
     philosophy: "設計不只是好看的畫面，是可以被使用、能解決真實問題的工具。\n\n我同時做設計與寫前端，因為兩端都得親自經驗才能做出真正可用的產品 — 知道哪些畫面工程上難實作、哪些互動成本高、哪些細節在使用情境中根本不重要。\n\n好的 UI 是讓人感覺不到設計的存在。",
     demos: [
       {
-        title: "Solo Sync — Discovery 探索頁",
-        tag: "Web App · UI Design",
-        desc: "音樂創作者協作平台的探索頁面 — 分類瀏覽、搜尋、即時互動。",
-        src: "https://solo-sync.vercel.app/discovery",
-        ratio: "16 / 9",
-      },
-      {
         title: "TFA Redesign — 前端重製案",
         tag: "HTML · CSS · JS",
         desc: "親手刻的響應式網站重製案，從版型結構、互動到動效全程實作。",
         src: "https://alice030-lab.github.io/tfa-redesign/index.html",
+        ratio: "16 / 9",
+      },
+      {
+        title: "Solo Sync — Discovery 探索頁",
+        tag: "Web App · UI Design",
+        desc: "音樂創作者協作平台的探索頁面 — 分類瀏覽、搜尋、即時互動。",
+        src: "https://solo-sync.vercel.app/discovery",
         ratio: "16 / 9",
       },
     ],
