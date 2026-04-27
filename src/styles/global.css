@@ -1,7 +1,7 @@
 :root {
   /* Editorial palette — cream base + muted pastels */
-  --cream: #F5EFE4;
-  --cream-deep: #EDE5D4;
+  --cream: #FBFAF5;
+  --cream-deep: #F2EEE3;
   --rose: #F2B5B0;
   --rose-deep: #E8948E;
   --sage: #C8D4B5;
@@ -19,7 +19,7 @@
   --g-sage: linear-gradient(180deg, #DEE9C6 0%, #A0BC85 100%);
   --g-lavender: linear-gradient(180deg, #D5C9E3 0%, #A99CC4 100%);
   --g-peach: linear-gradient(180deg, #FAD9BE 0%, #EDB389 100%);
-  --g-cream: linear-gradient(180deg, #FAF3E5 0%, #E8DEC5 100%);
+  --g-cream: linear-gradient(180deg, #FCFBF5 0%, #EFEAD9 100%);
 
   /* Thin hairline outline — used selectively on small elements only */
   --hair: 1px solid var(--ink);
@@ -97,7 +97,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 /* ========== Header ========== */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(245, 239, 228, 0.9);
+  background: rgba(251, 250, 245, 0.9);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
@@ -473,7 +473,8 @@ em, .italic { font-style: italic; font-weight: 500; }
   position: sticky;
   top: 60px; /* below site header */
   z-index: 30;
-  background: var(--cream);
+  background: rgba(251, 250, 245, 0.95);
+  backdrop-filter: blur(8px);
   padding: 24px 0 0;
   margin-bottom: 0;
 }
