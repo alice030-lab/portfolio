@@ -411,6 +411,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .case-image .frame {
   width: 100%;
+  aspect-ratio: 16 / 9;
   background-color: var(--grid-bg);
   background-image:
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
@@ -420,12 +421,17 @@ em, .italic { font-style: italic; font-weight: 500; }
   border-bottom: var(--hair);
   border-radius: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   box-shadow: none;
-  display: flex; justify-content: center;
+  display: block;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(26,26,26,0.3) transparent;
 }
+.case-image .frame::-webkit-scrollbar { width: 8px; }
+.case-image .frame::-webkit-scrollbar-thumb { background: rgba(26,26,26,0.3); border-radius: 4px; }
 .case-image .frame img {
-  display: block; max-width: 100%; height: auto; border-radius: 0;
+  display: block; width: 100%; height: auto; border-radius: 0;
 }
 .case-image figcaption {
   padding: 22px 28px;
