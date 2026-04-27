@@ -284,12 +284,17 @@ em, .italic { font-style: italic; font-weight: 500; }
   font-family: var(--serif);
   font-style: normal; font-weight: 500;
   font-size: clamp(32px, 4.6vw, 64px);
-  line-height: 1.1; letter-spacing: -0.02em;
+  line-height: 1.18; letter-spacing: -0.02em;
+  margin-bottom: 48px;
 }
 .box-interior .ed-hero-inner .sub {
   font-size: clamp(14px, 1.2vw, 16px);
   max-width: 40ch;
+  margin-top: 0;
+  margin-bottom: 56px;
+  line-height: 1.7;
 }
+.box-interior .ed-hero-inner .cta-row { margin-top: 0; }
 
 /* Box lid — hinged at the back-top, rotates up & away */
 .box-lid {
@@ -337,9 +342,10 @@ em, .italic { font-style: italic; font-weight: 500; }
   font-style: normal;
   font-weight: 500;
   font-size: clamp(32px, 4.6vw, 64px);
-  line-height: 1.1;
+  line-height: 1.18;
   letter-spacing: -0.02em;
   color: var(--ink);
+  margin-bottom: 48px;
 }
 .ed-hero h1 .reg { font-style: normal; }
 .ed-hero .sub {
@@ -347,10 +353,11 @@ em, .italic { font-style: italic; font-weight: 500; }
   font-size: clamp(14px, 1.2vw, 16px);
   color: var(--ink-soft);
   max-width: 40ch;
-  margin-top: 22px;
-  line-height: 1.55;
+  margin-top: 0;
+  margin-bottom: 56px;
+  line-height: 1.7;
 }
-.ed-hero .cta-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 40px; }
+.ed-hero .cta-row { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 0; }
 
 /* Hero side — stacked blocks like building blocks */
 .hero-stack {
