@@ -907,6 +907,50 @@ em, .italic { font-style: italic; font-weight: 500; }
   margin-top: 24px !important;
   font-style: italic;
 }
+.phi-tag-line {
+  font-size: 11px !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  margin-bottom: 16px !important;
+}
+.phi-empty {
+  color: var(--muted) !important;
+  font-style: italic;
+}
+.phi-empty a {
+  color: var(--rose-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.phi-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  cursor: pointer;
+  margin-bottom: 18px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.phi-back:hover { background: var(--ink); color: var(--cream); }
+
+/* Visual feedback when an image is selected */
+[data-img] {
+  cursor: pointer;
+  position: relative;
+}
+[data-img].is-active .frame,
+[data-img].is-active .demo-frame {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
 
 /* ========== Work index & Gallery ========== */
 .work-nav {

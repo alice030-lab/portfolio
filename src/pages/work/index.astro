@@ -84,8 +84,8 @@ tabs.push({
 
           {(t.type === "demos" || t.type === "mixed") && t.demos && (
             <div class="demo-grid">
-              {t.demos.map(d => (
-                <article class="demo-card">
+              {t.demos.map((d, di) => (
+                <article class="demo-card" data-img={`${t.id}-demo-${di}`}>
                   <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 9"};`}>
                     <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
                   </div>
@@ -100,8 +100,8 @@ tabs.push({
           )}
           {t.type === "mixed" && t.images && (
             <div class="case-image-stack">
-              {t.images.map(im => (
-                <figure class="case-image">
+              {t.images.map((im, ii) => (
+                <figure class="case-image" data-img={`${t.id}-img-${ii}`}>
                   <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
                   {im.caption && <figcaption>{im.caption}</figcaption>}
                 </figure>
@@ -124,8 +124,8 @@ tabs.push({
           )}
           {t.type === "images" && t.images && (
             <div class="gallery-grid">
-              {t.images.map(im => (
-                <figure class="gallery-item">
+              {t.images.map((im, ii) => (
+                <figure class="gallery-item" data-img={`${t.id}-img-${ii}`}>
                   <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
                   {im.caption && <figcaption>{im.caption}</figcaption>}
                 </figure>
@@ -137,6 +137,7 @@ tabs.push({
     </main>
 
     <aside class="work-philosophy">
+      {/* Category-level philosophy (default per tab) */}
       {tabs.map((t, i) => (
         <article class={`phi ${i === 0 ? "active" : ""}`} data-pane={t.id}>
           <div class="phi-eyebrow">{t.catTag}</div>
@@ -144,6 +145,28 @@ tabs.push({
           {t.philosophy && t.philosophy.split("\n\n").map(p => <p>{p}</p>)}
           <p class="phi-desc">{t.desc}</p>
         </article>
+      ))}
+      {/* Per-image philosophy panes — shown when an image is clicked */}
+      {tabs.map(t => (
+        <>
+          {t.images?.map((im, ii) => (
+            <article class="phi phi-item" data-pane={`${t.id}-img-${ii}`} data-parent={t.id}>
+              <button class="phi-back" type="button">← 返回 作品理念</button>
+              <div class="phi-eyebrow">{t.catTag}</div>
+              <h3 class="phi-title">{im.caption}</h3>
+              {im.note ? im.note.split("\n\n").map(p => <p>{p}</p>) : <p class="phi-empty">這件作品的詳細思考還沒整理上來。歡迎直接<a href={`${base}/contact`}>聊聊看</a>。</p>}
+            </article>
+          ))}
+          {t.demos?.map((d, di) => (
+            <article class="phi phi-item" data-pane={`${t.id}-demo-${di}`} data-parent={t.id}>
+              <button class="phi-back" type="button">← 返回 作品理念</button>
+              <div class="phi-eyebrow">{t.catTag}</div>
+              <h3 class="phi-title">{d.title}</h3>
+              <p class="phi-tag-line">{d.tag}</p>
+              {d.desc && <p>{d.desc}</p>}
+            </article>
+          ))}
+        </>
       ))}
     </aside>
   </div>
@@ -153,6 +176,17 @@ tabs.push({
       const buttons = document.querySelectorAll(".vtab");
       const panes = document.querySelectorAll(".tab-pane");
       const phis = document.querySelectorAll(".phi");
+
+      const showPhi = (key) => {
+        phis.forEach(p => p.classList.toggle("active", p.dataset.pane === key));
+      };
+      const showItems = (key) => {
+        document.querySelectorAll("[data-img].is-active").forEach(el => el.classList.remove("is-active"));
+        const el = document.querySelector(`[data-img="${key}"]`);
+        if (el) el.classList.add("is-active");
+      };
+
+      // Tab switch — also reset philosophy to category default
       buttons.forEach(btn => {
         btn.addEventListener("click", () => {
           const target = btn.getAttribute("data-tab");
@@ -162,9 +196,35 @@ tabs.push({
             b.setAttribute("aria-selected", on ? "true" : "false");
           });
           panes.forEach(p => p.classList.toggle("active", p.id === target));
-          phis.forEach(p => p.classList.toggle("active", p.dataset.pane === target));
+          showPhi(target);
+          document.querySelectorAll("[data-img].is-active").forEach(el => el.classList.remove("is-active"));
         });
       });
+
+      // Click on image / demo card → show its philosophy
+      document.querySelectorAll("[data-img]").forEach(el => {
+        el.addEventListener("click", (e) => {
+          // don't hijack iframe inside demo-card
+          if (el.classList.contains("demo-card") && e.target.closest("iframe")) return;
+          // don't hijack links inside cards
+          if (e.target.closest("a") && !el.contains(e.target.closest("a"))) return;
+          const key = el.getAttribute("data-img");
+          showPhi(key);
+          showItems(key);
+        });
+      });
+
+      // Back button on per-image philosophy
+      document.querySelectorAll(".phi-back").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const parent = btn.closest(".phi")?.dataset.parent;
+          if (parent) {
+            showPhi(parent);
+            document.querySelectorAll("[data-img].is-active").forEach(el => el.classList.remove("is-active"));
+          }
+        });
+      });
+
       const hash = window.location.hash.replace("#", "");
       if (hash) {
         const btn = document.querySelector(`.vtab[data-tab="${hash}"]`);
