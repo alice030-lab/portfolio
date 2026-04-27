@@ -739,6 +739,126 @@ em, .italic { font-style: italic; font-weight: 500; }
   font-size: 14px; color: var(--ink-soft); line-height: 1.65;
 }
 
+/* ========== Scattered geometric blocks (about page) ========== */
+.scatter-stage {
+  position: relative;
+  height: 360px;
+  margin: 20px 0 60px;
+  overflow: visible;
+}
+@media (min-width: 800px) { .scatter-stage { height: 460px; } }
+
+.geo {
+  position: absolute;
+  border: 1px solid var(--ink);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.4s cubic-bezier(.34, 1.56, .64, 1), box-shadow 0.3s ease;
+}
+.geo:hover {
+  transform: translate(-4px, -4px) rotate(var(--rot, 0deg));
+  box-shadow: 8px 8px 0 var(--ink);
+  z-index: 5;
+}
+
+/* Small square — rose */
+.geo-1 {
+  width: 88px; height: 88px;
+  top: 8%; left: 6%;
+  background: var(--g-rose);
+  --rot: -10deg; transform: rotate(-10deg);
+}
+/* Wide rectangle — sage */
+.geo-2 {
+  width: 180px; height: 64px;
+  top: 22%; left: 16%;
+  background: var(--g-sage);
+  --rot: 6deg; transform: rotate(6deg);
+}
+/* Tall narrow — lavender */
+.geo-3 {
+  width: 64px; height: 200px;
+  top: 4%; left: 32%;
+  background: var(--g-lavender);
+  --rot: -4deg; transform: rotate(-4deg);
+}
+/* Square — peach */
+.geo-4 {
+  width: 120px; height: 120px;
+  top: 38%; left: 26%;
+  background: var(--g-peach);
+  --rot: 12deg; transform: rotate(12deg);
+}
+/* Tall — rose */
+.geo-5 {
+  width: 88px; height: 140px;
+  top: 12%; left: 50%;
+  background: var(--g-rose);
+  --rot: 4deg; transform: rotate(4deg);
+}
+/* Wide flat — cream */
+.geo-6 {
+  width: 200px; height: 52px;
+  top: 56%; left: 8%;
+  background: var(--g-cream);
+  --rot: -6deg; transform: rotate(-6deg);
+}
+/* Square — sage */
+.geo-7 {
+  width: 100px; height: 100px;
+  top: 34%; left: 64%;
+  background: var(--g-sage);
+  --rot: -8deg; transform: rotate(-8deg);
+}
+/* Tall narrow — lavender */
+.geo-8 {
+  width: 72px; height: 160px;
+  top: 5%; right: 22%;
+  background: var(--g-lavender);
+  --rot: 8deg; transform: rotate(8deg);
+}
+/* Wide — peach */
+.geo-9 {
+  width: 160px; height: 72px;
+  top: 50%; right: 6%;
+  background: var(--g-peach);
+  --rot: -3deg; transform: rotate(-3deg);
+}
+/* Small square — rose */
+.geo-10 {
+  width: 72px; height: 72px;
+  top: 70%; left: 42%;
+  background: var(--g-rose);
+  --rot: 14deg; transform: rotate(14deg);
+}
+
+/* Triangle (peach) */
+.geo-tri {
+  width: 0;
+  height: 0;
+  border: 0;
+  background: transparent;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 90px solid #F2958E;
+  filter: drop-shadow(2px 2px 0 var(--ink)) drop-shadow(0 4px 12px rgba(0,0,0,0.08));
+  box-shadow: none;
+  top: 60%; left: 60%;
+  --rot: -18deg; transform: rotate(-18deg);
+}
+
+/* Circle (sage) */
+.geo-circle {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  top: 0; right: 6%;
+  background: var(--g-sage);
+}
+
+/* Hide a couple of pieces on small screens to reduce clutter */
+@media (max-width: 700px) {
+  .geo-3, .geo-6, .geo-9 { display: none; }
+}
+
 /* ========== Why choose me ========== */
 .why { padding-top: 20px; }
 .why-grid {
