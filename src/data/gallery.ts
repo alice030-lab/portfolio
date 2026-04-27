@@ -55,35 +55,15 @@ export const categories: GalleryCategory[] = [
     key: "dm",
     name: "DM & 平面設計",
     tagline: "02 — Print",
-    desc: "DM 改版、宣傳單張、Banner、海報、展覽邀請函。專門處理資訊量大、要在小篇幅內說清楚的案子。",
-    subsections: [
-      {
-        title: "DM 改善與設計",
-        note: "從結構、字型到圖文節奏的 DM 案例。",
-        images: [
-          { src: img("work-dm-1.png"), caption: "DM" },
-          { src: img("work-manual-2.png"), caption: "規範手冊內頁" },
-          { src: img("work-social-1.png"), caption: "DM 1" },
-          { src: img("work-social-2.png"), caption: "DM 2" },
-          { src: img("feature-02.png"), caption: "DM 3" },
-        ],
-      },
-      {
-        title: "海報 / Banner / 展覽",
-        note: "大尺寸印刷物、展場背板、活動主視覺。",
-        images: [
-          { src: img("work-detail.jpg"), caption: "展場背板細節（舊設計）" },
-        ],
-      },
-    ],
-  },
-  {
-    key: "manual",
-    name: "說明書與編輯設計",
-    tagline: "03 — Editorial",
-    desc: "長篇資訊的分層、圖示重繪、閱讀動線。讓厚手冊也能被讀完。",
+    desc: "DM、宣傳單張、Banner、海報、展場、說明書 — 平面設計類作品集合。",
     images: [
+      { src: img("work-dm-1.png"), caption: "DM" },
+      { src: img("work-manual-2.png"), caption: "規範手冊內頁" },
+      { src: img("work-social-1.png"), caption: "DM 1" },
+      { src: img("work-social-2.png"), caption: "DM 2" },
+      { src: img("feature-02.png"), caption: "DM 3" },
       { src: img("work-dm-2.png"), caption: "說明書" },
+      { src: img("work-detail.jpg"), caption: "展場背板細節（舊設計）" },
     ],
   },
   {
