@@ -4,6 +4,34 @@ import { categories } from "../data/gallery";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 <Layout>
+  <!-- 入場效果：滾動推門進入 -->
+  <section class="entrance" id="entrance">
+    <div class="entrance-stage">
+      <div class="entrance-meta">
+        <div class="entrance-eyebrow">— Welcome to —</div>
+        <h2 class="entrance-title">Alice <em>Office</em></h2>
+        <div class="entrance-arrow">
+          <span class="arrow-text">向下捲動，門將打開</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5 V 19 M 5 13 L 12 20 L 19 13"/></svg>
+        </div>
+      </div>
+
+      <div class="arch">
+        <!-- 拱門陰影 / 室內 -->
+        <div class="arch-interior"></div>
+        <!-- 兩片門 -->
+        <div class="door door-l">
+          <div class="door-panel"></div>
+          <div class="door-handle"></div>
+        </div>
+        <div class="door door-r">
+          <div class="door-panel"></div>
+          <div class="door-handle"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="ed-hero">
     <div class="ed-hero-inner">
       <div>
@@ -121,6 +149,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       </div>
       <span class="num">— 03</span>
     </div>
+
+    <script is:inline>
+      (function () {
+        const entrance = document.getElementById("entrance");
+        if (!entrance) return;
+        const stage = entrance.querySelector(".entrance-stage");
+        const update = () => {
+          const r = entrance.getBoundingClientRect();
+          const scrolled = -r.top;
+          const total = entrance.offsetHeight - window.innerHeight;
+          const p = Math.max(0, Math.min(1, scrolled / total));
+          stage.style.setProperty("--open", p.toFixed(3));
+        };
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+        update();
+      })();
+    </script>
     <div class="category-list">
       {categories.map(c => {
         const count = c.subsections ? c.subsections.reduce((n, s) => n + s.images.length, 0) : (c.images?.length ?? 0);

@@ -149,6 +149,152 @@ em, .italic { font-style: italic; font-weight: 500; }
 .site-footer .meta { font-size: 13px; color: var(--muted); display: flex; gap: 24px; flex-wrap: wrap; justify-content: flex-end; }
 .site-footer .meta a:hover { color: var(--ink); }
 
+/* ========== Entrance (scroll-driven arched door) ========== */
+.entrance {
+  height: 250vh; /* scroll buffer for door animation */
+  position: relative;
+  margin-top: -1px; /* avoid gap with header */
+}
+.entrance-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: linear-gradient(180deg, #F2B5B0 0%, #E8948E 60%, #D6766F 100%);
+  --open: 0;
+}
+.entrance-stage::before {
+  /* Subtle floor / ground */
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 12%;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.18));
+  pointer-events: none;
+}
+
+.entrance-meta {
+  position: absolute;
+  top: 12vh; left: 0; right: 0;
+  text-align: center;
+  color: var(--cream);
+  pointer-events: none;
+  z-index: 3;
+  opacity: calc(1 - var(--open) * 1.5);
+  transition: opacity 0.2s linear;
+}
+.entrance-eyebrow {
+  font-family: var(--sans);
+  font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 16px;
+}
+.entrance-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(56px, 9vw, 120px);
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+}
+.entrance-title em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.78);
+}
+.entrance-arrow {
+  margin-top: 28px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  font-family: var(--sans);
+  font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+.arrow-icon {
+  width: 22px; height: 22px;
+  animation: bob 1.6s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* The arch frame — clips everything inside to arch shape */
+.arch {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: clamp(280px, 42vh, 480px);
+  height: clamp(440px, 68vh, 720px);
+  perspective: 1400px;
+  border-radius: 50% 50% 0 0 / 38% 38% 0 0;
+  border: 3px solid var(--ink);
+  border-bottom: 0;
+  overflow: hidden;
+  filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.25));
+}
+/* The lit interior visible when doors open */
+.arch-interior {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, #FBFAF5 0%, #F5EFE4 50%, #E8DEC5 100%);
+  box-shadow: inset 0 30px 80px rgba(0, 0, 0, 0.3);
+}
+
+/* Doors — sit inside the arch, clipped by parent */
+.door {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 50%;
+  background: transparent;
+  transform-style: preserve-3d;
+  transition: transform 0.05s linear;
+}
+.door-panel {
+  position: absolute; inset: 12px;
+  background:
+    linear-gradient(180deg, #F8E9C8 0%, #E8C988 50%, #C8A552 100%); /* wood */
+  border: 2px solid #6B4515;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 4px rgba(255,255,255,0.15), inset 0 0 30px rgba(107,69,21,0.25);
+}
+.door-panel::before, .door-panel::after {
+  content: "";
+  position: absolute;
+  left: 14%; right: 14%;
+  border: 2px solid rgba(107, 69, 21, 0.6);
+  border-radius: 3px;
+}
+.door-panel::before { top: 8%; height: 36%; }
+.door-panel::after { top: 56%; height: 36%; }
+.door-handle {
+  position: absolute;
+  top: 50%;
+  width: 10px; height: 28px;
+  background: linear-gradient(180deg, #F4D976 0%, #B8861A 100%);
+  border: 1px solid #6B4515;
+  border-radius: 2px;
+  transform: translateY(-50%);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  z-index: 2;
+}
+
+.door.door-l {
+  left: 0;
+  transform-origin: left center;
+  transform: rotateY(calc(var(--open) * -110deg));
+}
+.door.door-l .door-handle { right: 16px; }
+
+.door.door-r {
+  right: 0;
+  transform-origin: right center;
+  transform: rotateY(calc(var(--open) * 110deg));
+}
+.door.door-r .door-handle { left: 16px; }
+
 /* ========== Editorial Hero (new signature) ========== */
 .ed-hero {
   position: relative;
