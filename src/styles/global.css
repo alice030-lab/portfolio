@@ -220,114 +220,84 @@ em, .italic { font-style: italic; font-weight: 500; }
   50% { transform: translateY(8px); }
 }
 
-/* The arch frame — grows from small archway to full viewport
-   --o = open progress 0→1
-   Initial: ~480x720px arch, bottom-center
-   Final: 100vw x 100vh, fills viewport with no border-radius */
-.arch {
+/* The box — small closed box that grows to fill viewport while lid lifts open
+   --o = open progress 0→1 */
+.box {
   --o: var(--open, 0);
-  --w-init: 480px;
-  --h-init: 720px;
+  --w-init: 360px;
+  --h-init: 320px;
   position: absolute;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
   width: calc(var(--w-init) + var(--o) * (100vw - var(--w-init)));
   height: calc(var(--h-init) + var(--o) * (100vh - var(--h-init)));
-  perspective: 1600px;
-  border-radius: calc((1 - var(--o)) * 240px) calc((1 - var(--o)) * 240px) 0 0
-                 / calc((1 - var(--o)) * 280px) calc((1 - var(--o)) * 280px) 0 0;
-  border: calc((1 - var(--o)) * 3px) solid var(--ink);
-  border-bottom: 0;
-  overflow: hidden;
-  filter: drop-shadow(0 calc((1 - var(--o)) * 12px) calc((1 - var(--o)) * 40px) rgba(0, 0, 0, 0.25));
+  perspective: 1800px;
+  perspective-origin: 50% 0%;
+  filter: drop-shadow(0 calc((1 - var(--o)) * 18px) calc((1 - var(--o)) * 50px) rgba(0, 0, 0, 0.3));
 }
-/* The lit interior — holds the actual hero content */
-.arch-interior {
+
+/* Box body (lower part) — holds the hero content inside */
+.box-body {
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  border: calc((1 - var(--o)) * 2.5px) solid var(--ink);
+  border-radius: calc((1 - var(--o)) * 8px);
+  overflow: hidden;
+}
+.box-interior {
   position: absolute;
   left: 50%; bottom: 0;
   transform: translateX(-50%);
-  /* Always full viewport size; clipped by parent .arch */
   width: 100vw;
   height: 100vh;
-  background:
-    radial-gradient(ellipse at 50% 30%, var(--cream) 0%, var(--cream-deep) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
 }
-.arch-interior .ed-hero-inner {
+.box-interior .ed-hero-inner {
   width: 100%;
   max-width: var(--max);
   padding: 80px var(--gutter);
   display: grid; grid-template-columns: 1fr; gap: 32px;
   align-items: start;
-  /* Fade in as door opens past 0.5 */
-  opacity: calc(max(0, var(--o) - 0.4) * 1.8);
+  opacity: calc(max(0, var(--o) - 0.45) * 2);
 }
 @media (min-width: 900px) {
-  .arch-interior .ed-hero-inner { grid-template-columns: 3fr 2fr; gap: 56px; align-items: center; }
+  .box-interior .ed-hero-inner { grid-template-columns: 3fr 2fr; gap: 56px; align-items: center; }
 }
-.arch-interior .ed-hero-inner h1 {
+.box-interior .ed-hero-inner h1 {
   font-family: var(--serif);
-  font-style: normal;
-  font-weight: 500;
+  font-style: normal; font-weight: 500;
   font-size: clamp(40px, 6.5vw, 96px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.05; letter-spacing: -0.02em;
 }
 
-/* Doors — sit inside the arch, clipped by parent */
-.door {
+/* Box lid — hinged at the back-top, rotates up & away */
+.box-lid {
   position: absolute;
-  top: 0; bottom: 0;
-  width: 50%;
-  background: transparent;
-  transform-style: preserve-3d;
-  transition: transform 0.05s linear;
+  top: 0; left: 0; right: 0;
+  height: calc(40% - var(--o) * 40%);  /* shrinks visually as box grows */
+  min-height: calc((1 - var(--o)) * 80px);
+  background: linear-gradient(180deg, var(--rose) 0%, var(--rose-deep) 100%);
+  border: calc((1 - var(--o)) * 2.5px) solid var(--ink);
+  border-radius: calc((1 - var(--o)) * 8px) calc((1 - var(--o)) * 8px) 0 0;
+  transform-origin: top center;
+  transform: rotateX(calc(var(--o) * -130deg));
+  transition: transform 0.05s linear, opacity 0.2s linear;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 -8px 16px rgba(0,0,0,0.12);
+  opacity: calc(1 - max(0, var(--o) - 0.85) * 6);  /* fade out at end */
+  pointer-events: none;
 }
-.door-panel {
-  position: absolute; inset: 12px;
-  background:
-    linear-gradient(180deg, #F8E9C8 0%, #E8C988 50%, #C8A552 100%); /* wood */
-  border: 2px solid #6B4515;
-  border-radius: 4px;
-  box-shadow: inset 0 0 0 4px rgba(255,255,255,0.15), inset 0 0 30px rgba(107,69,21,0.25);
+.box-lid-tag {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--cream);
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  opacity: calc(1 - var(--o) * 2);
 }
-.door-panel::before, .door-panel::after {
-  content: "";
-  position: absolute;
-  left: 14%; right: 14%;
-  border: 2px solid rgba(107, 69, 21, 0.6);
-  border-radius: 3px;
-}
-.door-panel::before { top: 8%; height: 36%; }
-.door-panel::after { top: 56%; height: 36%; }
-.door-handle {
-  position: absolute;
-  top: 50%;
-  width: 10px; height: 28px;
-  background: linear-gradient(180deg, #F4D976 0%, #B8861A 100%);
-  border: 1px solid #6B4515;
-  border-radius: 2px;
-  transform: translateY(-50%);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  z-index: 2;
-}
-
-.door.door-l {
-  left: 0;
-  transform-origin: left center;
-  transform: rotateY(calc(var(--open) * -110deg));
-}
-.door.door-l .door-handle { right: 16px; }
-
-.door.door-r {
-  right: 0;
-  transform-origin: right center;
-  transform: rotateY(calc(var(--open) * 110deg));
-}
-.door.door-r .door-handle { left: 16px; }
 
 /* ========== Editorial Hero (new signature) ========== */
 .ed-hero {
