@@ -28,9 +28,9 @@
   --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.06);
   --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
 
-  /* Radii */
-  --r-card: 14px;
-  --r-frame: 8px;
+  /* Radii — keep blocks rectangular, only pills are round */
+  --r-card: 4px;
+  --r-frame: 4px;
   --r-tag: 999px;
 
   /* Grid pattern backdrop — white bg + thin grid lines */
