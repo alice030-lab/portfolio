@@ -4,6 +4,14 @@ export interface GalleryItem {
   note?: string;
 }
 
+export interface GalleryDemo {
+  title: string;
+  src: string;
+  tag: string;
+  desc?: string;
+  ratio?: string;
+}
+
 export interface GalleryCategory {
   key: string;
   name: string;
@@ -11,6 +19,7 @@ export interface GalleryCategory {
   desc: string;
   subsections?: { title: string; note?: string; images: GalleryItem[] }[];
   images?: GalleryItem[];
+  demos?: GalleryDemo[];
 }
 
 const img = (n: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "")}/images/${n}`;
@@ -79,9 +88,32 @@ export const categories: GalleryCategory[] = [
     ],
   },
   {
+    key: "uiux",
+    name: "UI / UX & 前端",
+    tagline: "05 — Product",
+    desc: "訂位系統、營運後台、會員介面、響應式網站。不只是設計畫面，也親手寫前端。",
+    demos: [
+      {
+        title: "TFA Redesign — 前端重製案",
+        tag: "HTML · CSS · JS",
+        desc: "親手刻的響應式網站重製案，從版型結構、互動到動效全程實作。",
+        src: "https://alice030-lab.github.io/tfa-redesign/index.html",
+        ratio: "16 / 11",
+      },
+      {
+        title: "本作品集 — 自我展示",
+        tag: "Astro · GitHub Pages",
+        desc: "整站使用 Astro 靜態框架自行刻 — 響應式、SVG、CSS 漸層格紋背景、Hover 互動、TypeScript 內容資料結構。",
+        src: "https://alice030-lab.github.io/portfolio/",
+        ratio: "16 / 11",
+      },
+    ],
+  },
+  {
     key: "social",
     name: "社群內容",
     tagline: "06 — Social",
+    // (numbering aligns with homepage expertise grid)
     desc: "貼文模板系統、節慶活動圖、品牌日常內容。建一套工具讓團隊能持續產出。",
     images: [
       { src: img("work-social-1.png"), caption: "社群系列 A" },

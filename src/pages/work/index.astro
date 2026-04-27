@@ -35,7 +35,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   </section>
 
   {categories.map(c => {
-    const count = c.subsections ? c.subsections.reduce((n, s) => n + s.images.length, 0) : (c.images?.length ?? 0);
+    const count = c.demos ? c.demos.length
+      : c.subsections ? c.subsections.reduce((n, s) => n + s.images.length, 0)
+      : (c.images?.length ?? 0);
     return (
       <section class="container gallery-section" id={c.key}>
         <div class="section-head">
@@ -47,7 +49,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
         </div>
         <p class="gallery-desc">{c.desc}</p>
 
-        {c.subsections ? (
+        {c.demos ? (
+          <div class="demo-grid">
+            {c.demos.map(d => (
+              <article class="demo-card reveal">
+                <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 11"};`}>
+                  <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                </div>
+                <div class="demo-meta">
+                  <span class="tag">{d.tag}</span>
+                  <h3>{d.title}</h3>
+                  {d.desc && <p>{d.desc}</p>}
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : c.subsections ? (
           c.subsections.map(sub => (
             <div class="subsection">
               <div class="subsection-head">

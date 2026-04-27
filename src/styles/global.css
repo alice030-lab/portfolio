@@ -459,6 +459,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .category-row:nth-child(2) { background: var(--g-sage); }
 .category-row:nth-child(3) { background: var(--g-lavender); }
 .category-row:nth-child(4) { background: var(--g-peach); }
+.category-row:nth-child(5) { background: var(--g-cream); }
 /* hover handled by shared lift rule */
 .cat-info h3 { font-size: clamp(24px, 3vw, 40px); font-weight: 500; margin-bottom: 6px; }
 .cat-info p { font-size: 14px; color: var(--ink-soft); max-width: 60ch; }
