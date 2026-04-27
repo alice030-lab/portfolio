@@ -792,7 +792,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 @media (min-width: 900px) {
   .work-tabs-vertical {
     flex-direction: column;
-    border-right: 1px solid var(--ink);
+    border-right: 0; /* line drawn by .work-content border-left so it extends full height */
     border-bottom: 0;
     overflow-x: visible;
     overflow-y: auto;
@@ -842,10 +842,13 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .vtab-name { font-weight: 500; }
 
-/* Content area */
+/* Content area — owns the vertical dividers so they span full layout height */
 .work-content {
   padding: 32px clamp(20px, 3vw, 40px);
   min-width: 0;
+}
+@media (min-width: 900px) {
+  .work-content { border-left: 1px solid var(--ink); }
 }
 @media (min-width: 1280px) {
   .work-content { border-right: 1px solid var(--ink); }
