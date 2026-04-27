@@ -14,15 +14,24 @@
   --muted: #7A756B;
   --line: #E0D9CA;
 
-  /* Block gradient backgrounds — lighter → deeper within same hue */
-  --g-rose: linear-gradient(155deg, #F9CAC5 0%, #EA9E97 100%);
-  --g-sage: linear-gradient(155deg, #D9E3C6 0%, #B5CB9A 100%);
-  --g-lavender: linear-gradient(155deg, #D4C5E5 0%, #AF9ECC 100%);
-  --g-peach: linear-gradient(155deg, #FAD9BE 0%, #EDB389 100%);
-  --g-cream: linear-gradient(155deg, #F2EADA 0%, #E3D8BE 100%);
+  /* Block gradient backgrounds — vertical, lighter top → deeper bottom */
+  --g-rose: linear-gradient(180deg, #FAB7B1 0%, #F2958E 100%);
+  --g-sage: linear-gradient(180deg, #DEE9C6 0%, #A0BC85 100%);
+  --g-lavender: linear-gradient(180deg, #D5C9E3 0%, #A99CC4 100%);
+  --g-peach: linear-gradient(180deg, #FAD9BE 0%, #EDB389 100%);
+  --g-cream: linear-gradient(180deg, #FAF3E5 0%, #E8DEC5 100%);
 
-  /* Thin hairline outline — signature of this style */
+  /* Thin hairline outline — used selectively on small elements only */
   --hair: 1px solid var(--ink);
+
+  /* Soft drop shadow — gives cards quiet lift (BookSwap signature) */
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  /* Radii */
+  --r-card: 14px;
+  --r-frame: 8px;
+  --r-tag: 999px;
 
   /* Grid pattern backdrop — white bg + thin grid lines */
   --grid-bg: #FFFFFF;
@@ -60,11 +69,12 @@ a { color: inherit; text-decoration: none; }
 h1, h2, h3, h4 {
   font-family: var(--serif);
   font-weight: 500;
+  font-style: normal;
   letter-spacing: -0.02em;
   line-height: 1.05;
 }
-h1 { font-size: clamp(52px, 9vw, 140px); }
-h2 { font-size: clamp(36px, 5.5vw, 80px); }
+h1 { font-size: clamp(40px, 6.5vw, 96px); }
+h2 { font-size: clamp(32px, 4.8vw, 64px); }
 h3 { font-size: clamp(22px, 2.4vw, 36px); }
 
 em, .italic { font-style: italic; font-weight: 500; }
@@ -148,10 +158,10 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .ed-hero h1 {
   font-family: var(--serif);
-  font-style: italic;
+  font-style: normal;
   font-weight: 500;
   font-size: clamp(40px, 6.5vw, 96px);
-  line-height: 1.02;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--ink);
 }
@@ -177,7 +187,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 /* Hero block base — individual styling */
 .blk {
-  border-radius: 4px;
+  border-radius: var(--r-card);
   border: var(--hair);
   padding: 16px 18px;
   display: flex; flex-direction: column; justify-content: space-between;
@@ -185,7 +195,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   line-height: 1.1;
 }
 
-/* Shared "lift" interaction — box-shadow draws OUTSIDE the element, no z-index issues */
+/* Shared "lift" interaction — soft shadow at rest, solid black on hover */
 .blk,
 .exp-tile,
 .stat,
@@ -199,7 +209,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .work-nav a {
   position: relative;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 0 0 var(--ink);
+  box-shadow: var(--shadow-soft);
 }
 .blk:hover,
 .exp-tile:hover,
@@ -224,7 +234,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .work-card .frame img,
 .gallery-item .frame img {
-  border-radius: 4px;
+  border-radius: var(--r-card);
 }
 .blk .tag {
   font-family: var(--sans);
@@ -318,7 +328,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   background: var(--g-cream);
   border: var(--hair);
   padding: 40px 32px;
-  border-radius: 4px;
+  border-radius: var(--r-card);
   display: flex; flex-direction: column; gap: 14px;
   transition: transform 0.3s ease, background 0.3s ease;
 }
@@ -330,7 +340,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .exp-tile:nth-child(6) { background: var(--g-rose); }
 /* hover handled by shared lift rule */
 .exp-num { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink); opacity: 0.6; }
-.exp-tile h3 { font-size: 28px; font-style: italic; font-weight: 500; }
+.exp-tile h3 { font-size: 28px; font-weight: 500; }
 .exp-tile p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
 
 /* ========== Stats ========== */
@@ -342,7 +352,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 @media (min-width: 800px) { .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 .stat {
   padding: 32px 24px;
-  border-radius: 4px;
+  border-radius: var(--r-card);
   border: var(--hair);
   background: var(--g-cream);
 }
@@ -366,7 +376,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   background: var(--g-cream);
   border: var(--hair);
   padding: 40px;
-  border-radius: 4px;
+  border-radius: var(--r-card);
   margin-bottom: 80px;
 }
 .client-types p { font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
@@ -378,7 +388,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   gap: 24px; align-items: center;
   padding: 32px 24px;
   margin-bottom: 12px;
-  border-radius: 4px;
+  border-radius: var(--r-card);
   border: var(--hair);
   background: var(--g-cream);
   transition: background 0.3s ease, transform 0.3s ease;
@@ -388,7 +398,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .category-row:nth-child(3) { background: var(--g-lavender); }
 .category-row:nth-child(4) { background: var(--g-peach); }
 /* hover handled by shared lift rule */
-.cat-info h3 { font-size: clamp(24px, 3vw, 40px); font-style: italic; font-weight: 500; margin-bottom: 6px; }
+.cat-info h3 { font-size: clamp(24px, 3vw, 40px); font-weight: 500; margin-bottom: 6px; }
 .cat-info p { font-size: 14px; color: var(--ink-soft); max-width: 60ch; }
 .cat-count {
   font-family: var(--serif); font-style: italic;
@@ -427,7 +437,7 @@ em, .italic { font-style: italic; font-weight: 500; }
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
   border: var(--hair);
-  border-radius: 4px;
+  border-radius: var(--r-card);
   display: flex; align-items: center; justify-content: center;
   padding: 16px;
 }
@@ -443,7 +453,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   gap: 24px; align-items: baseline;
   padding: 20px 4px 0;
 }
-.work-card .meta .title { font-family: var(--serif); font-style: italic; font-size: clamp(22px, 2.4vw, 32px); }
+.work-card .meta .title { font-family: var(--serif); font-size: clamp(22px, 2.4vw, 32px); }
 .work-card .meta .tag { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 .work-card .meta .year { font-family: var(--serif); font-style: italic; color: var(--muted); }
 
@@ -479,7 +489,7 @@ em, .italic { font-style: italic; font-weight: 500; }
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
   border: var(--hair);
-  border-radius: 4px;
+  border-radius: var(--r-card);
   overflow: hidden;
   padding: 14px;
   display: flex; align-items: center; justify-content: center;
@@ -493,7 +503,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 /* ========== Hero on inner pages ========== */
 .hero { padding: clamp(60px, 10vh, 120px) 0 clamp(40px, 6vh, 80px); }
 .hero .eyebrow { margin-bottom: 24px; }
-.hero h1 { max-width: 18ch; font-style: italic; }
+.hero h1 { max-width: 18ch; }
 .hero .lead { margin-top: 32px; max-width: 56ch; font-size: clamp(16px, 1.3vw, 19px); color: var(--ink-soft); }
 .hero .meta-row { margin-top: 56px; display: flex; gap: 48px; flex-wrap: wrap; font-size: 12px; color: var(--muted); padding-top: 24px; border-top: 1px solid var(--line); }
 .hero .meta-row strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
@@ -501,7 +511,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 /* ========== Two col ========== */
 .two-col { display: grid; grid-template-columns: 1fr; gap: 32px; padding: 40px 0 60px; }
 @media (min-width: 900px) { .two-col { grid-template-columns: 1fr 2fr; gap: 80px; } }
-.two-col h2 { max-width: 14ch; font-style: italic; }
+.two-col h2 { max-width: 14ch; }
 .two-col p { font-size: 17px; line-height: 1.7; max-width: 60ch; margin-bottom: 1em; color: var(--ink-soft); }
 
 /* ========== Service list ========== */
@@ -511,20 +521,20 @@ em, .italic { font-style: italic; font-weight: 500; }
   align-items: baseline;
   padding: 24px 20px;
   margin-bottom: 8px;
-  border-radius: 4px;
+  border-radius: var(--r-card);
   border: var(--hair);
   background: var(--g-cream);
   transition: background 0.25s ease, transform 0.25s ease;
 }
 .service-row:hover { background: var(--g-rose); }
 .service-row .num { font-family: var(--serif); font-style: italic; color: var(--muted); }
-.service-row .name { font-family: var(--serif); font-style: italic; font-size: clamp(24px, 3vw, 44px); }
+.service-row .name { font-family: var(--serif); font-size: clamp(24px, 3vw, 44px); }
 .service-row .tags { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-align: right; }
 
 /* ========== Case study ========== */
 .case-hero { padding: 80px 0 40px; }
-.case-hero h1 { font-size: clamp(40px, 7vw, 88px); max-width: 18ch; font-style: italic; }
-.case-hero .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 24px; margin-top: 48px; padding: 32px; background: var(--g-cream); border: var(--hair); border-radius: 4px; font-size: 13px; }
+.case-hero h1 { font-size: clamp(40px, 7vw, 88px); max-width: 18ch; }
+.case-hero .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 24px; margin-top: 48px; padding: 32px; background: var(--g-cream); border: var(--hair); border-radius: var(--r-card); font-size: 13px; }
 .case-hero .meta div strong { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: 6px; }
 
 .case-body { padding: 40px 0; }
@@ -554,7 +564,7 @@ em, .italic { font-style: italic; font-weight: 500; }
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
   border: var(--hair);
-  border-radius: 4px;
+  border-radius: var(--r-card);
   padding: 14px;
   display: flex; align-items: center; justify-content: center;
 }
@@ -568,14 +578,14 @@ em, .italic { font-style: italic; font-weight: 500; }
 @media (min-width: 800px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
 .pricing-card {
   padding: 40px 32px;
-  border-radius: 4px;
+  border-radius: var(--r-card);
   border: var(--hair);
   background: var(--g-cream);
 }
 .pricing-card:nth-child(1) { background: var(--g-rose); }
 .pricing-card:nth-child(2) { background: var(--g-sage); }
 .pricing-card:nth-child(3) { background: var(--g-lavender); }
-.pricing-card .name { font-family: var(--serif); font-style: italic; font-size: 36px; margin-bottom: 8px; }
+.pricing-card .name { font-family: var(--serif); font-size: 36px; margin-bottom: 8px; }
 .pricing-card .price { font-family: var(--serif); font-style: italic; color: var(--ink-soft); margin-bottom: 32px; }
 .pricing-card ul { list-style: none; }
 .pricing-card li { padding: 10px 0; border-top: 1px solid rgba(26,26,26,0.12); font-size: 14px; }
@@ -587,7 +597,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   background: var(--g-cream);
   border: var(--hair);
   padding: 48px;
-  border-radius: 4px;
+  border-radius: var(--r-card);
 }
 .field { display: grid; gap: 8px; }
 .field label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
