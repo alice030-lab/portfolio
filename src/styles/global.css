@@ -922,6 +922,96 @@ em, .italic { font-style: italic; font-weight: 500; }
   .geo-3, .geo-6, .geo-9 { display: none; }
 }
 
+/* ========== Service flow / process ========== */
+.process { padding-top: 20px; }
+.process-intro {
+  max-width: 56ch;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin: 8px 0 40px;
+}
+.process-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 80px;
+}
+@media (min-width: 1180px) {
+  .process-flow {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+  }
+  .process-flow .step { flex: 1 1 0; min-width: 0; }
+  .process-flow .step-arrow { flex: 0 0 auto; }
+}
+.step {
+  border: 1px solid var(--ink);
+  padding: 24px 22px;
+  display: flex; flex-direction: column; gap: 8px;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: var(--shadow-soft);
+}
+.step:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 var(--ink);
+  z-index: 2;
+}
+.step-rose { background: var(--g-rose); }
+.step-sage { background: var(--g-sage); }
+.step-lavender { background: var(--g-lavender); }
+.step-peach { background: var(--g-peach); }
+
+.step-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  opacity: 0.55;
+}
+.step h3 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.step-time {
+  font-family: var(--sans);
+  font-size: 11px !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.6;
+  margin-top: -2px;
+}
+.step p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.step-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 24px;
+  color: var(--rose-deep);
+  padding: 4px 0;
+  transform: rotate(90deg); /* down arrow on mobile */
+}
+@media (min-width: 1180px) {
+  .step-arrow {
+    transform: rotate(0);
+    padding: 0 6px;
+    font-size: 26px;
+  }
+}
+
 /* ========== Pain points (interactive flip cards) ========== */
 .pain { padding-top: 20px; }
 .pain-intro {
