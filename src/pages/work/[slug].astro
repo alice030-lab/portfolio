@@ -24,11 +24,11 @@ for (const c of categories) {
     tabs.push({ id: c.key, name: c.name, href: `${base}/work/#${c.key}` });
   }
 }
-tabs.push({ id: "cases", name: "案例研究", href: `${base}/work/#cases` });
+tabs.push({ id: "cases", name: "包裝設計", href: `${base}/work/#cases` });
 ---
 <Layout title={`${work.title} — Alice Office`} description={work.summary}>
   <section class="container hero" style="padding-bottom: 24px;">
-    <div class="eyebrow">— 案例研究</div>
+    <div class="eyebrow">— 包裝設計</div>
     <h1>{work.title}</h1>
     <p class="lead">{work.summary}</p>
   </section>
@@ -73,7 +73,7 @@ tabs.push({ id: "cases", name: "案例研究", href: `${base}/work/#cases` });
       {/* Default pane — case info & intro */}
       <article class="phi active" data-pane="default">
         <div class="phi-eyebrow">{work.tag} · {work.year}</div>
-        <h3 class="phi-title">案例研究</h3>
+        <h3 class="phi-title">包裝設計</h3>
         {work.intro && <p>{work.intro}</p>}
         <dl class="case-meta-list">
           <dt>客戶</dt>
@@ -87,7 +87,7 @@ tabs.push({ id: "cases", name: "案例研究", href: `${base}/work/#cases` });
       {/* Per-section panes — shown when an image is clicked */}
       {work.sections.map((sec, si) => (
         <article class="phi phi-item" data-pane={`section-${si}`}>
-          <button class="phi-back" type="button">← 返回 案例研究</button>
+          <button class="phi-back" type="button">← 返回 包裝設計</button>
           <div class="phi-eyebrow">{work.tag} · 段落 {String(si + 1).padStart(2, "0")}</div>
           <h3 class="phi-title">{sec.title}</h3>
           {sec.desc && <p>{sec.desc}</p>}
