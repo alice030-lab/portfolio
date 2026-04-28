@@ -18,6 +18,43 @@ const link = (p: string) => `${base}${p}`;
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <!-- Book page-flip loader — visible until window.load + minimum 1.6s -->
+  <div id="book-loader" class="book-loader" aria-hidden="true">
+    <div class="book">
+      <div class="book-spine"></div>
+      <div class="page page-base page-base-l"></div>
+      <div class="page page-base page-base-r"></div>
+      <div class="page page-flip" style="--d: 0s"></div>
+      <div class="page page-flip" style="--d: 0.4s"></div>
+      <div class="page page-flip" style="--d: 0.8s"></div>
+      <div class="page page-flip" style="--d: 1.2s"></div>
+    </div>
+    <div class="book-loader-text">翻開設計師的故事…</div>
+  </div>
+  <script is:inline>
+    (function () {
+      const loader = document.getElementById("book-loader");
+      if (!loader) return;
+      const start = Date.now();
+      const minMs = 1600;
+      let hidden = false;
+      const hide = () => {
+        if (hidden) return;
+        hidden = true;
+        const elapsed = Date.now() - start;
+        const wait = Math.max(0, minMs - elapsed);
+        setTimeout(() => {
+          loader.classList.add("is-hidden");
+          setTimeout(() => loader.remove(), 700);
+        }, wait);
+      };
+      if (document.readyState === "complete") hide();
+      else window.addEventListener("load", hide, { once: true });
+      // Fallback: never block more than 8 seconds even if some asset stalls
+      setTimeout(hide, 8000);
+    })();
+  </script>
+
   <header class="site-header">
     <div class="inner">
       <a href={link("/")} class="brand">Alice Office<small>吳芝淩</small></a>
