@@ -22,13 +22,29 @@ const link = (p: string) => `${base}${p}`;
   <div id="book-loader" class="book-loader" aria-hidden="true">
     <div class="book">
       <div class="book-stage">
-        <div class="book-spine"></div>
+        <!-- Stacked thickness on both sides -->
+        <div class="page-thick page-thick-l"></div>
+        <div class="page-thick page-thick-r"></div>
         <div class="page page-base page-base-l"></div>
         <div class="page page-base page-base-r"></div>
-        <div class="page page-flip flip-rose" style="--d: 0s"></div>
-        <div class="page page-flip flip-sage" style="--d: 0.4s"></div>
-        <div class="page page-flip flip-lavender" style="--d: 0.8s"></div>
-        <div class="page page-flip flip-peach" style="--d: 1.2s"></div>
+        <div class="book-spine"></div>
+        <!-- Flipping pages — double-faced -->
+        <div class="page-flip flip-rose" style="--d: 0s">
+          <div class="face front"></div>
+          <div class="face back"></div>
+        </div>
+        <div class="page-flip flip-sage" style="--d: 0.6s">
+          <div class="face front"></div>
+          <div class="face back"></div>
+        </div>
+        <div class="page-flip flip-lavender" style="--d: 1.2s">
+          <div class="face front"></div>
+          <div class="face back"></div>
+        </div>
+        <div class="page-flip flip-peach" style="--d: 1.8s">
+          <div class="face front"></div>
+          <div class="face back"></div>
+        </div>
       </div>
     </div>
     <div class="book-loader-text">翻開設計師的故事…</div>
