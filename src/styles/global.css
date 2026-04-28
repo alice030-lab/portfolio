@@ -171,14 +171,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   background: transparent; /* let body's paper + pink gradient show through */
   --open: 0;
 }
-.entrance-stage::before {
-  /* Subtle ground shadow */
-  content: "";
-  position: absolute; left: 0; right: 0; bottom: 0;
-  height: 8%;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.06));
-  pointer-events: none;
-}
+/* (ground shadow removed) */
 
 .entrance-meta {
   position: absolute;
