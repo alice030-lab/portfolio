@@ -1217,7 +1217,8 @@ em, .italic { font-style: italic; font-weight: 500; }
   padding: 14px;
   display: flex; align-items: center; justify-content: center;
 }
-.gallery-item .frame img { display: block; max-width: 100%; height: auto; border-radius: 2px; }
+.gallery-item .frame img,
+.gallery-item .frame video { display: block; max-width: 100%; height: auto; border-radius: 2px; }
 .gallery-item figcaption {
   font-size: 13px; color: var(--muted);
   padding-left: 4px;

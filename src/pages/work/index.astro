@@ -102,7 +102,11 @@ tabs.push({
             <div class="case-image-stack">
               {t.images.map((im, ii) => (
                 <figure class="case-image" data-img={`${t.id}-img-${ii}`}>
-                  <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
+                  <div class="frame">
+                    {im.src.endsWith(".mp4") || im.src.endsWith(".webm")
+                      ? <video src={im.src} autoplay loop muted playsinline></video>
+                      : <img src={im.src} alt={im.caption ?? t.name} loading="lazy" />}
+                  </div>
                   {im.caption && <figcaption>{im.caption}</figcaption>}
                 </figure>
               ))}
@@ -126,7 +130,11 @@ tabs.push({
             <div class="gallery-grid">
               {t.images.map((im, ii) => (
                 <figure class="gallery-item" data-img={`${t.id}-img-${ii}`}>
-                  <div class="frame"><img src={im.src} alt={im.caption ?? t.name} loading="lazy" /></div>
+                  <div class="frame">
+                    {im.src.endsWith(".mp4") || im.src.endsWith(".webm")
+                      ? <video src={im.src} autoplay loop muted playsinline></video>
+                      : <img src={im.src} alt={im.caption ?? t.name} loading="lazy" />}
+                  </div>
                   {im.caption && <figcaption>{im.caption}</figcaption>}
                 </figure>
               ))}
