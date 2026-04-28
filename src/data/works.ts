@@ -34,7 +34,7 @@ export const works: Work[] = [
     client: "礁坑社區發展協會",
     year: "2023",
     tag: "包裝設計",
-    cover: img("pkg-drink-1.jpg"),
+    cover: img("pkg-drink-2.jpg"),
     span: "span-7",
     summary: "為礁坑社區做的完整包裝再造 — 從橄欖氣泡飲、菜單、展版到社群行銷圖一貫串起。",
     role: "包裝設計 · 插畫 · 視覺統籌",
