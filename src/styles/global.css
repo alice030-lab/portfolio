@@ -1844,6 +1844,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 
 /* Flipping pages — double-faced for proper "page lifting" feel */
 .page-flip {
+  position: absolute;
   left: 50%;
   width: 50%;
   top: 0; bottom: 0;
