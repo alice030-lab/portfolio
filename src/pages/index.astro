@@ -103,9 +103,66 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       </div>
       <span class="num">— 02</span>
     </div>
-    <div class="client-types reveal">
-      <div class="eyebrow" style="margin-bottom: 14px;">服務過的客戶類型</div>
-      <p>地方社區發展協會 · 製造業集團 · 私人會員制俱樂部 · 電動車充電網營運商 · 食品與農特產品牌 · 生活風格品牌 · 文化展覽機構</p>
+    <div class="clients-list">
+      <a href={`${base}/work/packaging-series`} class="client-row">
+        <div class="client-thumb"><img src={`${base}/images/pkg-drink-1.jpg`} alt="礁坑社區發展協會" loading="lazy" /></div>
+        <div class="client-info">
+          <div class="client-tag">地方社區發展協會</div>
+          <h3>礁坑社區發展協會</h3>
+          <p>包裝再造 — 橄欖氣泡飲、菜單、展版、社群行銷圖一貫串起。</p>
+        </div>
+        <div class="client-arrow">→</div>
+      </a>
+
+      <a href={`${base}/work/#dm-2`} class="client-row">
+        <div class="client-thumb"><img src={`${base}/images/dm-bsis.png`} alt="奇美車電" loading="lazy" /></div>
+        <div class="client-info">
+          <div class="client-tag">製造業集團</div>
+          <h3>奇美車電 Chimei Motor</h3>
+          <p>BSIS 盲點資訊系統與 AI DSM 數位側視鏡的產品 DM 與日文版視覺。</p>
+        </div>
+        <div class="client-arrow">→</div>
+      </a>
+
+      <a href={`${base}/work/#uiux-img-0`} class="client-row">
+        <div class="client-thumb"><img src={`${base}/images/case-golf.avif`} alt="威爾動力時時夠夫" loading="lazy" /></div>
+        <div class="client-info">
+          <div class="client-tag">私人會員制俱樂部</div>
+          <h3>威爾動力 — 時時夠夫</h3>
+          <p>高爾夫場地預約系統的會員介面、預約流程、管理後台一次規劃。</p>
+        </div>
+        <div class="client-arrow">→</div>
+      </a>
+
+      <a href={`${base}/work/#uiux-img-1`} class="client-row">
+        <div class="client-thumb"><img src={`${base}/images/case-charging.avif`} alt="電動車充電網營運" loading="lazy" /></div>
+        <div class="client-info">
+          <div class="client-tag">電動車充電網營運</div>
+          <h3>充電站預約充電系統</h3>
+          <p>HMI 介面、ZALO mini APP、營運後台 — 涵蓋整套使用情境。</p>
+        </div>
+        <div class="client-arrow">→</div>
+      </a>
+
+      <a href={`${base}/work/#social`} class="client-row">
+        <div class="client-thumb"><img src={`${base}/images/feature-01.png`} alt="生活風格與食品品牌" loading="lazy" /></div>
+        <div class="client-info">
+          <div class="client-tag">食品與生活風格品牌</div>
+          <h3>食品 / 農特產 / 生活風格品牌</h3>
+          <p>節慶主視覺、社群素材模組、年度主題視覺系統。</p>
+        </div>
+        <div class="client-arrow">→</div>
+      </a>
+
+      <a href={`${base}/work/#vi-0`} class="client-row">
+        <div class="client-thumb"><img src={`${base}/images/work-poster.jpg`} alt="文化展覽機構" loading="lazy" /></div>
+        <div class="client-info">
+          <div class="client-tag">文化展覽機構</div>
+          <h3>展覽 / 博覽會主視覺</h3>
+          <p>A0 海報版型、展場視覺延伸、規範手冊一站完整。</p>
+        </div>
+        <div class="client-arrow">→</div>
+      </a>
     </div>
   </section>
 
@@ -236,14 +293,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
         </div>
       </div>
     </div>
-
-    <aside class="pain-killer">
-      <div class="killer-eyebrow">— 我的殺手鐧</div>
-      <h3>讓設計動起來，<em>解決真實問題</em></h3>
-      <p><strong>AI 的輸出只是「素材」，我的產出是「成品」。</strong></p>
-      <p>客戶有 AI 圖沒用 — 他需要有人把圖變成一個會動的 React 元件、一個有互動邏輯的介面、一個能用的 SaaS 產品。</p>
-      <p class="killer-tagline">我把自己定位為「<em>能解決工程問題的設計策略家</em>」 — AI 是我的助手，不是競爭對手。</p>
-    </aside>
 
     <script is:inline>
       (function () {
