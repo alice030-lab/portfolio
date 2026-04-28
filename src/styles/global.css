@@ -958,7 +958,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   transition: transform 0.7s cubic-bezier(.4, 0, .2, 1);
   box-shadow: var(--shadow-soft);
 }
-.pain-front { background: linear-gradient(180deg, #FBC189 0%, #F08A3E 100%); }
+.pain-front { background: var(--g-peach); }
 .pain-back {
   background: var(--g-sage);
   transform: rotateY(180deg);
