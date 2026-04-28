@@ -479,12 +479,12 @@ em, .italic { font-style: italic; font-weight: 500; }
   font-family: var(--sans); font-size: 13px;
   color: var(--ink-soft); font-style: normal;
 }
-.blk.rose { background: var(--g-rose); }
-.blk.sage { background: var(--g-sage); }
-.blk.lavender { background: var(--g-lavender); }
-.blk.peach { background: var(--g-peach); }
+.blk.rose { background: var(--gf-rose); }
+.blk.sage { background: var(--gf-sage); }
+.blk.lavender { background: var(--gf-lavender); }
+.blk.peach { background: var(--gf-peach); }
 .blk.cream { background: var(--g-cream); }
-.blk.rose-deep { background: var(--g-rose); filter: brightness(0.92); }
+.blk.rose-deep { background: var(--gf-rose); filter: brightness(0.92); }
 
 /* Stacked layout — varying sizes like toy blocks */
 .blk.b1 { grid-column: 1 / span 4; grid-row: 1 / span 4; }  /* big square */
@@ -562,12 +562,12 @@ em, .italic { font-style: italic; font-weight: 500; }
   display: flex; flex-direction: column; gap: 14px;
   transition: transform 0.3s ease, background 0.3s ease;
 }
-.exp-tile:nth-child(1) { background: var(--g-rose); }
-.exp-tile:nth-child(2) { background: var(--g-sage); }
-.exp-tile:nth-child(3) { background: var(--g-lavender); }
-.exp-tile:nth-child(4) { background: var(--g-peach); }
+.exp-tile:nth-child(1) { background: var(--gf-rose); }
+.exp-tile:nth-child(2) { background: var(--gf-sage); }
+.exp-tile:nth-child(3) { background: var(--gf-lavender); }
+.exp-tile:nth-child(4) { background: var(--gf-peach); }
 .exp-tile:nth-child(5) { background: var(--g-cream); }
-.exp-tile:nth-child(6) { background: var(--g-rose); }
+.exp-tile:nth-child(6) { background: var(--gf-rose); }
 /* hover handled by shared lift rule */
 .exp-num { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink); opacity: 0.6; }
 .exp-tile h3 { font-size: 28px; font-weight: 500; }
