@@ -70,12 +70,12 @@ export const categories: GalleryCategory[] = [
       { src: img("work-social-1.png"), caption: "DM 1" },
       { src: img("work-social-2.png"), caption: "DM 2" },
       { src: img("work-dm-2.png"), caption: "說明書", note: "把長篇說明書拆解成模組化的閱讀單位，讓使用者能跳著讀、找到要找的資訊就走。" },
-      // Group B — phone format (9:16 vertical video)
-      { src: img("social-slot.mp4"), caption: "聖誕節拉霸機企劃", note: "為聖誕節企劃的社群互動 — 拉霸機概念，使用者抽到專屬祝福並可分享。\n\n引起公司內部好評，社群互動數較平日提升 10%。\n\n證明趣味互動比單純的節慶宣傳圖更能帶動社群熱度。" },
-      // Group C — wide banner (~3:1)
+      // Group B — wide banner (~3:1)
       { src: img("hero-vi-01.png"), caption: "社群主視覺 01", note: "節慶系列主視覺 — 把同一套品牌語言延伸到不同節氣，讓使用者在不同時節都能認出是同一個品牌。" },
       { src: img("hero-vi-03.png"), caption: "社群主視覺 03" },
       { src: img("feature-01.png"), caption: "社群主視覺", note: "年度社群主視覺 — 一套可拆解成多種比例（IG 貼文、限動、橫幅）的素材模組，讓團隊一次素材多平台用。" },
+      // Group C — phone format (9:16 vertical video)
+      { src: img("social-slot.mp4"), caption: "聖誕節拉霸機企劃", note: "為聖誕節企劃的社群互動 — 拉霸機概念，使用者抽到專屬祝福並可分享。\n\n引起公司內部好評，社群互動數較平日提升 10%。\n\n證明趣味互動比單純的節慶宣傳圖更能帶動社群熱度。" },
     ],
   },
   {
