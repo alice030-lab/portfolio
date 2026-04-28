@@ -12,7 +12,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const i = works.findIndex(w => w.slug === work.slug);
 const next = works.length > 1 ? works[(i + 1) % works.length] : null;
 
-// Build same vertical tab list as /work/ — tabs link back to /work/#tab
+// Build same vertical tab list as /work/
 type TabLink = { id: string; name: string; href: string };
 const tabs: TabLink[] = [];
 for (const c of categories) {
@@ -45,28 +45,20 @@ tabs.push({ id: "cases", name: "案例研究", href: `${base}/work/#cases` });
 
     <main class="work-content">
       <article class="case-body">
-        {work.body.map(b => {
-          if (b.type === "p") return <p>{b.text}</p>;
-          if (b.type === "full") return (
-            <div class="gallery-grid case-grid case-grid-1">
-              <figure class="gallery-item">
-                <div class="frame"><img src={b.src} alt={b.alt} loading="lazy" /></div>
-                {b.alt && <figcaption>{b.alt}</figcaption>}
+        {work.sections.map((sec, si) => (
+          <div class={`gallery-grid case-grid ${sec.layout === "pair" ? "case-grid-2" : "case-grid-1"}`}>
+            {sec.images.map(im => (
+              <figure class="gallery-item" data-case-section={si}>
+                <div class="frame">
+                  {im.src.endsWith(".mp4") || im.src.endsWith(".webm")
+                    ? <video src={im.src} autoplay loop muted playsinline></video>
+                    : <img src={im.src} alt={im.alt} loading="lazy" />}
+                </div>
+                {im.alt && <figcaption>{im.alt}</figcaption>}
               </figure>
-            </div>
-          );
-          if (b.type === "pair") return (
-            <div class="gallery-grid case-grid case-grid-2">
-              {b.pair?.map(p => (
-                <figure class="gallery-item">
-                  <div class="frame"><img src={p.src} alt={p.alt} loading="lazy" /></div>
-                  {p.alt && <figcaption>{p.alt}</figcaption>}
-                </figure>
-              ))}
-            </div>
-          );
-          return null;
-        })}
+            ))}
+          </div>
+        ))}
 
         {next && (
           <a href={`${base}/work/${next.slug}`} class="case-next">
@@ -78,21 +70,54 @@ tabs.push({ id: "cases", name: "案例研究", href: `${base}/work/#cases` });
     </main>
 
     <aside class="work-philosophy">
-      <article class="phi active">
+      {/* Default pane — case info & intro */}
+      <article class="phi active" data-pane="default">
         <div class="phi-eyebrow">{work.tag} · {work.year}</div>
-        <h3 class="phi-title">案例資訊</h3>
+        <h3 class="phi-title">案例研究</h3>
+        {work.intro && <p>{work.intro}</p>}
         <dl class="case-meta-list">
           <dt>客戶</dt>
           <dd>{work.client}</dd>
-          <dt>年份</dt>
-          <dd>{work.year}</dd>
           <dt>角色</dt>
           <dd>{work.role}</dd>
           <dt>工作範圍</dt>
           <dd>{work.scope.join(" · ")}</dd>
         </dl>
-        <p class="phi-desc">{work.summary}</p>
       </article>
+      {/* Per-section panes — shown when an image is clicked */}
+      {work.sections.map((sec, si) => (
+        <article class="phi phi-item" data-pane={`section-${si}`}>
+          <button class="phi-back" type="button">← 返回 案例研究</button>
+          <div class="phi-eyebrow">{work.tag} · 段落 {String(si + 1).padStart(2, "0")}</div>
+          <h3 class="phi-title">{sec.title}</h3>
+          {sec.desc && <p>{sec.desc}</p>}
+        </article>
+      ))}
     </aside>
   </div>
+
+  <script is:inline>
+    (function () {
+      const phis = document.querySelectorAll(".phi");
+      const showPhi = (key) => {
+        phis.forEach(p => p.classList.toggle("active", p.dataset.pane === key));
+      };
+      // Click an image group → show section pane
+      document.querySelectorAll("[data-case-section]").forEach(el => {
+        el.addEventListener("click", () => {
+          const idx = el.getAttribute("data-case-section");
+          showPhi(`section-${idx}`);
+          document.querySelectorAll("[data-case-section].is-active").forEach(x => x.classList.remove("is-active"));
+          el.classList.add("is-active");
+        });
+      });
+      // Back button on per-section pane
+      document.querySelectorAll(".phi-back").forEach(btn => {
+        btn.addEventListener("click", () => {
+          showPhi("default");
+          document.querySelectorAll("[data-case-section].is-active").forEach(x => x.classList.remove("is-active"));
+        });
+      });
+    })();
+  </script>
 </Layout>

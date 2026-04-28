@@ -1438,10 +1438,14 @@ em, .italic { font-style: italic; font-weight: 500; }
   cursor: pointer;
   position: relative;
 }
-.gallery-item[data-img].is-active .frame {
+.gallery-item[data-img].is-active .frame,
+.gallery-item[data-case-section].is-active .frame {
   transform: translate(-6px, -6px);
   box-shadow: 10px 10px 0 var(--sage-deep);
   z-index: 2;
+}
+[data-case-section] {
+  cursor: pointer;
 }
 .case-image[data-img].is-active {
   transform: translate(-6px, -6px);
