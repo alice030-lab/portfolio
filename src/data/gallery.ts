@@ -55,7 +55,7 @@ export const categories: GalleryCategory[] = [
   },
   {
     key: "dm",
-    name: "DM & 平面設計 / 社群",
+    name: "平面設計",
     tagline: "02 — Print & Social",
     desc: "DM、宣傳單張、Banner、海報、說明書、社群主視覺與互動企劃 — 所有平面與社群內容類作品。",
     philosophy: "平面與社群是品牌跟使用者最直接的兩種對話形式。\n\nDM 在有限的版面內結構化大量資訊；社群則是品牌每天的聲音，需要一套可重複使用的內容系統，讓在地團隊能持續產出。\n\n兩者共用一套思考方式：先決定「該說什麼、不該說什麼」，再決定怎麼說。",
