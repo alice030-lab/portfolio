@@ -627,7 +627,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .client-row:last-child { border-bottom: 0; }
 .client-row:hover {
-  background: var(--cream-deep);
+  background: linear-gradient(to left, var(--rose) 0%, var(--rose) 30%, var(--cream) 100%);
   padding-left: 36px;
 }
 .client-thumb {
