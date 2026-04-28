@@ -98,16 +98,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   <section class="container track-record">
     <div class="section-head">
       <div>
-        <div class="eyebrow">Numbers</div>
-        <h2><em>實績</em></h2>
+        <div class="eyebrow">Clients</div>
+        <h2>合作過的<em>客戶</em></h2>
       </div>
       <span class="num">— 02</span>
-    </div>
-    <div class="stats-grid">
-      <div class="stat reveal"><div class="stat-num">20<span>+</span></div><div class="stat-label">品牌識別案例</div></div>
-      <div class="stat reveal"><div class="stat-num">6</div><div class="stat-label">完整包裝系列</div></div>
-      <div class="stat reveal"><div class="stat-num">3</div><div class="stat-label">產品介面系統</div></div>
-      <div class="stat reveal"><div class="stat-num">60<span>+</span></div><div class="stat-label">單張視覺作品</div></div>
     </div>
     <div class="client-types reveal">
       <div class="eyebrow" style="margin-bottom: 14px;">服務過的客戶類型</div>
@@ -147,13 +141,130 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     </div>
   </section>
 
+  <section class="container pain">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Pain Points · AI 時代的競爭定位</div>
+        <h2>我能解決的<em>痛點</em></h2>
+      </div>
+      <span class="num">— 04</span>
+    </div>
+    <p class="pain-intro">AI 出圖很快，但企業真正的痛點是「圖很多、能用的很少；好看的很多、有靈魂的很少」。<br/>點開卡片看 AI 解決不了什麼、我可以怎麼接手。</p>
+
+    <div class="pain-grid">
+      <div class="pain-card" data-flipped="false">
+        <div class="pain-face pain-front">
+          <div class="pain-num">01</div>
+          <div class="pain-tag">AI 短處</div>
+          <h3>品牌一致性 &<br/>系統化</h3>
+          <p>AI 擅長「單張」驚艷的圖，但難維持跨情境一致 — Logo 極簡、Banner 跑風格。配色比例、字體規範、角色外型很難精確控制。</p>
+          <button type="button" class="pain-flip-btn">看我怎麼解 →</button>
+        </div>
+        <div class="pain-face pain-back">
+          <div class="pain-num">01</div>
+          <div class="pain-tag pain-tag-light">我的解法</div>
+          <h3>建立設計系統</h3>
+          <ul>
+            <li>定義精準的品牌規範、配色與元件</li>
+            <li>跨平台整合：網頁 / APP / 印刷物一套到底</li>
+            <li>讓品牌靈魂在每個載體都不散</li>
+          </ul>
+          <button type="button" class="pain-flip-btn">← 返回</button>
+        </div>
+      </div>
+
+      <div class="pain-card" data-flipped="false">
+        <div class="pain-face pain-front">
+          <div class="pain-num">02</div>
+          <div class="pain-tag">AI 短處</div>
+          <h3>邏輯溝通 &<br/>策略思考</h3>
+          <p>AI 只能依 Prompt 出圖，不理解「為什麼」。客戶說「想要大氣一點」AI 給華麗圖，但好設計要先問：受眾是誰？這張圖能增加轉化嗎？</p>
+          <button type="button" class="pain-flip-btn">看我怎麼解 →</button>
+        </div>
+        <div class="pain-face pain-back">
+          <div class="pain-num">02</div>
+          <div class="pain-tag pain-tag-light">我的解法</div>
+          <h3>視覺顧問 + UX 洞察</h3>
+          <ul>
+            <li>提供設計背後的策略支持</li>
+            <li>站在使用者視角設計可用的產品（Usable）</li>
+            <li>而不是好看但沒人用的圖庫</li>
+          </ul>
+          <button type="button" class="pain-flip-btn">← 返回</button>
+        </div>
+      </div>
+
+      <div class="pain-card" data-flipped="false">
+        <div class="pain-face pain-front">
+          <div class="pain-num">03</div>
+          <div class="pain-tag">AI 短處</div>
+          <h3>精確修正 &<br/>工程落地</h3>
+          <p>AI 生成的是像素圖，難微調、難工程對接。客戶想把按鈕往左移 2px，AI 會重畫一張完全不同的圖；產出非向量、非分層原檔，工程接不到。</p>
+          <button type="button" class="pain-flip-btn">看我怎麼解 →</button>
+        </div>
+        <div class="pain-face pain-back">
+          <div class="pain-num">03</div>
+          <div class="pain-tag pain-tag-light">我的解法</div>
+          <h3>精修 + 向量化</h3>
+          <ul>
+            <li>用前端經驗把 AI 創意「工程化」</li>
+            <li>產出符合前端標準的 SVG / Figma 原檔</li>
+            <li>4K 螢幕到名片都一樣清晰</li>
+          </ul>
+          <button type="button" class="pain-flip-btn">← 返回</button>
+        </div>
+      </div>
+
+      <div class="pain-card" data-flipped="false">
+        <div class="pain-face pain-front">
+          <div class="pain-num">04</div>
+          <div class="pain-tag">AI 短處</div>
+          <h3>法律風險 &<br/>版權保障</h3>
+          <p>AI 製圖存在嚴重的版權模糊地帶。多數國家法律不保護純 AI 生成物，企業視覺資產隨時可能被抄襲且無法維權。</p>
+          <button type="button" class="pain-flip-btn">看我怎麼解 →</button>
+        </div>
+        <div class="pain-face pain-back">
+          <div class="pain-num">04</div>
+          <div class="pain-tag pain-tag-light">我的解法</div>
+          <h3>原創保證 + AI 輔助</h3>
+          <ul>
+            <li>提供具備法律效力的原創設計</li>
+            <li>用 AI 加速概念發想，但成品經人工重繪</li>
+            <li>確保商業安全 + 完整版權歸屬</li>
+          </ul>
+          <button type="button" class="pain-flip-btn">← 返回</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="pain-killer">
+      <div class="killer-eyebrow">— 我的殺手鐧</div>
+      <h3>讓設計動起來，<em>解決真實問題</em></h3>
+      <p><strong>AI 的輸出只是「素材」，我的產出是「成品」。</strong></p>
+      <p>客戶有 AI 圖沒用 — 他需要有人把圖變成一個會動的 React 元件、一個有互動邏輯的介面、一個能用的 SaaS 產品。</p>
+      <p class="killer-tagline">我把自己定位為「<em>能解決工程問題的設計策略家</em>」 — AI 是我的助手，不是競爭對手。</p>
+    </aside>
+
+    <script is:inline>
+      (function () {
+        document.querySelectorAll(".pain-flip-btn").forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            const card = e.currentTarget.closest(".pain-card");
+            if (!card) return;
+            card.dataset.flipped = card.dataset.flipped === "true" ? "false" : "true";
+          });
+        });
+      })();
+    </script>
+  </section>
+
   <section class="container">
     <div class="section-head">
       <div>
         <div class="eyebrow">Work</div>
         <h2>作品<em>分類</em></h2>
       </div>
-      <span class="num">— 04</span>
+      <span class="num">— 05</span>
     </div>
 
     <script is:inline>
