@@ -286,23 +286,52 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .box-interior .ed-hero-inner .cta-row { margin-top: 0; }
 
-/* Box lid — hinged at the back-top, rotates up & away */
-.box-lid {
+/* 4 紙箱掀頁 — top / bottom / left / right，各自 hinge 在對應邊
+   配合 .box 的 perspective 讓 rotateX / rotateY 看起來有 3D 折開感 */
+.box-flap {
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: calc(40% - var(--o) * 40%);  /* shrinks visually as box grows */
-  min-height: calc((1 - var(--o)) * 80px);
-  background: linear-gradient(180deg, var(--rose) 0%, var(--rose-deep) 100%);
   border: calc((1 - var(--o)) * 2.5px) solid var(--ink);
-  border-radius: calc((1 - var(--o)) * 8px) calc((1 - var(--o)) * 8px) 0 0;
-  transform-origin: top center;
-  transform: rotateX(calc(var(--o) * -130deg));
-  transition: transform 0.05s linear, opacity 0.2s linear;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: inset 0 -8px 16px rgba(0,0,0,0.12);
-  opacity: calc(1 - max(0, var(--o) - 0.85) * 6);  /* fade out at end */
+  background: linear-gradient(180deg, var(--rose) 0%, var(--rose-deep) 100%);
+  border-radius: calc((1 - var(--o)) * 4px);
+  transition: transform 0.06s linear, opacity 0.2s linear;
+  box-shadow: inset 0 0 18px rgba(0,0,0,0.1);
+  opacity: calc(1 - max(0, var(--o) - 0.88) * 8);
   pointer-events: none;
 }
+/* TOP — width 100%, height 50%, hinge on top edge, fold up & back */
+.flap-top {
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  transform-origin: top center;
+  transform: rotateX(calc(var(--o) * -160deg));
+  z-index: 4;
+  display: flex; align-items: center; justify-content: center;
+}
+/* BOTTOM — width 100%, height 50%, hinge on bottom edge, fold down */
+.flap-bottom {
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  transform-origin: bottom center;
+  transform: rotateX(calc(var(--o) * 160deg));
+  z-index: 3;
+}
+/* LEFT — full height, half width, hinge on left edge, fold left */
+.flap-left {
+  top: 0; bottom: 0; left: 0;
+  width: 50%;
+  transform-origin: left center;
+  transform: rotateY(calc(var(--o) * -160deg));
+  z-index: 2;
+}
+/* RIGHT — full height, half width, hinge on right edge, fold right */
+.flap-right {
+  top: 0; bottom: 0; right: 0;
+  width: 50%;
+  transform-origin: right center;
+  transform: rotateY(calc(var(--o) * 160deg));
+  z-index: 1;
+}
+
 .box-lid-tag {
   font-family: var(--serif);
   font-style: italic;
