@@ -60,6 +60,8 @@ export const categories: GalleryCategory[] = [
     desc: "DM、宣傳單張、Banner、海報、展場、說明書 — 平面設計類作品集合。",
     philosophy: "DM 是品牌與使用者最直接的對話。在有限的版面與閱讀時間內，把訊息傳到、把眼神留下，是平面設計的本職。\n\n我擅長處理資訊量大的案子 — 把長篇拆解成可被掃讀的層次，讓重點自然浮上來。\n\n每一次改版都是重新整理「該說什麼、不該說什麼」。",
     images: [
+      { src: img("dm-bsis.png"), caption: "BSIS 盲點資訊系統 DM（奇美車電）", note: "為奇美車電的 BSIS 盲點資訊系統設計的產品宣傳 DM。\n\n資訊量大、認證徽章多、技術規格繁雜 — 在單頁內結構化呈現「應用情境 → 認證 → 規格 → 功能特色」四大區塊，讓專業客戶能一眼掃讀。\n\n使用紫色為主色凸顯科技感，搭配實際攝影與插畫示意圖。Taiwan Excellence 2022 入選作品。" },
+      { src: img("dm-golf-venue.png"), caption: "場地預約系統 DM（威爾動力）", note: "為威爾動力高爾夫場地預約系統設計的宣傳 DM。\n\n搭配 UI 截圖呈現「我的會員」與「便捷預約」兩大介面亮點，金色標題 + 紫色基底傳達高端俱樂部的調性。\n\n小尺寸 mockup 安排在主視覺四角 — 讓功能展示不搶走核心訊息「場地預約系統」的視覺主導。" },
       { src: img("work-dm-1.png"), caption: "DM", note: "DM 改版前後對照。原版資訊擁擠、層次混亂；改版重新組織資訊架構，讓主訴求一眼可見、次要資訊作為支援。" },
       { src: img("work-manual-2.png"), caption: "規範手冊內頁", note: "手冊內頁的閱讀節奏設計 — 圖文比例、留白、字型大小，全部依照閱讀者「翻閱的速度」反推。" },
       { src: img("work-social-1.png"), caption: "DM 1" },
