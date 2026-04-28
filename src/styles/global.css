@@ -21,6 +21,12 @@
   --g-peach: linear-gradient(180deg, #FAD9BE 0%, #EDB389 100%);
   --g-cream: linear-gradient(180deg, #FCFBF5 0%, #EFEAD9 100%);
 
+  /* Faded variants — colour on top, fades to white at bottom */
+  --gf-rose: linear-gradient(180deg, #F2958E 0%, #FBFAF5 100%);
+  --gf-sage: linear-gradient(180deg, #A0BC85 0%, #FBFAF5 100%);
+  --gf-lavender: linear-gradient(180deg, #A99CC4 0%, #FBFAF5 100%);
+  --gf-peach: linear-gradient(180deg, #EDB389 0%, #FBFAF5 100%);
+
   /* Thin hairline outline — used selectively on small elements only */
   --hair: 1px solid var(--ink);
 
@@ -959,10 +965,10 @@ em, .italic { font-style: italic; font-weight: 500; }
   box-shadow: 8px 8px 0 var(--ink);
   z-index: 2;
 }
-.step-rose { background: var(--g-rose); }
-.step-sage { background: var(--g-sage); }
-.step-lavender { background: var(--g-lavender); }
-.step-peach { background: var(--g-peach); }
+.step-rose { background: var(--gf-rose); }
+.step-sage { background: var(--gf-sage); }
+.step-lavender { background: var(--gf-lavender); }
+.step-peach { background: var(--gf-peach); }
 
 .step-num {
   font-family: var(--serif);
@@ -1048,9 +1054,9 @@ em, .italic { font-style: italic; font-weight: 500; }
   transition: transform 0.7s cubic-bezier(.4, 0, .2, 1);
   box-shadow: var(--shadow-soft);
 }
-.pain-front { background: var(--g-peach); }
+.pain-front { background: var(--gf-peach); }
 .pain-back {
-  background: var(--g-sage);
+  background: var(--gf-sage);
   transform: rotateY(180deg);
 }
 .pain-card[data-flipped="true"] .pain-front { transform: rotateY(180deg); }
