@@ -63,12 +63,10 @@ export const categories: GalleryCategory[] = [
       { src: img("dm-bsis.png"), caption: "BSIS 盲點資訊系統 DM（奇美車電）", note: "為奇美車電的 BSIS 盲點資訊系統設計的產品宣傳 DM。\n\n資訊量大、認證徽章多、技術規格繁雜 — 在單頁內結構化呈現「應用情境 → 認證 → 規格 → 功能特色」四大區塊，讓專業客戶能一眼掃讀。\n\n使用紫色為主色凸顯科技感，搭配實際攝影與插畫示意圖。Taiwan Excellence 2022 入選作品。" },
       { src: img("dm-golf-venue.png"), caption: "場地預約系統 DM（威爾動力）", note: "為威爾動力高爾夫場地預約系統設計的宣傳 DM。\n\n搭配 UI 截圖呈現「我的會員」與「便捷預約」兩大介面亮點，金色標題 + 紫色基底傳達高端俱樂部的調性。\n\n小尺寸 mockup 安排在主視覺四角 — 讓功能展示不搶走核心訊息「場地預約系統」的視覺主導。" },
       { src: img("work-dm-1.png"), caption: "DM", note: "DM 改版前後對照。原版資訊擁擠、層次混亂；改版重新組織資訊架構，讓主訴求一眼可見、次要資訊作為支援。" },
-      { src: img("work-manual-2.png"), caption: "規範手冊內頁", note: "手冊內頁的閱讀節奏設計 — 圖文比例、留白、字型大小，全部依照閱讀者「翻閱的速度」反推。" },
       { src: img("work-social-1.png"), caption: "DM 1" },
       { src: img("work-social-2.png"), caption: "DM 2" },
       { src: img("feature-02.png"), caption: "DM 3" },
       { src: img("work-dm-2.png"), caption: "說明書", note: "把長篇說明書拆解成模組化的閱讀單位，讓使用者能跳著讀、找到要找的資訊就走。" },
-      { src: img("work-detail.jpg"), caption: "展場背板細節（舊設計）", note: "舊設計案例 — 雖然不是當下會做的風格，但保留作為設計演化的紀錄。" },
     ],
   },
   {
