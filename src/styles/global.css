@@ -1309,6 +1309,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   cursor: pointer;
   white-space: nowrap;
   text-align: left;
+  text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
 }
 @media (min-width: 900px) {
@@ -1586,8 +1587,57 @@ em, .italic { font-style: italic; font-weight: 500; }
 .case-hero .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 24px; margin-top: 48px; padding: 32px; background: var(--g-cream); border: var(--hair); border-radius: var(--r-card); font-size: 13px; }
 .case-hero .meta div strong { display: block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: 6px; }
 
-.case-body { padding: 40px 0 60px; }
+.case-body { padding: 0; }
 .case-body p { max-width: 65ch; font-size: 17px; line-height: 1.8; margin: 0 auto 1.5em; color: var(--ink-soft); }
+
+/* Case study meta list (shown in right philosophy column) */
+.case-meta-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px 16px;
+  margin: 8px 0 24px;
+  padding: 0;
+}
+.case-meta-list dt {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 14px;
+}
+.case-meta-list dt:first-child { margin-top: 0; }
+.case-meta-list dd {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* Next case link inside case body */
+.case-next {
+  display: block;
+  margin: 60px 0 0;
+  padding: 32px 28px;
+  border: 1px solid var(--ink);
+  background: var(--g-cream);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.25s ease, transform 0.25s ease;
+  box-shadow: var(--shadow-soft);
+}
+.case-next:hover {
+  background: var(--gf-rose);
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+.case-next h3 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
 
 /* Case study images use the same .gallery-item style as work index */
 .case-body .case-grid {
