@@ -18,58 +18,17 @@ const link = (p: string) => `${base}${p}`;
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- Book page-flip loader — hand-drawn SVG, visible until window.load + min 1.6s -->
+  <!-- Memo collage loader — visible until window.load + min 1.6s -->
   <div id="book-loader" class="book-loader" aria-hidden="true">
-    <svg class="book-svg" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <!-- Hand-drawn jitter filter -->
-        <filter id="rough" x="-2%" y="-2%" width="104%" height="104%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3" />
-          <feDisplacementMap in="SourceGraphic" scale="1.6" />
-        </filter>
-      </defs>
-
-      <g class="ink" stroke="#6B4515" fill="#FBFAF5" stroke-width="2.5"
-         stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
-
-        <!-- LEFT BOTTOM COVER (spine slants up-right toward middle) -->
-        <path d="M 40 250 Q 50 225 60 215 L 200 175 L 200 250 Q 130 258 60 256 Q 48 258 40 250 Z" />
-        <!-- LEFT cover bottom edge hatching -->
-        <path fill="none" d="M 60 245 L 90 240 M 70 255 L 110 248 M 95 262 L 145 252" />
-
-        <!-- RIGHT BOTTOM COVER (with cross-hatch on outer side) -->
-        <path d="M 200 175 L 380 215 Q 388 225 390 250 Q 380 258 350 256 L 200 250 Z" />
-        <!-- RIGHT cover hatching (denser, like reference) -->
-        <path fill="none" d="
-          M 240 210 L 360 230
-          M 235 220 L 365 240
-          M 230 230 L 370 248
-          M 225 240 L 372 254
-          M 295 220 L 305 240
-          M 320 215 L 330 245
-          M 345 215 L 355 248" stroke-width="1.4" />
-
-        <!-- SPINE / center binding -->
-        <path fill="none" d="M 200 175 L 200 250" stroke-width="2.8" />
-
-        <!-- FLIPPING PAGE 1 (front, lifting from spine, slight curl) -->
-        <g class="fly fly-1">
-          <path d="M 200 175 L 215 90 Q 250 60 295 80 L 310 175 Q 255 168 200 175 Z" />
-          <path fill="none" d="M 230 110 L 270 100 M 240 130 L 280 120 M 250 150 L 285 140" stroke-width="1.4" />
-        </g>
-
-        <!-- FLIPPING PAGE 2 (back, taller arc) -->
-        <g class="fly fly-2">
-          <path d="M 200 175 L 245 60 Q 295 35 345 65 L 330 175 Q 270 170 200 175 Z" />
-          <path fill="none" d="M 260 90 L 295 75 M 270 110 L 305 95 M 280 130 L 315 115 M 290 150 L 320 135" stroke-width="1.4" />
-        </g>
-
-        <!-- TOP fold lines (suggest pages curving) -->
-        <path fill="none" d="M 200 175 L 215 92" stroke-width="1.6" />
-        <path fill="none" d="M 200 175 L 245 65" stroke-width="1.6" />
-      </g>
-    </svg>
-    <div class="book-loader-text">翻開設計師的故事…</div>
+    <div class="memo-stack">
+      <div class="memo m1"></div>
+      <div class="memo m2"></div>
+      <div class="memo m3"></div>
+      <div class="memo m4"></div>
+      <div class="memo m5"></div>
+      <div class="memo m6"></div>
+    </div>
+    <div class="book-loader-text">整理設計師的便條…</div>
   </div>
   <script is:inline>
     (function () {

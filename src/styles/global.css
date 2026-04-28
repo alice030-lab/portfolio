@@ -1758,7 +1758,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 .about-stamp strong { font-style: italic; font-family: var(--serif); font-size: 18px; }
 
-/* ========== Hand-drawn SVG book loader ========== */
+/* ========== Memo collage loader ========== */
 .book-loader {
   position: fixed; inset: 0; z-index: 9000;
   background-color: var(--cream);
@@ -1774,38 +1774,63 @@ em, .italic { font-style: italic; font-weight: 500; }
   opacity: 0; visibility: hidden; pointer-events: none;
 }
 
-.book-svg {
-  width: 360px;
-  height: auto;
-  filter: drop-shadow(0 8px 12px rgba(107, 69, 21, 0.12));
+.memo-stack {
+  position: relative;
+  width: 320px;
+  height: 240px;
+}
+.memo {
+  position: absolute;
+  border: 1px solid var(--ink);
+  box-shadow: var(--shadow-soft);
+  rotate: var(--r, 0deg);
+  opacity: 0;
+  animation: memo-pop 2.4s var(--d, 0s) ease-in-out infinite;
+}
+@keyframes memo-pop {
+  0%   { opacity: 0; scale: 0.85; }
+  20%  { opacity: 1; scale: 1.04; }
+  35%  { scale: 1; }
+  85%  { opacity: 1; scale: 1; }
+  100% { opacity: 0; scale: 0.95; }
 }
 
-/* Flipping pages — pivot around spine top (200, 175) */
-.book-svg .fly {
-  transform-origin: 200px 175px;
-  animation-duration: 2.6s;
-  animation-iteration-count: infinite;
-  animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
-  transform-box: fill-box; /* Use the path's bounding box for rotation origin (Safari) */
+.memo.m1 {
+  --r: -8deg; --d: 0s;
+  width: 140px; height: 100px;
+  top: 80px; left: 0;
+  background: var(--gf-rose);
 }
-.book-svg .fly-1 {
-  animation-name: page-fly-1;
+.memo.m2 {
+  --r: 5deg; --d: 0.18s;
+  width: 110px; height: 130px;
+  top: 0; left: 70px;
+  background: var(--gf-sage);
 }
-.book-svg .fly-2 {
-  animation-name: page-fly-2;
-  animation-delay: 0.5s;
+.memo.m3 {
+  --r: -4deg; --d: 0.36s;
+  width: 130px; height: 90px;
+  top: 50px; right: 30px;
+  background: var(--gf-lavender);
 }
-
-/* The pages arc: lift up, peak, then fall back. Repeats indefinitely. */
-@keyframes page-fly-1 {
-  0%, 100% { transform: rotate(-2deg) translateY(0); }
-  35%      { transform: rotate(-12deg) translate(-4px, -6px); }
-  65%      { transform: rotate(8deg) translate(6px, -4px); }
+.memo.m4 {
+  --r: 8deg; --d: 0.54s;
+  width: 100px; height: 110px;
+  bottom: 0; right: 0;
+  background: var(--gf-peach);
 }
-@keyframes page-fly-2 {
-  0%, 100% { transform: rotate(2deg) translateY(0); }
-  35%      { transform: rotate(-8deg) translate(-2px, -10px); }
-  65%      { transform: rotate(14deg) translate(8px, -6px); }
+.memo.m5 {
+  --r: 2deg; --d: 0.72s;
+  width: 120px; height: 80px;
+  bottom: 0; left: 40px;
+  background: var(--g-cream);
+}
+.memo.m6 {
+  --r: -10deg; --d: 0.9s;
+  width: 80px; height: 70px;
+  top: 110px; left: 110px;
+  background: var(--gf-rose);
+  filter: brightness(0.96);
 }
 
 .book-loader-text {
@@ -1822,7 +1847,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .book-svg .fly { animation: none; }
+  .memo { animation: none; opacity: 1; scale: 1; }
   .book-loader-text { animation: none; opacity: 1; }
 }
 
