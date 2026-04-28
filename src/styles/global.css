@@ -258,18 +258,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   width: 100vw;
   height: 100vh;
   display: flex; align-items: center; justify-content: center;
-  background-color: var(--cream);
-  background-image:
-    linear-gradient(
-      180deg,
-      rgba(242, 181, 176, 0.95) 0px,
-      rgba(242, 181, 176, 0.55) 240px,
-      rgba(242, 181, 176, 0) 560px
-    ),
-    url("/portfolio/images/paper-texture.png");
-  background-repeat: no-repeat, repeat;
-  background-size: auto, 700px 700px;
-  background-blend-mode: multiply, multiply;
+  background: transparent; /* let body's paper + pink gradient show through */
 }
 .box-interior .ed-hero-inner {
   width: 100%;
