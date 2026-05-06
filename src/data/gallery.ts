@@ -93,10 +93,10 @@ export const categories: GalleryCategory[] = [
         ratio: "16 / 9",
       },
       {
-        title: "Solo Sync — Discovery 探索頁",
+        title: "uslink — Discovery 探索頁",
         tag: "Web App · UI Design",
         desc: "音樂創作者協作平台的探索頁面 — 分類瀏覽、搜尋、即時互動。",
-        src: "https://solo-sync.vercel.app/discovery",
+        src: "https://uslink.vercel.app/discovery",
         ratio: "16 / 9",
       },
     ],
