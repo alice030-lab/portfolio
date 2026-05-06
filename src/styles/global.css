@@ -1570,14 +1570,24 @@ em, .italic { font-style: italic; font-weight: 500; }
     gap: 28px;
   }
 }
-/* When tab pane has ≤ 2 items, make them larger by capping columns */
-.gallery-grid:has(> .gallery-item:nth-child(2):last-child) {
-  grid-template-columns: 1fr 1fr;
-  max-width: 1100px;
-}
+/* When subsection has ≤ 2 items, stack vertically at large size
+   so users can actually read the content */
+.gallery-grid:has(> .gallery-item:nth-child(2):last-child),
 .gallery-grid:has(> .gallery-item:only-child) {
   grid-template-columns: 1fr;
-  max-width: 880px;
+  max-width: 720px;
+  margin: 0 auto;
+  gap: 32px;
+}
+.gallery-grid:has(> .gallery-item:nth-child(2):last-child) > .gallery-item .frame,
+.gallery-grid:has(> .gallery-item:only-child) > .gallery-item .frame {
+  padding: 12px;
+}
+.gallery-grid:has(> .gallery-item:nth-child(2):last-child) > .gallery-item .frame img,
+.gallery-grid:has(> .gallery-item:only-child) > .gallery-item .frame img {
+  max-width: 100%;
+  height: auto;
+  max-height: none;
 }
 .gallery-item { display: flex; flex-direction: column; gap: 10px; }
 .gallery-item .frame {
