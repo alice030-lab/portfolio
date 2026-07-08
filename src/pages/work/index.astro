@@ -87,7 +87,14 @@ tabs.push({
               {t.demos.map((d, di) => (
                 <article class="demo-card" data-img={`${t.id}-demo-${di}`}>
                   <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 9"};`}>
-                    <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                    {d.image ? (
+                      <a href={d.link ?? d.src} target="_blank" rel="noopener noreferrer" class="demo-shot-link">
+                        <img src={d.image} alt={d.title} loading="lazy" />
+                        <span class="demo-shot-cta">連到網站查看 ↗</span>
+                      </a>
+                    ) : (
+                      <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                    )}
                   </div>
                   <div class="demo-meta">
                     <span class="tag">{d.tag}</span>

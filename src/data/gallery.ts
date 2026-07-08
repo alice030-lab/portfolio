@@ -10,6 +10,8 @@ export interface GalleryDemo {
   tag: string;
   desc?: string;
   ratio?: string;
+  image?: string;
+  link?: string;
 }
 
 export interface GalleryCategory {
@@ -89,14 +91,15 @@ export const categories: GalleryCategory[] = [
         title: "TFA Redesign — 前端重製案",
         tag: "HTML · CSS · JS",
         desc: "親手刻的響應式網站重製案，從版型結構、互動到動效全程實作。",
-        src: "https://alice030-lab.github.io/tfa-redesign/index.html",
+        src: "https://tfa.com.tw/",
         ratio: "16 / 9",
       },
       {
         title: "uslink — Discovery 探索頁",
         tag: "Web App · UI Design",
-        desc: "音樂創作者協作平台的探索頁面 — 分類瀏覽、搜尋、即時互動。",
-        src: "https://uslink.vercel.app/discovery",
+        desc: "揪夥旅遊與技能交換社群平台的探索頁面 — 分類瀏覽、搜尋、即時互動。",
+        src: "https://uslinkyou.com/discovery",
+        image: img("demo-uslink-discovery.png"),
         ratio: "16 / 9",
       },
     ],
