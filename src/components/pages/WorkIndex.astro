@@ -102,7 +102,7 @@ tabs.push({
                         {d.slides.map((s, si) => (
                           <figure class="showcase-page-item" data-slide={si}>
                             {s.kind === "video"
-                              ? <video src={s.src} muted loop playsinline preload={si < 2 ? "auto" : "metadata"} aria-label={`${s.page} ${s.title}`}></video>
+                              ? <video src={s.src} muted autoplay loop playsinline preload={si < 2 ? "auto" : "metadata"} aria-label={`${s.page} ${s.title}`}></video>
                               : <img src={s.src} alt={`${s.page} ${s.title}`} loading={si === 0 ? "eager" : "lazy"} />}
                           </figure>
                         ))}
@@ -274,10 +274,17 @@ tabs.push({
         const frameOnScreen = { v: false };
         const sync = () => {
           videos.forEach(v => {
+            v.muted = true; // some browsers ignore the attribute; muted is required for autoplay
             const show = frameOnScreen.v && inFrame.get(v);
             if (show) v.play().catch(() => {}); else v.pause();
           });
         };
+        // If the browser blocked autoplay (Safari low-power mode, autoplay settings…),
+        // retry as soon as the visitor interacts with the page.
+        ["pointerdown", "touchstart", "wheel", "keydown", "scroll"].forEach(ev =>
+          window.addEventListener(ev, sync, { passive: true })
+        );
+        frame.addEventListener("scroll", sync, { passive: true });
         if ("IntersectionObserver" in window) {
           const io = new IntersectionObserver((entries) => {
             entries.forEach(en => inFrame.set(en.target, en.isIntersecting));
