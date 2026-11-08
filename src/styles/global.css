@@ -1441,6 +1441,11 @@ em, .italic { font-style: italic; font-weight: 500; }
   background: transparent;
   position: relative;
 }
+/* Tablet (2-column) layout: philosophy drops below the content, inside column 2,
+   so it never sits under the sticky tab rail in column 1. */
+@media (min-width: 900px) and (max-width: 1279px) {
+  .work-philosophy { grid-column: 2; }
+}
 @media (min-width: 1280px) {
   .work-philosophy {
     border-top: 0;
