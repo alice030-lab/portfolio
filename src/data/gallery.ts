@@ -100,7 +100,7 @@ export const categories: GalleryCategory[] = [
       {
         title: "拼拼 — 低負擔的心情日記 App",
         tag: "App · UI/UX · IP Design",
-        desc: "為「容易停下來的記錄者」設計的日記 App — 先留白再引導、花獸收藏與微獎勵、匿名單向回信、填色共創與圖轉音樂。以展示視窗依頁序呈現研究、策略與動態原型。",
+        desc: "為「容易停下來的記錄者」設計的日記 App — 先留白再引導、花獸收藏與微獎勵、匿名單向回信、填色共創與圖轉音樂。以展示視窗依頁序呈現研究、策略、動態原型、色彩計畫與成果。",
         src: "",
         ratio: "16 / 9",
         slides: [
@@ -118,6 +118,10 @@ export const categories: GalleryCategory[] = [
           { page: "12", title: "低負擔匿名交流", src: img("pinpin/pinpin-12.mp4"), kind: "video" },
           { page: "13", title: "填色共創與回訪", src: img("pinpin/pinpin-13.mp4"), kind: "video" },
           { page: "14", title: "圖轉音樂與迭代", src: img("pinpin/pinpin-14.mp4"), kind: "video" },
+          { page: "15", title: "長期紀錄與回看", src: img("pinpin/pinpin-15.webp"), kind: "image" },
+          { page: "16", title: "色彩計畫", src: img("pinpin/pinpin-16.webp"), kind: "image" },
+          { page: "17", title: "產品與行銷策略", src: img("pinpin/pinpin-17.webp"), kind: "image" },
+          { page: "18", title: "產品成果與協作分工", src: img("pinpin/pinpin-18.webp"), kind: "image" },
         ],
       },
       {

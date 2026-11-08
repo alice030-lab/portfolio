@@ -71,8 +71,8 @@ export const dataEn: Record<string, string> = {
   "設計不只是好看的畫面，是可以被使用、能解決真實問題的工具。\n\n我同時做設計與寫前端，因為兩端都得親自經驗才能做出真正可用的產品 — 知道哪些畫面工程上難實作、哪些互動成本高、哪些細節在使用情境中根本不重要。\n\n好的 UI 是讓人感覺不到設計的存在。":
     "Design isn't just a good-looking screen; it's a tool that can be used and solves a real problem.\n\nI do both design and front-end, because you have to experience both ends to make something genuinely usable — knowing which screens are hard to build, which interactions are costly, and which details don't matter at all in real use.\n\nGood UI is the kind you don't notice.",
   "拼拼 — 低負擔的心情日記 App": "Pinpin — A Low-Pressure Mood Diary App",
-  "為「容易停下來的記錄者」設計的日記 App — 先留白再引導、花獸收藏與微獎勵、匿名單向回信、填色共創與圖轉音樂。以展示視窗依頁序呈現研究、策略與動態原型。":
-    "A diary app for people who tend to stop writing — blank first, guidance when stuck; flower-beast collection and micro-rewards; anonymous one-way replies; collaborative colouring and picture-to-music. The window walks through research, strategy and motion prototypes in page order.",
+  "為「容易停下來的記錄者」設計的日記 App — 先留白再引導、花獸收藏與微獎勵、匿名單向回信、填色共創與圖轉音樂。以展示視窗依頁序呈現研究、策略、動態原型、色彩計畫與成果。":
+    "A diary app for people who tend to stop writing — blank first, guidance when stuck; flower-beast collection and micro-rewards; anonymous one-way replies; collaborative colouring and picture-to-music. The window walks through research, strategy, motion prototypes, the colour plan and outcomes in page order.",
   "專案概覽": "Project overview",
   "競品研究與取捨": "Competitor research & trade-offs",
   "使用情境與問題定義": "Use cases & problem definition",
@@ -87,6 +87,10 @@ export const dataEn: Record<string, string> = {
   "低負擔匿名交流": "Low-pressure anonymous exchange",
   "填色共創與回訪": "Collaborative colouring & return visits",
   "圖轉音樂與迭代": "Picture-to-music & iteration",
+  "長期紀錄與回看": "Long-term records & review",
+  "色彩計畫": "Colour plan",
+  "產品與行銷策略": "Product & marketing strategy",
+  "產品成果與協作分工": "Outcomes & collaboration",
   "TFA Redesign — 前端重製案": "TFA Redesign — Front-end Rebuild",
   "親手刻的響應式網站重製案，從版型結構、互動到動效全程實作。":
     "A hand-coded responsive website rebuild — layout structure, interaction and motion all implemented end to end.",

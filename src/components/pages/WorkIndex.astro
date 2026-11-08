@@ -9,9 +9,9 @@ const categories = localize(categoriesZh, lang);
 const L = (p: string) => href(lang, p);
 const ui = {
   zh: { title: "作品 — Alice Office", eyebrow: "— 作品集", lead: "分類整理的作品集，依主題切換瀏覽。", pieces: "件", openSite: "連到網站查看 ↗", back: "← 返回 作品理念", approach: "作品理念", emptyA: "這件作品的詳細思考還沒整理上來。歡迎直接", emptyLink: "聊聊看", emptyB: "。",
-    casesName: "包裝設計", casesDesc: "需要完整脈絡說明的長篇案例。", casesPhi: "包裝設計需要從結構、平面到插畫一次完成 — 在貨架上、手中、與手機螢幕上都站得住的產品而做。\n\n擅長處理在地品牌、文創、農特產類案件，強調誠實傳達產品本身，不過度包裝成文創樣板。" },
+    nextHint: "繼續往下滑，接著看", casesName: "包裝設計", casesDesc: "需要完整脈絡說明的長篇案例。", casesPhi: "包裝設計需要從結構、平面到插畫一次完成 — 在貨架上、手中、與手機螢幕上都站得住的產品而做。\n\n擅長處理在地品牌、文創、農特產類案件，強調誠實傳達產品本身，不過度包裝成文創樣板。" },
   en: { title: "Work — Alice Office", eyebrow: "— Portfolio", lead: "The portfolio organised by category — switch topics to browse.", pieces: "pieces", openSite: "Open the site ↗", back: "← Back to approach", approach: "Approach", emptyA: "The thinking behind this piece isn't written up yet. Feel free to ", emptyLink: "get in touch", emptyB: ".",
-    casesName: "Packaging", casesDesc: "Long-form cases that need the full context.", casesPhi: "Packaging has to be completed in one pass — structure, graphics and illustration — for products that must hold up on the shelf, in the hand and on a phone screen.\n\nI work mostly with local brands, cultural products and agricultural specialties, and insist on conveying the product honestly rather than over-packaging it into a cultural-creative template." },
+    nextHint: "Keep scrolling for", casesName: "Packaging", casesDesc: "Long-form cases that need the full context.", casesPhi: "Packaging has to be completed in one pass — structure, graphics and illustration — for products that must hold up on the shelf, in the hand and on a phone screen.\n\nI work mostly with local brands, cultural products and agricultural specialties, and insist on conveying the product honestly rather than over-packaging it into a cultural-creative template." },
 }[lang];
 
 type Tab = {
@@ -167,6 +167,12 @@ tabs.push({
               ))}
             </div>
           )}
+          {i < tabs.length - 1 && (
+            <div class="pane-next" aria-hidden="true">
+              <span class="pane-next-arrow">↓</span>
+              <span>{ui.nextHint} <b>{String(i + 2).padStart(2, "0")} {tabs[i + 1].name}</b></span>
+            </div>
+          )}
         </section>
       ))}
     </main>
@@ -286,6 +292,39 @@ tabs.push({
           videos.forEach(v => v.play().catch(() => {}));
         }
       });
+
+      // Auto-advance: when the whole page (footer included) is scrolled to the very bottom
+      // and the visitor keeps scrolling down, move on to the next tab.
+      (function () {
+        const tabButtons = Array.from(buttons);
+        let acc = 0, lock = false, touchY = null;
+        const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        const insideScroller = (t) => t && t.closest && t.closest(".demo-frame--showcase, .case-image .frame");
+        const goNext = () => {
+          if (lock) return;
+          const i = tabButtons.findIndex(b => b.classList.contains("active"));
+          if (i < 0 || i >= tabButtons.length - 1) return;
+          lock = true; acc = 0;
+          const nextBtn = tabButtons[i + 1];
+          nextBtn.click();
+          history.replaceState(null, "", "#" + nextBtn.getAttribute("data-tab"));
+          const layout = document.querySelector(".work-layout");
+          const top = (layout ? layout.getBoundingClientRect().top + window.scrollY : 0) - 72;
+          window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+          setTimeout(() => { lock = false; }, 1400);
+        };
+        window.addEventListener("wheel", (e) => {
+          if (e.deltaY <= 0 || !atBottom() || insideScroller(e.target)) { acc = 0; return; }
+          acc += e.deltaY;
+          if (acc > 140) goNext();
+        }, { passive: true });
+        window.addEventListener("touchstart", (e) => { touchY = e.touches[0].clientY; }, { passive: true });
+        window.addEventListener("touchmove", (e) => {
+          if (touchY == null || !atBottom() || insideScroller(e.target)) return;
+          if (touchY - e.touches[0].clientY > 90) { touchY = null; goNext(); }
+        }, { passive: true });
+        window.addEventListener("touchend", () => { touchY = null; }, { passive: true });
+      })();
 
       const hash = window.location.hash.replace("#", "");
       if (hash) {

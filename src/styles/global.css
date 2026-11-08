@@ -1977,3 +1977,17 @@ em, .italic { font-style: italic; font-weight: 500; }
 .nav .lang-switch .lang-sep { opacity: 0.4; }
 .nav .lang-switch.active::after { display: none; }
 .not-found .btn-pill + .btn-pill { margin-left: 10px; }
+
+/* ========== Work tabs: "keep scrolling for next tab" hint ========== */
+.pane-next {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  margin: 24px auto 0;
+  padding: 18px 0 8px;
+  border-top: 1px dashed var(--line);
+  font-size: 13px; letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.pane-next b { color: var(--ink); font-weight: 500; }
+.pane-next-arrow { display: inline-block; animation: pane-next-bob 1.6s ease-in-out infinite; }
+@keyframes pane-next-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { .pane-next-arrow { animation: none; } }
