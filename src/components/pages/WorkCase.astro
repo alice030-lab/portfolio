@@ -1,0 +1,127 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { works as worksZh } from "../../data/works";
+import { categories as categoriesZh } from "../../data/gallery";
+import { localize, href, type Lang } from "../../i18n";
+
+const { lang, slug } = Astro.props as { lang: Lang; slug: string };
+const works = localize(worksZh, lang);
+const categories = localize(categoriesZh, lang);
+const work = works.find(w => w.slug === slug)!;
+const L = (p: string) => href(lang, p);
+const ui = {
+  zh: { cases: "包裝設計", next: "{ui.next}", client: "客戶", role: "角色", scope: "工作範圍", back: "← 返回 包裝設計", section: "段落" },
+  en: { cases: "Packaging", next: "Next case →", client: "Client", role: "Role", scope: "Scope", back: "← Back to the case", section: "Section" },
+}[lang];
+const i = works.findIndex(w => w.slug === work.slug);
+const next = works.length > 1 ? works[(i + 1) % works.length] : null;
+
+// Build same vertical tab list as /work/
+type TabLink = { id: string; name: string; href: string };
+const tabs: TabLink[] = [];
+for (const c of categories) {
+  if (c.subsections) {
+    c.subsections.forEach((sub, si) => {
+      tabs.push({ id: `${c.key}-${si}`, name: sub.title, href: L(`/work/#${c.key}-${si}`) });
+    });
+  } else {
+    tabs.push({ id: c.key, name: c.name, href: L(`/work/#${c.key}`) });
+  }
+}
+tabs.push({ id: "cases", name: ui.cases, href: L("/work/#cases") });
+---
+<Layout title={`${work.title} — Alice Office`} description={work.summary}>
+  <section class="container hero" style="padding-bottom: 24px;">
+    <div class="eyebrow">— {ui.cases}</div>
+    <h1>{work.title}</h1>
+    <p class="lead">{work.summary}</p>
+  </section>
+
+  <div class="work-layout">
+    <aside class="work-tabs-vertical" role="tablist">
+      {tabs.map(t => (
+        <a class={`vtab ${t.id === "cases" ? "active" : ""}`} href={t.href}>
+          <span class="vtab-num">{t.id === "cases" ? "—" : ""}</span>
+          <span class="vtab-name">{t.name}</span>
+        </a>
+      ))}
+    </aside>
+
+    <main class="work-content">
+      <article class="case-body">
+        {work.sections.map((sec, si) => (
+          <div class={`gallery-grid case-grid ${sec.layout === "pair" ? "case-grid-2" : "case-grid-1"}`}>
+            {sec.images.map(im => (
+              <figure class="gallery-item" data-case-section={si}>
+                <div class="frame">
+                  {im.src.endsWith(".mp4") || im.src.endsWith(".webm")
+                    ? <video src={im.src} autoplay loop muted playsinline></video>
+                    : <img src={im.src} alt={im.alt} loading="lazy" />}
+                </div>
+                {im.alt && <figcaption>{im.alt}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        ))}
+
+        {next && (
+          <a href={L(`/work/${next.slug}`)} class="case-next">
+            <div class="eyebrow" style="margin-bottom: 8px;">{ui.next}</div>
+            <h3>{next.title}</h3>
+          </a>
+        )}
+      </article>
+    </main>
+
+    <aside class="work-philosophy">
+      {/* Default pane — case info & intro */}
+      <article class="phi active" data-pane="default">
+        <div class="phi-eyebrow">{work.tag} · {work.year}</div>
+        <h3 class="phi-title">{ui.cases}</h3>
+        {work.intro && <p>{work.intro}</p>}
+        <dl class="case-meta-list">
+          <dt>{ui.client}</dt>
+          <dd>{work.client}</dd>
+          <dt>{ui.role}</dt>
+          <dd>{work.role}</dd>
+          <dt>{ui.scope}</dt>
+          <dd>{work.scope.join(" · ")}</dd>
+        </dl>
+      </article>
+      {/* Per-section panes — shown when an image is clicked */}
+      {work.sections.map((sec, si) => (
+        <article class="phi phi-item" data-pane={`section-${si}`}>
+          <button class="phi-back" type="button">{ui.back}</button>
+          <div class="phi-eyebrow">{work.tag} · {ui.section} {String(si + 1).padStart(2, "0")}</div>
+          <h3 class="phi-title">{sec.title}</h3>
+          {sec.desc && <p>{sec.desc}</p>}
+        </article>
+      ))}
+    </aside>
+  </div>
+
+  <script is:inline>
+    (function () {
+      const phis = document.querySelectorAll(".phi");
+      const showPhi = (key) => {
+        phis.forEach(p => p.classList.toggle("active", p.dataset.pane === key));
+      };
+      // Click an image group → show section pane
+      document.querySelectorAll("[data-case-section]").forEach(el => {
+        el.addEventListener("click", () => {
+          const idx = el.getAttribute("data-case-section");
+          showPhi(`section-${idx}`);
+          document.querySelectorAll("[data-case-section].is-active").forEach(x => x.classList.remove("is-active"));
+          el.classList.add("is-active");
+        });
+      });
+      // Back button on per-section pane
+      document.querySelectorAll(".phi-back").forEach(btn => {
+        btn.addEventListener("click", () => {
+          showPhi("default");
+          document.querySelectorAll("[data-case-section].is-active").forEach(x => x.classList.remove("is-active"));
+        });
+      });
+    })();
+  </script>
+</Layout>

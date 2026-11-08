@@ -1,0 +1,91 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import type { Lang } from "../../i18n";
+const { lang } = Astro.props as { lang: Lang };
+const copy = {
+  zh: {
+    title: "關於 — Alice Office",
+    eyebrow: "— 關於工作室",
+    lead: "品牌、編輯、產品 — 三個獨立的設計領域，放在同一間工作室裡時會彼此磨利。",
+    mottoLabel: "工作室座右銘：", motto: "讓客戶想法成真就是我的超能力。",
+    how: "工作方式",
+    how1: "每個案子都從一場長談開始。多數客戶找上我們的時候，需求還沒完全成形 — 是某個地方覺得不對勁、加上一個說不太上來的方向感。我們花時間把這些感覺翻譯成團隊可以一起執行的東西。",
+    how2: "方向確定後，我們動作快、過程透明。每週固定回報、檔案隨時交付、絕不在最後一刻才大揭曉。把設計關在黑盒子裡六週、最後拿出 90 頁簡報的那種做法，我們不做。",
+    fields: "專業領域",
+    f1b: "識別與編輯設計。", f1: "標準字、字型系統、規範手冊、書籍、操作手冊 — 品牌真正會長期使用的長篇載體。",
+    f2b: "包裝設計。", f2: "結構與平面，為那些需要在貨架、手中、與手機螢幕上都站得住的產品而做。",
+    f3b: "產品介面。", f3: "給營運人員、會員、後台管理者使用的 UI 與 UX — 是天天被打開的那些畫面，不是行銷網站。",
+    clients: "合作客戶",
+    c1: "歡慶長壽里程碑的製造業集團、私人會員制俱樂部、電動車充電網營運商、想在貨架站穩腳跟的食品與生活品牌、製作展覽與書籍的文化機構。",
+    c2: "多數合作從六週的單點衝刺、到跨季度的長期顧問都有。我們同時不會接超過數件案子。",
+  },
+  en: {
+    title: "About — Alice Office",
+    eyebrow: "— About the studio",
+    lead: "Brand, editorial, product — three separate design fields that sharpen each other when they share one studio.",
+    mottoLabel: "Studio motto: ", motto: "Making a client's idea real is my superpower.",
+    how: "How I work",
+    how1: "Every project starts with a long conversation. Most clients arrive before the brief has fully formed — something feels off, plus a sense of direction they can't quite put into words. We spend time translating those feelings into something a team can act on together.",
+    how2: "Once the direction is set, we move fast and keep the process transparent. Weekly check-ins, files delivered as we go, and never a last-minute big reveal. Locking design in a black box for six weeks and emerging with a 90-page deck is not how we work.",
+    fields: "Fields",
+    f1b: "Identity & editorial design. ", f1: "Logotypes, type systems, guideline manuals, books, operating manuals — the long-form carriers a brand actually uses for years.",
+    f2b: "Packaging. ", f2: "Structure and graphics, for products that have to hold up on the shelf, in the hand and on a phone screen.",
+    f3b: "Product interfaces. ", f3: "UI and UX for operators, members and back-office admins — the screens people open every day, not marketing sites.",
+    clients: "Clients",
+    c1: "Manufacturing groups celebrating long-lived milestones, private members' clubs, EV charging network operators, food and lifestyle brands trying to hold their ground on the shelf, and cultural institutions producing exhibitions and books.",
+    c2: "Engagements range from six-week focused sprints to retained consulting across quarters. We never take on more than a handful of projects at once.",
+  },
+}[lang];
+---
+<Layout title={copy.title}>
+  <section class="container hero">
+    <div class="eyebrow">{copy.eyebrow}</div>
+    <h1>{lang === "en" ? <>Design practice<br/>in <em>three voices</em></> : <>三種<em>聲音</em>的<br/>設計實踐</>}</h1>
+    <p class="lead">{copy.lead}</p>
+    <div class="about-stamp">
+      <span>{copy.mottoLabel}<strong>{copy.motto}</strong></span>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="scatter-stage" aria-hidden="true">
+      <div class="geo geo-1"></div>
+      <div class="geo geo-2"></div>
+      <div class="geo geo-3"></div>
+      <div class="geo geo-4"></div>
+      <div class="geo geo-5"></div>
+      <div class="geo geo-6"></div>
+      <div class="geo geo-7"></div>
+      <div class="geo geo-8"></div>
+      <div class="geo geo-9"></div>
+      <div class="geo geo-10"></div>
+      <div class="geo geo-tri"></div>
+      <div class="geo geo-circle"></div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="two-col reveal">
+      <h2>{copy.how}</h2>
+      <div>
+        <p>{copy.how1}</p>
+        <p>{copy.how2}</p>
+      </div>
+    </div>
+    <div class="two-col reveal">
+      <h2>{copy.fields}</h2>
+      <div>
+        <p><strong>{copy.f1b}</strong>{copy.f1}</p>
+        <p><strong>{copy.f2b}</strong>{copy.f2}</p>
+        <p><strong>{copy.f3b}</strong>{copy.f3}</p>
+      </div>
+    </div>
+    <div class="two-col reveal">
+      <h2>{copy.clients}</h2>
+      <div>
+        <p>{copy.c1}</p>
+        <p>{copy.c2}</p>
+      </div>
+    </div>
+  </section>
+</Layout>

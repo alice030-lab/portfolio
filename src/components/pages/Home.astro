@@ -1,0 +1,362 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { categories } from "../../data/gallery";
+import { localize, href, type Lang } from "../../i18n";
+const { lang } = Astro.props as { lang: Lang };
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const cats = localize(categories, lang);
+const L = (p: string) => href(lang, p);
+
+const copy = {
+  zh: {
+    scrollHint: "向下捲動，門將打開",
+    sub: "Alice Office 是設計師吳芝淩的個人實踐 — 在品牌識別、編輯設計、與產品介面之間工作，服務認真對待細節的團隊。",
+    ctaWork: "看作品", ctaTalk: "聊聊合作",
+    blk: { b1: "VI 規劃", b2: "DM & 平面", b3: "說明書" },
+    reset: "↺ 重新整理想法", resetAria: "重新整理想法", dragHint: "↑ 試著拖拉看看",
+    skillsEyebrow: "Skills",
+    skills: [
+      { h: "VI 規劃 & 展場主視覺", p: "標準字、識別系統、年度主視覺、展場視覺與活動延伸應用。從 logo 到整套品牌資產與展場一次到位。" },
+      { h: "DM & 平面設計", p: "DM 改版、宣傳單張、Banner、海報。專門處理資訊量大、要在小篇幅內說清楚的案子。" },
+      { h: "說明書與編輯設計", p: "長篇資訊的分層、圖示重繪、閱讀動線。讓厚手冊也能被讀完。" },
+      { h: "包裝設計", p: "從結構、平面到插畫一次完成的包裝系列。擅長處理在地品牌、文創、農特產。" },
+      { h: "UI / UX 設計", p: "訂位系統、營運後台、會員介面。不只是美，更要好用、能解決真的問題。" },
+      { h: "社群內容", p: "貼文模板系統、節慶活動圖、品牌日常內容。建一套工具讓團隊能持續產出。" },
+    ],
+    clientsEyebrow: "Clients",
+    clients: [
+      { href: L("/work/packaging-series"), img: "pkg-drink-2.jpg", alt: "礁坑社區發展協會", tag: "地方社區發展協會", h: "礁坑社區發展協會", p: "包裝再造 — 橄欖氣泡飲、菜單、展版、社群行銷圖一貫串起。" },
+      { href: L("/work/#dm-2"), img: "dm-bsis.png", alt: "奇美車電", tag: "製造業集團", h: "奇美車電 Chimei Motor", p: "BSIS 盲點資訊系統與 AI DSM 數位側視鏡的產品 DM 與日文版視覺。" },
+      { href: L("/work/#uiux-img-0"), img: "case-golf.avif", alt: "威爾動力時時夠夫", tag: "私人會員制俱樂部", h: "威爾動力 — 時時夠夫", p: "高爾夫場地預約系統的會員介面、預約流程、管理後台一次規劃。" },
+      { href: L("/work/#uiux-img-1"), img: "case-charging.avif", alt: "電動車充電網營運", tag: "電動車充電網營運", h: "充電站預約充電系統", p: "HMI 介面、ZALO mini APP、營運後台 — 涵蓋整套使用情境。" },
+      { href: L("/work/#social"), img: "feature-01.png", alt: "生活風格與食品品牌", tag: "食品與生活風格品牌", h: "食品 / 農特產 / 生活風格品牌", p: "節慶主視覺、社群素材模組、年度主題視覺系統。" },
+      { href: L("/work/#vi-0"), img: "work-poster.jpg", alt: "文化展覽機構", tag: "文化展覽機構", h: "展覽 / 博覽會主視覺", p: "A0 海報版型、展場視覺延伸、規範手冊一站完整。" },
+      { href: "https://tfa.com.tw/", external: true, img: "", alt: "", tag: "電商 / 生鮮農產零售", h: "台灣鮮農 TFA", p: "響應式官網前端重製 — 版型結構、互動與動效全程實作，重製版已上線為正式官網。" },
+      { href: L("/work/#uiux-demo-2"), img: "demo-uslink-discovery.png", alt: "uslink", tag: "旅遊揪團 / 技能交換社群平台", h: "uslink", p: "Discovery 探索頁介面設計 — 分類瀏覽、搜尋、即時互動。" },
+    ],
+    whyEyebrow: "Why me",
+    why: [
+      { h: "會寫前端", p: "設計圖不只交給工程師看 — 還能自己做出來。少了交接成本，畫面落地誤差最小，動效細節真的會被實作。" },
+      { h: "有美感", p: "多年品牌設計沉澱，從版面、字型、配色到留白都不輕率。不模板化，不套素材庫，每一張畫面都重新想過。" },
+      { h: "懂行銷", p: "設計不只好看 — 還要能被找到、能說服、能轉換。理解目標受眾、SEO、文案結構、消費心理。" },
+      { h: "懂印刷", p: "從出血、CMYK 校色到紙材、印工、後加工，全程能與印刷廠直接對話。設計不只在螢幕上漂亮，落到紙上也對。" },
+    ],
+    painEyebrow: "Pain Points · AI 時代的競爭定位",
+    painTagFront: "AI 短處", painTagBack: "我的解法", flip: "看我怎麼解 →", back: "← 返回",
+    pains: [
+      { fh: ["品牌一致性 &", "系統化"], fp: "AI 擅長「單張」驚艷的圖，但難維持跨情境一致 — Logo 極簡、Banner 跑風格。配色比例、字體規範、角色外型很難精確控制。", bh: "建立設計系統", bl: ["定義精準的品牌規範、配色與元件", "跨平台整合：網頁 / APP / 印刷物一套到底", "讓品牌靈魂在每個載體都不散"] },
+      { fh: ["邏輯溝通 &", "策略思考"], fp: "AI 只能依 Prompt 出圖，不理解「為什麼」。客戶說「想要大氣一點」AI 給華麗圖，但好設計要先問：受眾是誰？這張圖能增加轉化嗎？", bh: "視覺顧問 + UX 洞察", bl: ["提供設計背後的策略支持", "站在使用者視角設計可用的產品（Usable）", "而不是好看但沒人用的圖庫"] },
+      { fh: ["精確修正 &", "工程落地"], fp: "AI 生成的是像素圖，難微調、難工程對接。客戶想把按鈕往左移 2px，AI 會重畫一張完全不同的圖；產出非向量、非分層原檔，工程接不到。", bh: "精修 + 向量化", bl: ["用前端經驗把 AI 創意「工程化」", "產出符合前端標準的 SVG / Figma 原檔", "4K 螢幕到名片都一樣清晰"] },
+      { fh: ["法律風險 &", "版權保障"], fp: "AI 製圖存在嚴重的版權模糊地帶。多數國家法律不保護純 AI 生成物，企業視覺資產隨時可能被抄襲且無法維權。", bh: "原創保證 + AI 輔助", bl: ["提供具備法律效力的原創設計", "用 AI 加速概念發想，但成品經人工重繪", "確保商業安全 + 完整版權歸屬"] },
+    ],
+    workEyebrow: "Work", go: "前往 →",
+  },
+  en: {
+    scrollHint: "Scroll down to open the box",
+    sub: "Alice Office is the independent practice of designer Alice Wu — working across brand identity, editorial design and product interfaces for teams that take details seriously.",
+    ctaWork: "View work", ctaTalk: "Let's talk",
+    blk: { b1: "Identity", b2: "DM & Print", b3: "Manuals" },
+    reset: "↺ Reset the ideas", resetAria: "Reset the ideas", dragHint: "↑ Try dragging",
+    skillsEyebrow: "Skills",
+    skills: [
+      { h: "Identity & Exhibition Key Visuals", p: "Logotypes, identity systems, annual key visuals, exhibition graphics and event extensions. From the logo to a complete set of brand assets and exhibition visuals, done in one go." },
+      { h: "DM & Graphic Design", p: "DM redesigns, flyers, banners, posters. I specialise in information-dense pieces that have to explain themselves in a small space." },
+      { h: "Manuals & Editorial", p: "Layering long-form information, redrawing diagrams, shaping the reading path. Making thick manuals that actually get read." },
+      { h: "Packaging", p: "Packaging series completed from structure and graphics through to illustration. Experienced with local brands, cultural products and agricultural specialties." },
+      { h: "UI / UX Design", p: "Booking systems, operations back-ends, member interfaces. Not just good-looking: usable, and solving real problems." },
+      { h: "Social Content", p: "Post template systems, seasonal campaign graphics, everyday brand content. Building a toolkit so the team can keep producing." },
+    ],
+    clientsEyebrow: "Clients",
+    clients: [
+      { href: L("/work/packaging-series"), img: "pkg-drink-2.jpg", alt: "Jiaokeng Community Development Association", tag: "Community development association", h: "Jiaokeng Community Development Association", p: "Packaging renewal — olive sparkling drink, menu, exhibition boards and social graphics in one consistent line." },
+      { href: L("/work/#dm-2"), img: "dm-bsis.png", alt: "Chimei Motor", tag: "Manufacturing group", h: "Chimei Motor", p: "Product DMs for the BSIS blind-spot information system and the AI DSM digital side mirror, including the Japanese edition." },
+      { href: L("/work/#uiux-img-0"), img: "case-golf.avif", alt: "Will Power golf venue booking", tag: "Private members' club", h: "Will Power — Golf Venue Booking", p: "Member interface, booking flow and admin back-end for a golf venue booking system, planned as one." },
+      { href: L("/work/#uiux-img-1"), img: "case-charging.avif", alt: "EV charging network operator", tag: "EV charging network operator", h: "Charging Station Booking System", p: "HMI, Zalo mini app and operations back-end — covering the whole usage scenario." },
+      { href: L("/work/#social"), img: "feature-01.png", alt: "Food and lifestyle brands", tag: "Food & lifestyle brands", h: "Food / Agricultural / Lifestyle Brands", p: "Seasonal key visuals, social asset modules and annual theme visual systems." },
+      { href: L("/work/#vi-0"), img: "work-poster.jpg", alt: "Cultural and exhibition institutions", tag: "Cultural & exhibition institutions", h: "Exhibition & Expo Key Visuals", p: "A0 poster templates, exhibition visual extensions and guideline manuals, complete in one place." },
+      { href: "https://tfa.com.tw/", external: true, img: "", alt: "", tag: "E-commerce / fresh produce retail", h: "Taiwan Fresh Agriculture (TFA)", p: "Responsive website front-end rebuild — layout, interaction and motion all hand-coded; the rebuild is now the live official site." },
+      { href: L("/work/#uiux-demo-2"), img: "demo-uslink-discovery.png", alt: "uslink", tag: "Travel groups / skill-swap community platform", h: "uslink", p: "Discovery page UI — category browsing, search and real-time interaction." },
+    ],
+    whyEyebrow: "Why me",
+    why: [
+      { h: "I code front-end", p: "Designs aren't just handed to engineers — I can build them myself. Less hand-off cost, minimal drift from mock-up to screen, and motion details that actually get implemented." },
+      { h: "An eye for form", p: "Years of brand design behind every layout, typeface, palette and margin. No templates, no stock kits — every screen is thought through again." },
+      { h: "I understand marketing", p: "Design has to do more than look good — it has to be found, persuade and convert. Audience, SEO, copy structure and buying psychology all come into it." },
+      { h: "I understand print", p: "From bleed and CMYK proofing to paper stock, press work and finishing, I talk to printers directly. The design has to work on paper, not only on screen." },
+    ],
+    painEyebrow: "Pain Points · Positioning in the age of AI",
+    painTagFront: "Where AI falls short", painTagBack: "My approach", flip: "See how I solve it →", back: "← Back",
+    pains: [
+      { fh: ["Brand consistency &", "systems"], fp: "AI excels at a single stunning image but struggles to stay consistent across contexts — a minimal logo here, a banner drifting in style there. Colour ratios, type rules and character shapes are hard to control precisely.", bh: "Build a design system", bl: ["Define precise brand rules, palettes and components", "Cross-platform: web, app and print from one system", "Keep the brand's soul intact on every medium"] },
+      { fh: ["Reasoning &", "strategy"], fp: "AI only renders what the prompt says; it doesn't understand why. When a client asks for 'something grander', AI returns ornament — good design first asks: who is the audience, and will this convert?", bh: "Visual consulting + UX insight", bl: ["Strategic grounding behind every design decision", "Products designed from the user's point of view — usable, not just pretty", "Not a gallery of nice images nobody uses"] },
+      { fh: ["Precise revisions &", "engineering hand-off"], fp: "AI output is pixels — hard to fine-tune, hard to hand to engineering. Ask to move a button 2px left and AI repaints a different image; no vectors, no layered source files for developers.", bh: "Refinement + vectorisation", bl: ["Front-end experience to engineer AI concepts into production", "SVG and Figma source files that meet front-end standards", "Crisp from a 4K screen down to a business card"] },
+      { fh: ["Legal risk &", "copyright"], fp: "AI imagery sits in a copyright grey zone. Most jurisdictions don't protect purely AI-generated work, so a company's visual assets can be copied with no recourse.", bh: "Original work + AI assist", bl: ["Original designs with legal standing", "AI to speed up ideation; finished work redrawn by hand", "Commercial safety and full ownership of rights"] },
+    ],
+    workEyebrow: "Work", go: "Go →",
+  },
+}[lang];
+---
+<Layout>
+  <!-- 入場效果：滾動推門進入 -->
+  <section class="entrance" id="entrance">
+    <div class="entrance-stage">
+      <div class="entrance-meta">
+        <div class="entrance-eyebrow">— Welcome to —</div>
+        <h2 class="entrance-title">Alice <em>Office</em></h2>
+        <div class="entrance-arrow">
+          <span class="arrow-text">{copy.scrollHint}</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5 V 19 M 5 13 L 12 20 L 19 13"/></svg>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-flap flap-top">
+          <div class="box-lid-tag">Alice Office</div>
+        </div>
+        <div class="box-flap flap-bottom"></div>
+        <div class="box-flap flap-left"></div>
+        <div class="box-flap flap-right"></div>
+        <div class="box-body">
+          <div class="box-interior">
+            <div class="ed-hero-inner">
+              <div>
+                <div class="eyebrow" style="margin-bottom: 32px;">— Alice Office · Est. 2018 · Taipei</div>
+                <h1>
+                  {lang === "en"
+                    ? <>Design is<br/>the sum<br/>of <em>thinking.</em></>
+                    : <>設計<span class="reg">，</span><br/>是一種思考<br/>的<em>總和。</em></>}
+                </h1>
+                <p class="sub">{copy.sub}</p>
+                <div class="cta-row">
+                  <a href={L("/work")} class="btn-pill">{copy.ctaWork}</a>
+                  <a href={L("/contact")} class="btn-pill light">{copy.ctaTalk}</a>
+                </div>
+              </div>
+              <div class="hero-stack" id="hero-stack">
+                <div class="blk b1 rose"><div class="tag">Identity</div><div class="num">01</div><div class="label">{copy.blk.b1}</div></div>
+                <div class="blk b2 sage"><div class="tag">Print</div><div class="num">02</div><div class="label">{copy.blk.b2}</div></div>
+                <div class="blk b3 lavender"><div class="tag">Editorial</div><div class="num">03</div><div class="label">{copy.blk.b3}</div></div>
+                <div class="blk b4 peach"><div class="tag">Package</div><div class="num">04</div></div>
+                <div class="blk b5 cream"><div class="tag">UI / UX</div><div class="num">05</div></div>
+                <div class="blk b6 rose-deep"><div class="tag">Social</div><div class="num">06</div></div>
+                <button type="button" class="stack-reset" id="stack-reset" aria-label={copy.resetAria}>{copy.reset}</button>
+                <div class="stack-hint">{copy.dragHint}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container expertise">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">{copy.skillsEyebrow}</div>
+        <h2>{lang === "en" ? <>What I <em>do</em></> : <>擅長<em>什麼</em></>}</h2>
+      </div>
+      <span class="num">— 01</span>
+    </div>
+    <div class="expertise-grid">
+      {copy.skills.map((s, i) => (
+        <div class="exp-tile reveal">
+          <div class="exp-num">{String(i + 1).padStart(2, "0")}</div>
+          <h3>{s.h}</h3>
+          <p>{s.p}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container track-record">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">{copy.clientsEyebrow}</div>
+        <h2>{lang === "en" ? <>Clients I've <em>worked with</em></> : <>合作過的<em>客戶</em></>}</h2>
+      </div>
+      <span class="num">— 02</span>
+    </div>
+    <div class="clients-list">
+      {copy.clients.map(c => (
+        <a href={c.href} class="client-row" target={c.external ? "_blank" : undefined} rel={c.external ? "noopener noreferrer" : undefined}>
+          <div class="client-thumb">{c.img && <img src={`${base}/images/${c.img}`} alt={c.alt} loading="lazy" />}</div>
+          <div class="client-info">
+            <div class="client-tag">{c.tag}</div>
+            <h3>{c.h}</h3>
+            <p>{c.p}</p>
+          </div>
+          <div class="client-arrow">→</div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="container why">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">{copy.whyEyebrow}</div>
+        <h2>{lang === "en" ? <>Why <em>me</em></> : <>為何選擇<em>我</em></>}</h2>
+      </div>
+      <span class="num">— 03</span>
+    </div>
+    <div class="why-grid">
+      {copy.why.map((w, i) => (
+        <article class="why-tile">
+          <div class="why-num">{String(i + 1).padStart(2, "0")}</div>
+          <h3>{w.h}</h3>
+          <p>{w.p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="container pain">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">{copy.painEyebrow}</div>
+        <h2>{lang === "en" ? <>Pain points I <em>solve</em></> : <>我能解決的<em>痛點</em></>}</h2>
+      </div>
+      <span class="num">— 04</span>
+    </div>
+    <p class="pain-intro">
+      {lang === "en"
+        ? <>AI makes images fast, but the real pain for companies is this: plenty of images, few that are usable; plenty that look good, few with a soul.<br/>Flip a card to see what AI can't do and how I take over.</>
+        : <>AI 出圖很快，但企業真正的痛點是「圖很多、能用的很少；好看的很多、有靈魂的很少」。<br/>點開卡片看 AI 解決不了什麼、我可以怎麼接手。</>}
+    </p>
+
+    <div class="pain-grid">
+      {copy.pains.map((p, i) => (
+        <div class="pain-card" data-flipped="false">
+          <div class="pain-face pain-front">
+            <div class="pain-num">{String(i + 1).padStart(2, "0")}</div>
+            <div class="pain-tag">{copy.painTagFront}</div>
+            <h3>{p.fh[0]}<br/>{p.fh[1]}</h3>
+            <p>{p.fp}</p>
+            <button type="button" class="pain-flip-btn">{copy.flip}</button>
+          </div>
+          <div class="pain-face pain-back">
+            <div class="pain-num">{String(i + 1).padStart(2, "0")}</div>
+            <div class="pain-tag pain-tag-light">{copy.painTagBack}</div>
+            <h3>{p.bh}</h3>
+            <ul>{p.bl.map(li => <li>{li}</li>)}</ul>
+            <button type="button" class="pain-flip-btn">{copy.back}</button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <script is:inline>
+      (function () {
+        document.querySelectorAll(".pain-flip-btn").forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            const card = e.currentTarget.closest(".pain-card");
+            if (!card) return;
+            card.dataset.flipped = card.dataset.flipped === "true" ? "false" : "true";
+          });
+        });
+      })();
+    </script>
+  </section>
+
+  <section class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">{copy.workEyebrow}</div>
+        <h2>{lang === "en" ? <>Work <em>by category</em></> : <>作品<em>分類</em></>}</h2>
+      </div>
+      <span class="num">— 05</span>
+    </div>
+
+    <script is:inline>
+      (function () {
+        const entrance = document.getElementById("entrance");
+        if (!entrance) return;
+        const stage = entrance.querySelector(".entrance-stage");
+        const update = () => {
+          const r = entrance.getBoundingClientRect();
+          const scrolled = -r.top;
+          const total = entrance.offsetHeight - window.innerHeight;
+          const p = Math.max(0, Math.min(1, scrolled / total));
+          stage.style.setProperty("--open", p.toFixed(3));
+        };
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+        update();
+      })();
+
+      // Draggable hero blocks
+      (function () {
+        const stack = document.getElementById("hero-stack");
+        if (!stack) return;
+        const blocks = stack.querySelectorAll(".blk");
+        const reset = document.getElementById("stack-reset");
+        const state = new WeakMap();
+
+        blocks.forEach((blk) => {
+          state.set(blk, { x: 0, y: 0, rot: 0 });
+
+          const apply = (dragging) => {
+            const s = state.get(blk);
+            const scale = dragging ? 1.06 : 1;
+            blk.style.transform = `translate(${s.x}px, ${s.y}px) rotate(${s.rot}deg) scale(${scale})`;
+          };
+
+          let startX = 0, startY = 0, baseX = 0, baseY = 0;
+
+          blk.addEventListener("pointerdown", (e) => {
+            const s = state.get(blk);
+            startX = e.clientX; startY = e.clientY;
+            baseX = s.x; baseY = s.y;
+            blk.classList.add("dragging", "has-moved");
+            blk.setPointerCapture(e.pointerId);
+            reset?.classList.add("show");
+            apply(true);
+          });
+
+          blk.addEventListener("pointermove", (e) => {
+            if (!blk.classList.contains("dragging")) return;
+            const s = state.get(blk);
+            s.x = baseX + (e.clientX - startX);
+            s.y = baseY + (e.clientY - startY);
+            s.rot = Math.max(-12, Math.min(12, ((e.clientX - startX) + (e.clientY - startY)) * 0.04));
+            state.set(blk, s);
+            apply(true);
+          });
+
+          const release = () => {
+            if (!blk.classList.contains("dragging")) return;
+            const s = state.get(blk);
+            s.rot = s.rot * 0.5;
+            state.set(blk, s);
+            blk.classList.remove("dragging");
+            apply(false);
+          };
+          blk.addEventListener("pointerup", release);
+          blk.addEventListener("pointercancel", release);
+          blk.addEventListener("lostpointercapture", release);
+        });
+
+        reset?.addEventListener("click", () => {
+          blocks.forEach((blk) => {
+            state.set(blk, { x: 0, y: 0, rot: 0 });
+            blk.classList.remove("dragging");
+            blk.classList.remove("has-moved");
+            blk.style.transform = "";
+          });
+          reset.classList.remove("show");
+        });
+      })();
+    </script>
+    <div class="category-list">
+      {cats.map(c => (
+        <a href={L(`/work#${c.key}`)} class="category-row reveal">
+          <div class="cat-info">
+            <h3>{c.name}</h3>
+            <p>{c.desc}</p>
+          </div>
+          <div class="cat-count">{copy.go}</div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

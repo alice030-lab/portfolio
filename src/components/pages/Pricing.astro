@@ -1,0 +1,106 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import type { Lang } from "../../i18n";
+const { lang } = Astro.props as { lang: Lang };
+const copy = {
+  zh: {
+    title: "方案 — Alice Office", eyebrow: "— 合作方案",
+    lead: "三種我們常見的合作模式。實際範圍會依照案子內容調整 — 以下是起始參考，不是固定菜單。",
+    from: "起",
+    plans: [
+      { name: "單點衝刺", price: "NT$ 120,000", items: ["單一聚焦的交付物", "2–4 週時程", "兩輪修改", "提供印刷可用檔案", "適合：單件作品、小型系統、包裝改版"] },
+      { name: "完整專案", price: "NT$ 380,000", items: ["品牌或產品系統", "6–12 週時程", "策略 + 設計 + 交接", "規範手冊與元件庫", "適合：識別系統、產品 UI、編輯系列"] },
+      { name: "長期顧問", price: "NT$ 80,000 / 月", items: ["持續性的系統工作", "季度合約", "每週固定工作時段", "檔期優先排入", "適合：需要資深設計夥伴的內部團隊"] },
+    ],
+    flowEyebrow: "Service Flow · 委託我之後的流程", flowNum: "— Process",
+    flowIntro: "從第一通電話到完稿交付，每一步都有預期時程、清楚的里程碑，過程沒有黑盒子。",
+    steps: [
+      { name: "諮詢", time: "約 30 分鐘", desc: "視訊或見面，先聊清楚需求、預算、時程。理解問題的形狀，再談解法。" },
+      { name: "規劃", time: "2 – 3 天", desc: "確認工作範圍，提供透明報價單。簽約後鎖定時程、里程碑與付款節點。" },
+      { name: "發想", time: "1 – 2 週", desc: "視覺方向探索。提出 2 – 3 個截然不同的方向，附設計理由，幫你選對的那條路。" },
+      { name: "設計", time: "2 – 4 週", desc: "選定方向後深化執行。每週固定回報、工作檔隨時交付，過程透明可見。" },
+      { name: "修改", time: "1 – 2 週", desc: "兩輪結構性修改 + 細節微調。同步在檔案上溝通，不靠來回幾十封信件。" },
+      { name: "交付", time: "1 天", desc: "完稿檔案 + 規範說明 + 三個月內小修改免費。產品類可延伸長期顧問支援。" },
+    ],
+    ex1: "攝影、文案、印刷通常會另外發包 — 我們很樂意在過程中提供視覺指導與信任的合作夥伴推薦，但不會在這上頭加價。",
+    ex2: "產品開發的前端實作會依案子個別評估；多數情況下我們交付設計檔與元件規格，由你的工程團隊或我們合作的開發工作室實作。",
+  },
+  en: {
+    title: "Pricing — Alice Office", eyebrow: "— Ways of working together",
+    lead: "Three engagement models we see most often. The actual scope is adjusted to each project — treat these as starting points, not a fixed menu.",
+    from: "from",
+    plans: [
+      { name: "Focused Sprint", price: "NT$ 120,000", items: ["One focused deliverable", "2–4 week timeline", "Two rounds of revisions", "Print-ready files", "Good for: a single piece, a small system, a packaging refresh"] },
+      { name: "Full Project", price: "NT$ 380,000", items: ["A brand or product system", "6–12 week timeline", "Strategy + design + hand-off", "Guideline manual and component library", "Good for: identity systems, product UI, editorial series"] },
+      { name: "Retained Consulting", price: "NT$ 80,000 / month", items: ["Ongoing systems work", "Quarterly contract", "Fixed weekly working hours", "Priority scheduling", "Good for: in-house teams that need a senior design partner"] },
+    ],
+    flowEyebrow: "Service Flow · What happens after you hire me", flowNum: "— Process",
+    flowIntro: "From the first call to final delivery, every step has an expected timeline and clear milestones. No black boxes.",
+    steps: [
+      { name: "Consultation", time: "about 30 min", desc: "A video call or a meeting to get clear on needs, budget and timing. Understand the shape of the problem before talking solutions." },
+      { name: "Planning", time: "2 – 3 days", desc: "Confirm the scope and provide a transparent quote. Once signed, we lock the timeline, milestones and payment points." },
+      { name: "Concepts", time: "1 – 2 weeks", desc: "Visual direction exploration. Two or three distinctly different directions, each with its reasoning, to help you pick the right path." },
+      { name: "Design", time: "2 – 4 weeks", desc: "Develop the chosen direction in depth. Weekly check-ins and working files delivered as we go, so the process stays visible." },
+      { name: "Revisions", time: "1 – 2 weeks", desc: "Two rounds of structural revisions plus fine-tuning. Feedback happens on the files, not across dozens of emails." },
+      { name: "Delivery", time: "1 day", desc: "Final files, a guideline note, and small fixes free for three months. Product work can extend into retained support." },
+    ],
+    ex1: "Photography, copywriting and printing are usually commissioned separately — we're glad to give visual direction and recommend trusted partners along the way, without a mark-up.",
+    ex2: "Front-end implementation for product work is assessed per project; in most cases we deliver design files and component specs for your engineering team or a development studio we work with.",
+  },
+}[lang];
+const tones = ["step-rose", "step-sage", "step-lavender", "step-peach", "step-rose", "step-sage"];
+---
+<Layout title={copy.title}>
+  <section class="container hero">
+    <div class="eyebrow">{copy.eyebrow}</div>
+    <h1>{lang === "en" ? <>Pricing,<br/><em>stated plainly.</em></> : <>價格<br/><em>清楚說。</em></>}</h1>
+    <p class="lead">{copy.lead}</p>
+  </section>
+
+  <section class="container">
+    <div class="pricing-grid">
+      {copy.plans.map(p => (
+        <div class="pricing-card">
+          <div class="name">{p.name}</div>
+          <div class="price"><em>{copy.from}</em> {p.price}</div>
+          <ul>{p.items.map(i => <li>{i}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container process">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">{copy.flowEyebrow}</div>
+        <h2>{lang === "en" ? <>How a project <em>runs</em></> : <>合作<em>怎麼進行</em></>}</h2>
+      </div>
+      <span class="num">{copy.flowNum}</span>
+    </div>
+    <p class="process-intro">{copy.flowIntro}</p>
+
+    <div class="process-flow">
+      {copy.steps.map((s, i) => (
+        <>
+          <article class={`step ${tones[i]}`}>
+            <div class="step-num">{String(i + 1).padStart(2, "0")}</div>
+            <h3>{s.name}</h3>
+            <p class="step-time">{s.time}</p>
+            <p>{s.desc}</p>
+          </article>
+          {i < copy.steps.length - 1 && <div class="step-arrow" aria-hidden="true">→</div>}
+        </>
+      ))}
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="two-col reveal">
+      <h2>{lang === "en" ? <>Not<br/><em>included</em></> : <>不<br/>包含的<em>項目</em></>}</h2>
+      <div>
+        <p>{copy.ex1}</p>
+        <p>{copy.ex2}</p>
+      </div>
+    </div>
+  </section>
+</Layout>

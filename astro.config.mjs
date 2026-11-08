@@ -5,4 +5,9 @@ export default defineConfig({
   site: 'https://alice030-lab.github.io',
   base: '/portfolio',
   trailingSlash: 'ignore',
+  i18n: {
+    defaultLocale: 'zh',
+    locales: ['zh', 'en'],
+    routing: { prefixDefaultLocale: false },
+  },
 });

@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import type { Lang } from "../../i18n";
+const { lang } = Astro.props as { lang: Lang };
+const copy = {
+  zh: { title: "聯絡 — Alice Office", eyebrow: "— 開始一場對話", lead: "需求說得越誠實、設計就越能對上。我們會看完每一封來信，並在兩個工作日內回覆。", name: "姓名", email: "電子郵件", company: "公司 / 案子名稱", brief: "用你自己的話說說這個案子", send: "送出" },
+  en: { title: "Contact — Alice Office", eyebrow: "— Start a conversation", lead: "The more honest the brief, the better the design fits. We read every message and reply within two working days.", name: "Name", email: "Email", company: "Company / project name", brief: "Tell us about the project in your own words", send: "Send" },
+}[lang];
+---
+<Layout title={copy.title}>
+  <section class="container hero contact">
+    <div class="eyebrow">{copy.eyebrow}</div>
+    <h1>{lang === "en" ? <>Tell us what<br/><em>you need.</em></> : <>聊聊你的<br/><em>需求。</em></>}</h1>
+    <p class="lead" style="margin-bottom: 60px;">{copy.lead}</p>
+
+    <form class="contact-form" action="mailto:hello@aliceoffice.studio" method="post" enctype="text/plain">
+      <div class="field">
+        <label for="name">{copy.name}</label>
+        <input id="name" name="name" type="text" required />
+      </div>
+      <div class="field">
+        <label for="email">{copy.email}</label>
+        <input id="email" name="email" type="email" required />
+      </div>
+      <div class="field">
+        <label for="company">{copy.company}</label>
+        <input id="company" name="company" type="text" />
+      </div>
+      <div class="field">
+        <label for="brief">{copy.brief}</label>
+        <textarea id="brief" name="brief" required></textarea>
+      </div>
+      <button class="btn-pill" type="submit">{copy.send}</button>
+    </form>
+  </section>
+</Layout>

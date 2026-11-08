@@ -1,12 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+import { href } from "../i18n";
 ---
-<Layout title="找不到這頁 — Alice Office">
+<Layout title="找不到這頁 · Page not found — Alice Office">
   <section class="not-found">
     <div class="eyebrow">— Page not found</div>
     <h1><em>404</em></h1>
     <p>這條路走丟了。要不要回家喝杯茶？</p>
-    <a href={`${base}/`} class="btn-pill">回首頁</a>
+    <p lang="en">This path got lost. Shall we head home for a cup of tea?</p>
+    <a href={href("zh", "/")} class="btn-pill">回首頁</a>
+    <a href={href("en", "/")} class="btn-pill light" lang="en">Back home (EN)</a>
   </section>
 </Layout>

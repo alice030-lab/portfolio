@@ -1,16 +1,25 @@
 ---
 import "../styles/global.css";
-const { title = "Alice Office — 品牌與編輯設計", description = "吳芝淩的設計實踐：品牌識別、包裝、產品介面。" } = Astro.props;
+import { getLang, href, altHref, htmlLang, t } from "../i18n";
+const lang = getLang(Astro.url);
+const {
+  title = t(lang, "Alice Office — 品牌與編輯設計", "Alice Office — Brand & Editorial Design"),
+  description = t(lang, "吳芝淩的設計實踐：品牌識別、包裝、產品介面。", "The design practice of Alice Wu: brand identity, packaging and product interfaces."),
+} = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const path = Astro.url.pathname.replace(base, "") || "/";
-const isActive = (p: string) => path === p || (p !== "/" && path.startsWith(p));
-const link = (p: string) => `${base}${p}`;
+const pathNoLang = lang === "en" ? (path.replace(/^\/en(\/|$)/, "/") || "/") : path;
+const isActive = (p: string) => pathNoLang === p || (p !== "/" && pathNoLang.startsWith(p));
+const link = (p: string) => href(lang, p);
 const siteOrigin = "https://alice030-lab.github.io";
 const pageUrl = `${siteOrigin}${base}${path}`;
 const ogImage = `${siteOrigin}${base}/images/og-work.png`;
+const switchHref = altHref(lang, Astro.url);
+const zhUrl = `${siteOrigin}${href("zh", pathNoLang)}`;
+const enUrl = `${siteOrigin}${href("en", pathNoLang)}`;
 ---
 <!doctype html>
-<html lang="zh-Hant">
+<html lang={htmlLang(lang)}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,10 +30,14 @@ const ogImage = `${siteOrigin}${base}/images/og-work.png`;
   <meta property="og:description" content={description} />
   <meta property="og:url" content={pageUrl} />
   <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content={lang === "en" ? "en_US" : "zh_TW"} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
+  <link rel="alternate" hreflang="zh-Hant" href={zhUrl} />
+  <link rel="alternate" hreflang="en" href={enUrl} />
+  <link rel="alternate" hreflang="x-default" href={zhUrl} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -40,7 +53,7 @@ const ogImage = `${siteOrigin}${base}/images/og-work.png`;
       <div class="memo m5"></div>
       <div class="memo m6"></div>
     </div>
-    <div class="book-loader-text">整理設計師的便條…</div>
+    <div class="book-loader-text">{t(lang, "整理設計師的便條…", "Tidying the designer's notes…")}</div>
   </div>
   <script is:inline>
     (function () {
@@ -68,13 +81,16 @@ const ogImage = `${siteOrigin}${base}/images/og-work.png`;
 
   <header class="site-header">
     <div class="inner">
-      <a href={link("/")} class="brand">Alice Office<small>吳芝淩</small></a>
+      <a href={link("/")} class="brand">Alice Office<small>{t(lang, "吳芝淩", "Alice Wu")}</small></a>
       <nav class="nav">
-        <a href={link("/")} class={isActive("/") ? "active" : ""}>首頁</a>
-        <a href={link("/work")} class={isActive("/work") ? "active" : ""}>作品</a>
-        {/* <a href={link("/about")} class={isActive("/about") ? "active" : ""}>關於</a> */}
-        {/* <a href={link("/pricing")} class={isActive("/pricing") ? "active" : ""}>方案</a> */}
-        {/* <a href={link("/contact")} class={isActive("/contact") ? "active" : ""}>聯絡</a> */}
+        <a href={link("/")} class={isActive("/") ? "active" : ""}>{t(lang, "首頁", "Home")}</a>
+        <a href={link("/work")} class={isActive("/work") ? "active" : ""}>{t(lang, "作品", "Work")}</a>
+        {/* <a href={link("/about")} class={isActive("/about") ? "active" : ""}>{t(lang, "關於", "About")}</a> */}
+        {/* <a href={link("/pricing")} class={isActive("/pricing") ? "active" : ""}>{t(lang, "方案", "Pricing")}</a> */}
+        {/* <a href={link("/contact")} class={isActive("/contact") ? "active" : ""}>{t(lang, "聯絡", "Contact")}</a> */}
+        <a href={switchHref} class="lang-switch" hreflang={lang === "en" ? "zh-Hant" : "en"} lang={lang === "en" ? "zh-Hant" : "en"} aria-label={t(lang, "Switch to English", "切換為中文")}>
+          <span class={lang === "zh" ? "on" : ""}>中</span><span class="lang-sep">/</span><span class={lang === "en" ? "on" : ""}>EN</span>
+        </a>
       </nav>
     </div>
   </header>
@@ -83,10 +99,14 @@ const ogImage = `${siteOrigin}${base}/images/og-work.png`;
 
   <footer class="site-footer">
     <div class="inner">
-      <div class="big">一起做出<br/><em style="font-style:italic;color:#6b6b6b">值得細看的設計。</em></div>
+      <div class="big">
+        {lang === "en"
+          ? <>Let's make<br/><em style="font-style:italic;color:#6b6b6b">design worth a closer look.</em></>
+          : <>一起做出<br/><em style="font-style:italic;color:#6b6b6b">值得細看的設計。</em></>}
+      </div>
       <div class="meta">
         <span>© {new Date().getFullYear()} Alice Office</span>
-        <span>台北 · 台灣</span>
+        <span>{t(lang, "台北 · 台灣", "Taipei · Taiwan")}</span>
         <a href="mailto:hello@aliceoffice.studio">hello@aliceoffice.studio</a>
       </div>
     </div>
