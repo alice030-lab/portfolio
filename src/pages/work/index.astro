@@ -86,8 +86,41 @@ tabs.push({
             <div class="demo-grid">
               {t.demos.map((d, di) => (
                 <article class="demo-card" data-img={`${t.id}-demo-${di}`}>
-                  <div class="demo-frame" style={`aspect-ratio: ${d.ratio ?? "16 / 9"};`}>
-                    {d.image ? (
+                  <div class={`demo-frame ${d.slides ? "demo-frame--showcase" : ""}`} style={`aspect-ratio: ${d.ratio ?? "16 / 9"};`}>
+                    {d.slides ? (
+                      <div class="showcase" data-showcase tabindex="0">
+                        <div class="showcase-stage">
+                          {d.slides.map((s, si) => (
+                            <figure class={`showcase-slide ${si === 0 ? "is-current" : ""}`} data-slide={si}>
+                              {s.kind === "video"
+                                ? <video src={s.src} muted loop playsinline preload={si === 0 ? "auto" : "metadata"} aria-label={`${s.page} ${s.title}`}></video>
+                                : <img src={s.src} alt={`${s.page} ${s.title}`} loading={si === 0 ? "eager" : "lazy"} />}
+                            </figure>
+                          ))}
+                        </div>
+                        <aside class="showcase-side">
+                          <div class="showcase-head">
+                            <span class="showcase-page"><b data-showcase-page>{d.slides[0].page}</b> / {d.slides[d.slides.length - 1].page}</span>
+                            <h4 class="showcase-title" data-showcase-title>{d.slides[0].title}</h4>
+                          </div>
+                          <ol class="showcase-list">
+                            {d.slides.map((s, si) => (
+                              <li>
+                                <button type="button" class={`showcase-jump ${si === 0 ? "is-current" : ""}`} data-jump={si} aria-label={`第 ${s.page} 頁 ${s.title}`}>
+                                  <span class="showcase-jump-num">{s.page}</span>
+                                  <span class="showcase-jump-name">{s.title}</span>
+                                  {s.kind === "video" && <span class="showcase-jump-kind" aria-hidden="true">▶</span>}
+                                </button>
+                              </li>
+                            ))}
+                          </ol>
+                          <div class="showcase-nav">
+                            <button type="button" class="showcase-btn" data-prev aria-label="上一頁">←</button>
+                            <button type="button" class="showcase-btn" data-next aria-label="下一頁">→</button>
+                          </div>
+                        </aside>
+                      </div>
+                    ) : d.image ? (
                       <a href={d.link ?? d.src} target="_blank" rel="noopener noreferrer" class="demo-shot-link">
                         <img src={d.image} alt={d.title} loading="lazy" />
                         <span class="demo-shot-cta">連到網站查看 ↗</span>
@@ -221,6 +254,8 @@ tabs.push({
         el.addEventListener("click", (e) => {
           // don't hijack iframe inside demo-card
           if (el.classList.contains("demo-card") && e.target.closest("iframe")) return;
+          // don't hijack showcase controls
+          if (e.target.closest(".showcase-side")) return;
           // don't hijack links inside cards
           if (e.target.closest("a") && !el.contains(e.target.closest("a"))) return;
           const key = el.getAttribute("data-img");
@@ -238,6 +273,54 @@ tabs.push({
             document.querySelectorAll("[data-img].is-active").forEach(el => el.classList.remove("is-active"));
           }
         });
+      });
+
+      // Showcase windows — paged viewer; videos autoplay & loop while current
+      document.querySelectorAll("[data-showcase]").forEach(sc => {
+        const slides = Array.from(sc.querySelectorAll(".showcase-slide"));
+        const jumps = Array.from(sc.querySelectorAll(".showcase-jump"));
+        const pageEl = sc.querySelector("[data-showcase-page]");
+        const titleEl = sc.querySelector("[data-showcase-title]");
+        let cur = 0;
+        const playCurrent = () => {
+          slides.forEach((sl, i) => {
+            const v = sl.querySelector("video");
+            if (!v) return;
+            if (i === cur) { v.currentTime = 0; v.play().catch(() => {}); }
+            else v.pause();
+          });
+        };
+        const go = (n) => {
+          cur = (n + slides.length) % slides.length;
+          slides.forEach((sl, i) => sl.classList.toggle("is-current", i === cur));
+          jumps.forEach((j, i) => j.classList.toggle("is-current", i === cur));
+          const j = jumps[cur];
+          if (pageEl) pageEl.textContent = j.querySelector(".showcase-jump-num").textContent;
+          if (titleEl) titleEl.textContent = j.querySelector(".showcase-jump-name").textContent;
+          j.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          // warm up the next slide's video
+          const nv = slides[(cur + 1) % slides.length].querySelector("video");
+          if (nv && nv.preload !== "auto") nv.preload = "auto";
+          playCurrent();
+        };
+        sc.querySelector("[data-prev]").addEventListener("click", () => go(cur - 1));
+        sc.querySelector("[data-next]").addEventListener("click", () => go(cur + 1));
+        jumps.forEach((j, i) => j.addEventListener("click", () => go(i)));
+        sc.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1); }
+          if (e.key === "ArrowRight") { e.preventDefault(); go(cur + 1); }
+        });
+        // Only run video while the window is on screen
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver((entries) => {
+            entries.forEach(en => {
+              const v = slides[cur].querySelector("video");
+              if (!v) return;
+              if (en.isIntersecting) v.play().catch(() => {}); else v.pause();
+            });
+          }, { threshold: 0.2 }).observe(sc);
+        }
+        playCurrent();
       });
 
       const hash = window.location.hash.replace("#", "");

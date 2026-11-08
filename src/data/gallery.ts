@@ -4,6 +4,14 @@ export interface GalleryItem {
   note?: string;
 }
 
+export interface GallerySlide {
+  /** 頁碼，依作品集頁序排列 */
+  page: string;
+  title: string;
+  src: string;
+  kind: "image" | "video";
+}
+
 export interface GalleryDemo {
   title: string;
   src: string;
@@ -12,6 +20,8 @@ export interface GalleryDemo {
   ratio?: string;
   image?: string;
   link?: string;
+  /** 有 slides 時，以「作品展示視窗」呈現：圖片＋自動循環影片的翻頁展示 */
+  slides?: GallerySlide[];
 }
 
 export interface GalleryCategory {
@@ -87,6 +97,29 @@ export const categories: GalleryCategory[] = [
     desc: "訂位系統、營運後台、會員介面、響應式網站。不只是設計畫面，也親手寫前端。",
     philosophy: "設計不只是好看的畫面，是可以被使用、能解決真實問題的工具。\n\n我同時做設計與寫前端，因為兩端都得親自經驗才能做出真正可用的產品 — 知道哪些畫面工程上難實作、哪些互動成本高、哪些細節在使用情境中根本不重要。\n\n好的 UI 是讓人感覺不到設計的存在。",
     demos: [
+      {
+        title: "拼拼 — 低負擔的心情日記 App",
+        tag: "App · UI/UX · IP Design",
+        desc: "為「容易停下來的記錄者」設計的日記 App — 先留白再引導、花獸收藏與微獎勵、匿名單向回信、填色共創與圖轉音樂。以展示視窗依頁序呈現研究、策略與動態原型。",
+        src: "",
+        ratio: "16 / 9",
+        slides: [
+          { page: "01", title: "專案概覽", src: img("pinpin/pinpin-01.mp4"), kind: "video" },
+          { page: "02", title: "競品研究與取捨", src: img("pinpin/pinpin-02.webp"), kind: "image" },
+          { page: "03", title: "使用情境與問題定義", src: img("pinpin/pinpin-03.webp"), kind: "image" },
+          { page: "04", title: "產品策略與取捨", src: img("pinpin/pinpin-04.webp"), kind: "image" },
+          { page: "05", title: "兩條回訪路徑", src: img("pinpin/pinpin-05.webp"), kind: "image" },
+          { page: "06", title: "適時引導", src: img("pinpin/pinpin-06.webp"), kind: "image" },
+          { page: "07", title: "兩種表達方式", src: img("pinpin/pinpin-07.mp4"), kind: "video" },
+          { page: "08", title: "情緒辨識與主導權", src: img("pinpin/pinpin-08.mp4"), kind: "video" },
+          { page: "09", title: "花獸收藏與微獎勵", src: img("pinpin/pinpin-09.mp4"), kind: "video" },
+          { page: "10", title: "花獸 IP 設計", src: img("pinpin/pinpin-10.webp"), kind: "image" },
+          { page: "11", title: "花獸互動與感官體驗", src: img("pinpin/pinpin-11.mp4"), kind: "video" },
+          { page: "12", title: "低負擔匿名交流", src: img("pinpin/pinpin-12.mp4"), kind: "video" },
+          { page: "13", title: "填色共創與回訪", src: img("pinpin/pinpin-13.mp4"), kind: "video" },
+          { page: "14", title: "圖轉音樂與迭代", src: img("pinpin/pinpin-14.mp4"), kind: "video" },
+        ],
+      },
       {
         title: "TFA Redesign — 前端重製案",
         tag: "HTML · CSS · JS",
