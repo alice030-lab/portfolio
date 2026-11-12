@@ -52,8 +52,10 @@
 
   --max: 1440px;
   --gutter: clamp(20px, 4vw, 56px);
-  --serif: "Fraunces", "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
-  --sans: "Inter", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif;
+  --serif: "Fraunces", "Noto Serif TC", "Songti TC", Georgia, serif;
+  /* Body copy: Inter for Latin, the device's own Chinese font for CJK (PingFang on Apple,
+     Noto Sans CJK on Android, JhengHei on Windows) — nothing to download for Chinese body text. */
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Noto Sans CJK TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
