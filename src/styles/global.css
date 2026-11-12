@@ -2026,28 +2026,20 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 
 @media (max-width: 760px) {
-  /* --- Showcase (e.g. Pinpin): swipe sideways, one full page at a time --- */
+  /* --- Showcase (e.g. Pinpin): same as long case images — a preview of the stacked
+         pages, and a button that unfolds the whole waterfall into the page --- */
   .demo-frame--showcase {
-    aspect-ratio: 1 / 1 !important;
-    overflow-x: auto; overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    aspect-ratio: auto !important;
+    max-height: 440px;
+    overflow: hidden;
   }
-  .demo-frame--showcase::-webkit-scrollbar { display: none; }
-  .showcase-stack { flex-direction: row; height: 100%; }
-  .showcase-page-item { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; }
-  .showcase-page-item img, .showcase-page-item video { height: 100%; }
-  .showcase-counter {
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding: 10px 16px;
-    border-bottom: var(--hair);
-    background: var(--cream);
-    font-size: 12px; letter-spacing: 0.04em;
-    color: var(--muted);
+  .demo-card:not(.is-expanded) .demo-frame--showcase::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0; height: 96px;
+    background: linear-gradient(to bottom, rgba(251, 250, 245, 0), rgba(251, 250, 245, 0.96));
+    pointer-events: none;
   }
-  .showcase-counter b { color: var(--ink); font-family: var(--serif); font-size: 15px; font-weight: 600; }
+  .demo-card.is-expanded .demo-frame--showcase { max-height: none; }
 
   /* --- Embedded live sites: taller preview, tap opens the real site --- */
   .demo-frame:has(> iframe) { aspect-ratio: 4 / 5 !important; }
@@ -2126,3 +2118,6 @@ em, .italic { font-style: italic; font-weight: 500; }
   .blk .num { font-size: 24px; }
   .blk .label { font-size: 11px; }
 }
+
+/* Headings: avoid a single orphaned character on the last line (e.g. 「…識別應／用」) */
+.section-head h2, .hero h1, .demo-meta h3, .case-image figcaption { text-wrap: balance; }

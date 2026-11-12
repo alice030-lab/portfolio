@@ -9,9 +9,9 @@ const categories = localize(categoriesZh, lang);
 const L = (p: string) => href(lang, p);
 const ui = {
   zh: { title: "作品 — Alice Office", eyebrow: "— 作品集", lead: "分類整理的作品集，依主題切換瀏覽。", pieces: "件", piece: "件", openSite: "連到網站查看 ↗", back: "← 返回 作品理念", approach: "作品理念", emptyA: "這件作品的詳細思考還沒整理上來。歡迎直接", emptyLink: "聊聊看", emptyB: "。",
-    nextHint: "繼續往下滑，接著看", swipe: "左右滑動看下一頁", expand: "展開完整長圖 ↓", collapse: "收合長圖 ↑", casesName: "包裝設計", casesDesc: "需要完整脈絡說明的長篇案例。", casesPhi: "包裝設計需要從結構、平面到插畫一次完成 — 在貨架上、手中、與手機螢幕上都站得住的產品而做。\n\n擅長處理在地品牌、文創、農特產類案件，強調誠實傳達產品本身，不過度包裝成文創樣板。" },
+    nextHint: "繼續往下滑，接著看", expandPages: "展開全部 {n} 頁 ↓", collapsePages: "收合 ↑", expand: "展開完整長圖 ↓", collapse: "收合長圖 ↑", casesName: "包裝設計", casesDesc: "需要完整脈絡說明的長篇案例。", casesPhi: "包裝設計需要從結構、平面到插畫一次完成 — 在貨架上、手中、與手機螢幕上都站得住的產品而做。\n\n擅長處理在地品牌、文創、農特產類案件，強調誠實傳達產品本身，不過度包裝成文創樣板。" },
   en: { title: "Work — Alice Office", eyebrow: "— Portfolio", lead: "The portfolio organised by category — switch topics to browse.", pieces: "pieces", piece: "piece", openSite: "Open the site ↗", back: "← Back to approach", approach: "Approach", emptyA: "The thinking behind this piece isn't written up yet. Feel free to ", emptyLink: "get in touch", emptyB: ".",
-    nextHint: "Keep scrolling for", swipe: "Swipe for the next page", expand: "Show the full image ↓", collapse: "Collapse ↑", casesName: "Packaging", casesDesc: "Long-form cases that need the full context.", casesPhi: "Packaging has to be completed in one pass — structure, graphics and illustration — for products that must hold up on the shelf, in the hand and on a phone screen.\n\nI work mostly with local brands, cultural products and agricultural specialties, and insist on conveying the product honestly rather than over-packaging it into a cultural-creative template." },
+    nextHint: "Keep scrolling for", expandPages: "Show all {n} pages ↓", collapsePages: "Collapse ↑", expand: "Show the full image ↓", collapse: "Collapse ↑", casesName: "Packaging", casesDesc: "Long-form cases that need the full context.", casesPhi: "Packaging has to be completed in one pass — structure, graphics and illustration — for products that must hold up on the shelf, in the hand and on a phone screen.\n\nI work mostly with local brands, cultural products and agricultural specialties, and insist on conveying the product honestly rather than over-packaging it into a cultural-creative template." },
 }[lang];
 
 type Tab = {
@@ -121,10 +121,10 @@ tabs.push({
                     )}
                   </div>
                   {d.slides && (
-                    <div class="showcase-counter" aria-hidden="true">
-                      <span class="showcase-swipe">← {ui.swipe} →</span>
-                      <span><b data-showcase-cur>01</b> / {String(d.slides.length).padStart(2, "0")}</span>
-                    </div>
+                    <button type="button" class="case-expand" aria-expanded="false"
+                      data-more={ui.expandPages.replace("{n}", String(d.slides.length))} data-less={ui.collapsePages}>
+                      {ui.expandPages.replace("{n}", String(d.slides.length))}
+                    </button>
                   )}
                   <div class="demo-meta">
                     <span class="tag">{d.tag}</span>
@@ -322,15 +322,14 @@ tabs.push({
         frame.addEventListener("scroll", updateCounter, { passive: true });
         window.addEventListener("resize", updateCounter);
         if ("IntersectionObserver" in window) {
+          // No explicit root: visibility is measured against the screen and already accounts for
+          // the frame's own clipping, so it works both as a scrolling window and fully expanded.
+          frameOnScreen.v = true;
           const io = new IntersectionObserver((entries) => {
             entries.forEach(en => inFrame.set(en.target, en.isIntersecting));
             sync();
-          }, { root: frame, threshold: 0.25 });
+          }, { threshold: 0.25 });
           videos.forEach(v => { inFrame.set(v, false); io.observe(v); });
-          new IntersectionObserver((entries) => {
-            entries.forEach(en => { frameOnScreen.v = en.isIntersecting; });
-            sync();
-          }, { threshold: 0.1 }).observe(frame);
         } else {
           videos.forEach(v => v.play().catch(() => {}));
         }
@@ -372,7 +371,17 @@ tabs.push({
           const open = fig.classList.toggle("is-expanded");
           btn.textContent = open ? btn.dataset.less : btn.dataset.more;
           btn.setAttribute("aria-expanded", open ? "true" : "false");
-          if (!open) fig.scrollIntoView({ block: "start", behavior: "auto" });
+          if (!open) fig.scrollIntoView({ block: "start", behavior: "instant" });
+        });
+      });
+      document.querySelectorAll(".demo-card > .case-expand").forEach(btn => {
+        const card = btn.closest(".demo-card");
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const open = card.classList.toggle("is-expanded");
+          btn.textContent = open ? btn.dataset.less : btn.dataset.more;
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          if (!open) card.scrollIntoView({ block: "start", behavior: "instant" });
         });
       });
 
@@ -381,9 +390,13 @@ tabs.push({
       (function () {
         const tabButtons = Array.from(buttons);
         let acc = 0, lock = false, touchY = null;
-        const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-        const insideScroller = (t) => t && t.closest && t.closest(".demo-frame--showcase, .case-image .frame");
-        const goNext = () => {
+        // A little tolerance: phone browsers resize their toolbars and report fractional offsets.
+        const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 24;
+        const insideScroller = (t) => {
+          const el = t && t.closest && t.closest(".demo-frame--showcase, .case-image .frame");
+          return !!el && el.scrollHeight > el.clientHeight + 4 && getComputedStyle(el).overflowY !== "hidden";
+        };
+        const goNext = (viaTouch) => {
           if (lock) return;
           const i = tabButtons.findIndex(b => b.classList.contains("active"));
           if (i < 0 || i >= tabButtons.length - 1) return;
@@ -391,20 +404,36 @@ tabs.push({
           const nextBtn = tabButtons[i + 1];
           nextBtn.click();
           history.replaceState(null, "", "#" + nextBtn.getAttribute("data-tab"));
-          window.scrollTo({ top: layoutTop(), behavior: "smooth" });
+          if (viaTouch) {
+            // On phones a finger-driven / momentum scroll overrides a smooth scrollTo, which left
+            // the reader stranded mid-page. Jump instantly, and re-assert until momentum has died.
+            const jump = () => {
+              const top = layoutTop();
+              if (Math.abs(window.scrollY - top) > 2) window.scrollTo({ top, behavior: "instant" });
+            };
+            jump();
+            requestAnimationFrame(jump);
+            [60, 160, 320, 520, 800].forEach(ms => setTimeout(jump, ms));
+          } else {
+            window.scrollTo({ top: layoutTop(), behavior: "smooth" });
+          }
           setTimeout(() => { lock = false; }, 1400);
         };
         window.addEventListener("wheel", (e) => {
           if (e.deltaY <= 0 || !atBottom() || insideScroller(e.target)) { acc = 0; return; }
           acc += e.deltaY;
-          if (acc > 140) goNext();
+          if (acc > 140) goNext(false);
         }, { passive: true });
-        window.addEventListener("touchstart", (e) => { touchY = e.touches[0].clientY; }, { passive: true });
+        // Touch: pull up past the very bottom, then let go → next tab opens at its start
+        let armed = false;
+        window.addEventListener("touchstart", (e) => { touchY = e.touches[0].clientY; armed = false; }, { passive: true });
         window.addEventListener("touchmove", (e) => {
-          if (touchY == null || !atBottom() || insideScroller(e.target)) return;
-          if (touchY - e.touches[0].clientY > 90) { touchY = null; goNext(); }
+          if (touchY == null || insideScroller(e.target)) return;
+          armed = atBottom() && (touchY - e.touches[0].clientY > 60);
         }, { passive: true });
-        window.addEventListener("touchend", () => { touchY = null; }, { passive: true });
+        const release = () => { if (armed) goNext(true); armed = false; touchY = null; };
+        window.addEventListener("touchend", release, { passive: true });
+        window.addEventListener("touchcancel", () => { armed = false; touchY = null; }, { passive: true });
       })();
 
       const hash = window.location.hash.replace("#", "");
