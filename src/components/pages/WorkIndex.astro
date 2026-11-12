@@ -9,9 +9,9 @@ const categories = localize(categoriesZh, lang);
 const L = (p: string) => href(lang, p);
 const ui = {
   zh: { title: "作品 — Alice Office", eyebrow: "— 作品集", lead: "分類整理的作品集，依主題切換瀏覽。", pieces: "件", openSite: "連到網站查看 ↗", back: "← 返回 作品理念", approach: "作品理念", emptyA: "這件作品的詳細思考還沒整理上來。歡迎直接", emptyLink: "聊聊看", emptyB: "。",
-    nextHint: "繼續往下滑，接著看", casesName: "包裝設計", casesDesc: "需要完整脈絡說明的長篇案例。", casesPhi: "包裝設計需要從結構、平面到插畫一次完成 — 在貨架上、手中、與手機螢幕上都站得住的產品而做。\n\n擅長處理在地品牌、文創、農特產類案件，強調誠實傳達產品本身，不過度包裝成文創樣板。" },
+    nextHint: "繼續往下滑，接著看", swipe: "左右滑動看下一頁", expand: "展開完整長圖 ↓", collapse: "收合長圖 ↑", casesName: "包裝設計", casesDesc: "需要完整脈絡說明的長篇案例。", casesPhi: "包裝設計需要從結構、平面到插畫一次完成 — 在貨架上、手中、與手機螢幕上都站得住的產品而做。\n\n擅長處理在地品牌、文創、農特產類案件，強調誠實傳達產品本身，不過度包裝成文創樣板。" },
   en: { title: "Work — Alice Office", eyebrow: "— Portfolio", lead: "The portfolio organised by category — switch topics to browse.", pieces: "pieces", openSite: "Open the site ↗", back: "← Back to approach", approach: "Approach", emptyA: "The thinking behind this piece isn't written up yet. Feel free to ", emptyLink: "get in touch", emptyB: ".",
-    nextHint: "Keep scrolling for", casesName: "Packaging", casesDesc: "Long-form cases that need the full context.", casesPhi: "Packaging has to be completed in one pass — structure, graphics and illustration — for products that must hold up on the shelf, in the hand and on a phone screen.\n\nI work mostly with local brands, cultural products and agricultural specialties, and insist on conveying the product honestly rather than over-packaging it into a cultural-creative template." },
+    nextHint: "Keep scrolling for", swipe: "Swipe for the next page", expand: "Show the full image ↓", collapse: "Collapse ↑", casesName: "Packaging", casesDesc: "Long-form cases that need the full context.", casesPhi: "Packaging has to be completed in one pass — structure, graphics and illustration — for products that must hold up on the shelf, in the hand and on a phone screen.\n\nI work mostly with local brands, cultural products and agricultural specialties, and insist on conveying the product honestly rather than over-packaging it into a cultural-creative template." },
 }[lang];
 
 type Tab = {
@@ -113,9 +113,19 @@ tabs.push({
                         <span class="demo-shot-cta">{ui.openSite}</span>
                       </a>
                     ) : (
-                      <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                      <>
+                        <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                        {d.mobileImage && <img class="demo-mobile-shot" src={d.mobileImage} alt={d.title} loading="lazy" />}
+                        <a class="demo-open-link" href={d.link ?? d.src} target="_blank" rel="noopener noreferrer"><span>{ui.openSite}</span></a>
+                      </>
                     )}
                   </div>
+                  {d.slides && (
+                    <div class="showcase-counter" aria-hidden="true">
+                      <span class="showcase-swipe">← {ui.swipe} →</span>
+                      <span><b data-showcase-cur>01</b> / {String(d.slides.length).padStart(2, "0")}</span>
+                    </div>
+                  )}
                   <div class="demo-meta">
                     <span class="tag">{d.tag}</span>
                     <h3>{d.title}</h3>
@@ -134,6 +144,7 @@ tabs.push({
                       ? <video src={im.src} autoplay loop muted playsinline></video>
                       : <img src={im.src} alt={im.caption ?? t.name} loading="lazy" />}
                   </div>
+                  <button type="button" class="case-expand" aria-expanded="false" data-more={ui.expand} data-less={ui.collapse}>{ui.expand}</button>
                   {im.caption && <figcaption>{im.caption}</figcaption>}
                 </figure>
               ))}
@@ -228,9 +239,21 @@ tabs.push({
       };
 
       // Tab switch — also reset philosophy to category default
+      const headerH = () => (document.querySelector(".site-header")?.offsetHeight || 72);
+      const layoutTop = () => {
+        const layout = document.querySelector(".work-layout");
+        return Math.max(0, (layout ? layout.getBoundingClientRect().top + window.scrollY : 0) - headerH() + 1);
+      };
       buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", (e) => {
           const target = btn.getAttribute("data-tab");
+          // Phone: the tab bar scrolls sideways — keep the current tab in view
+          const rail = btn.parentElement;
+          if (rail && rail.scrollWidth > rail.clientWidth + 4) {
+            rail.scrollTo({ left: btn.offsetLeft - (rail.clientWidth - btn.offsetWidth) / 2, behavior: e.isTrusted ? "smooth" : "auto" });
+          }
+          // Tapped while deep inside another tab → start the new one from its top
+          if (e.isTrusted && window.scrollY > layoutTop()) window.scrollTo({ top: layoutTop(), behavior: "auto" });
           buttons.forEach(b => {
             const on = b === btn;
             b.classList.toggle("active", on);
@@ -285,6 +308,19 @@ tabs.push({
           window.addEventListener(ev, sync, { passive: true })
         );
         frame.addEventListener("scroll", sync, { passive: true });
+        // Page counter (phone: pages are swiped sideways)
+        const counter = sc.closest(".demo-card")?.querySelector("[data-showcase-cur]");
+        const items = sc.querySelectorAll(".showcase-page-item");
+        const updateCounter = () => {
+          if (!counter || !items.length) return;
+          const sideways = frame.scrollWidth > frame.clientWidth + 4;
+          const i = sideways
+            ? Math.round(frame.scrollLeft / frame.clientWidth)
+            : Math.round(frame.scrollTop / (items[0].offsetHeight || 1));
+          counter.textContent = String(Math.max(1, Math.min(items.length, i + 1))).padStart(2, "0");
+        };
+        frame.addEventListener("scroll", updateCounter, { passive: true });
+        window.addEventListener("resize", updateCounter);
         if ("IntersectionObserver" in window) {
           const io = new IntersectionObserver((entries) => {
             entries.forEach(en => inFrame.set(en.target, en.isIntersecting));
@@ -298,6 +334,28 @@ tabs.push({
         } else {
           videos.forEach(v => v.play().catch(() => {}));
         }
+      });
+
+      // Phone: long case images open collapsed; a button expands them to full length
+      document.querySelectorAll(".case-image").forEach(fig => {
+        const btn = fig.querySelector(".case-expand");
+        const frame = fig.querySelector(".frame");
+        const media = frame && frame.querySelector("img, video");
+        if (!btn || !frame || !media) return;
+        const measure = () => {
+          if (fig.classList.contains("is-expanded")) return;
+          fig.classList.toggle("is-short", media.offsetHeight <= frame.clientHeight + 2);
+        };
+        media.addEventListener("load", measure);
+        window.addEventListener("resize", measure);
+        measure();
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const open = fig.classList.toggle("is-expanded");
+          btn.textContent = open ? btn.dataset.less : btn.dataset.more;
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          if (!open) fig.scrollIntoView({ block: "start", behavior: "auto" });
+        });
       });
 
       // Auto-advance: when the whole page (footer included) is scrolled to the very bottom
@@ -315,9 +373,7 @@ tabs.push({
           const nextBtn = tabButtons[i + 1];
           nextBtn.click();
           history.replaceState(null, "", "#" + nextBtn.getAttribute("data-tab"));
-          const layout = document.querySelector(".work-layout");
-          const top = (layout ? layout.getBoundingClientRect().top + window.scrollY : 0) - 72;
-          window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+          window.scrollTo({ top: layoutTop(), behavior: "smooth" });
           setTimeout(() => { lock = false; }, 1400);
         };
         window.addEventListener("wheel", (e) => {

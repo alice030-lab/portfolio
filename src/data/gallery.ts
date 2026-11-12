@@ -19,6 +19,8 @@ export interface GalleryDemo {
   desc?: string;
   ratio?: string;
   image?: string;
+  /** 手機上用這張截圖取代即時內嵌（iframe），點擊再開啟網站 */
+  mobileImage?: string;
   link?: string;
   /** 有 slides 時，以「作品展示視窗」呈現：圖片＋自動循環影片的翻頁展示 */
   slides?: GallerySlide[];
@@ -129,6 +131,7 @@ export const categories: GalleryCategory[] = [
         tag: "HTML · CSS · JS",
         desc: "親手刻的響應式網站重製案，從版型結構、互動到動效全程實作。",
         src: "https://tfa.com.tw/",
+        mobileImage: img("demo-tfa-mobile.jpg"),
         ratio: "16 / 9",
       },
       {

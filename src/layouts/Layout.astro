@@ -95,6 +95,16 @@ const enUrl = `${siteOrigin}${href("en", pathNoLang)}`;
     </div>
   </header>
 
+  <script is:inline>
+    (function () {
+      const h = document.querySelector(".site-header");
+      const set = () => document.documentElement.style.setProperty("--header-h", (h ? h.offsetHeight : 72) + "px");
+      set();
+      window.addEventListener("resize", set);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
+    })();
+  </script>
+
   <main><slot /></main>
 
   <footer class="site-footer">
