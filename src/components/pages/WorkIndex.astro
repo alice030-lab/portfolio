@@ -102,7 +102,7 @@ tabs.push({
                         {d.slides.map((s, si) => (
                           <figure class="showcase-page-item" data-slide={si}>
                             {s.kind === "video"
-                              ? <video src={s.src} muted autoplay loop playsinline preload={si < 2 ? "auto" : "metadata"} aria-label={`${s.page} ${s.title}`}></video>
+                              ? <video src={s.src} muted loop playsinline preload="metadata" aria-label={`${s.page} ${s.title}`}></video>
                               : <img src={s.src} alt={`${s.page} ${s.title}`} loading={si === 0 ? "eager" : "lazy"} />}
                           </figure>
                         ))}
@@ -115,7 +115,7 @@ tabs.push({
                     ) : (
                       <>
                         <iframe src={d.src} loading="lazy" title={d.title} sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
-                        {d.mobileImage && <img class="demo-mobile-shot" src={d.mobileImage} alt={d.title} loading="lazy" />}
+                        {d.mobileImage && <img class="demo-mobile-shot" src={d.mobileImage} alt={d.title} loading="lazy" decoding="async" />}
                         <a class="demo-open-link" href={d.link ?? d.src} target="_blank" rel="noopener noreferrer"><span>{ui.openSite}</span></a>
                       </>
                     )}
@@ -141,8 +141,8 @@ tabs.push({
                 <figure class="case-image" data-img={`${t.id}-img-${ii}`}>
                   <div class="frame">
                     {im.src.endsWith(".mp4") || im.src.endsWith(".webm")
-                      ? <video src={im.src} autoplay loop muted playsinline></video>
-                      : <img src={im.src} alt={im.caption ?? t.name} loading="lazy" />}
+                      ? <video src={im.src} data-lazy-video loop muted playsinline preload="none"></video>
+                      : <img src={im.src} alt={im.caption ?? t.name} loading="lazy" decoding="async" />}
                   </div>
                   <button type="button" class="case-expand" aria-expanded="false" data-more={ui.expand} data-less={ui.collapse}>{ui.expand}</button>
                   {im.caption && <figcaption>{im.caption}</figcaption>}
@@ -170,8 +170,8 @@ tabs.push({
                 <figure class="gallery-item" data-img={`${t.id}-img-${ii}`}>
                   <div class="frame">
                     {im.src.endsWith(".mp4") || im.src.endsWith(".webm")
-                      ? <video src={im.src} autoplay loop muted playsinline></video>
-                      : <img src={im.src} alt={im.caption ?? t.name} loading="lazy" />}
+                      ? <video src={im.src} data-lazy-video loop muted playsinline preload="none"></video>
+                      : <img src={im.src} alt={im.caption ?? t.name} loading="lazy" decoding="async" />}
                   </div>
                   {im.caption && <figcaption>{im.caption}</figcaption>}
                 </figure>
@@ -335,6 +335,21 @@ tabs.push({
           videos.forEach(v => v.play().catch(() => {}));
         }
       });
+
+      // Gallery videos: nothing is downloaded until the video is actually on screen
+      (function () {
+        const vids = document.querySelectorAll("video[data-lazy-video]");
+        if (!vids.length) return;
+        if (!("IntersectionObserver" in window)) { vids.forEach(v => { v.muted = true; v.play().catch(() => {}); }); return; }
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(en => {
+            const v = en.target;
+            v.muted = true;
+            if (en.isIntersecting) v.play().catch(() => {}); else v.pause();
+          });
+        }, { threshold: 0.15 });
+        vids.forEach(v => io.observe(v));
+      })();
 
       // Phone: long case images open collapsed; a button expands them to full length
       document.querySelectorAll(".case-image").forEach(fig => {

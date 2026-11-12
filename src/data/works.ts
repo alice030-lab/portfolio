@@ -34,7 +34,7 @@ export const works: Work[] = [
     client: "礁坑社區發展協會",
     year: "2023",
     tag: "包裝設計",
-    cover: img("pkg-drink-2.jpg"),
+    cover: img("pkg-drink-2.webp"),
     span: "span-7",
     summary: "為礁坑社區做的完整包裝再造 — 從橄欖氣泡飲、菜單、展版到社群行銷圖一貫串起。",
     role: "包裝設計 · 插畫 · 視覺統籌",
@@ -46,8 +46,8 @@ export const works: Work[] = [
         desc: "自行繪製橄欖與橄欖花插圖呈現清爽感。",
         layout: "pair",
         images: [
-          { src: img("pkg-drink-1.jpg"), alt: "橄欖氣泡飲包裝 1" },
-          { src: img("pkg-drink-2.jpg"), alt: "橄欖氣泡飲包裝 2" },
+          { src: img("pkg-drink-1.webp"), alt: "橄欖氣泡飲包裝 1" },
+          { src: img("pkg-drink-2.webp"), alt: "橄欖氣泡飲包裝 2" },
         ],
       },
       {
@@ -55,8 +55,8 @@ export const works: Work[] = [
         desc: "使用中式風格並加大文字，使老年人較易看清楚。",
         layout: "pair",
         images: [
-          { src: img("pkg-menu-1.png"), alt: "橄欖菜單設計 1" },
-          { src: img("pkg-menu-2.jpg"), alt: "橄欖菜單設計 2" },
+          { src: img("pkg-menu-1.webp"), alt: "橄欖菜單設計 1" },
+          { src: img("pkg-menu-2.webp"), alt: "橄欖菜單設計 2" },
         ],
       },
       {
@@ -64,7 +64,7 @@ export const works: Work[] = [
         desc: "展場用大尺寸視覺，延續包裝的色票與插畫語彙。",
         layout: "full",
         images: [
-          { src: img("pkg-board.jpg"), alt: "展版設計" },
+          { src: img("pkg-board.webp"), alt: "展版設計" },
         ],
       },
       {
@@ -72,7 +72,7 @@ export const works: Work[] = [
         desc: "把品牌視覺延伸到線上社群貼文，從產品、線下活動、到線上一體成形。",
         layout: "full",
         images: [
-          { src: img("pkg-social.jpg"), alt: "社群行銷圖" },
+          { src: img("pkg-social.webp"), alt: "社群行銷圖" },
         ],
       },
     ],

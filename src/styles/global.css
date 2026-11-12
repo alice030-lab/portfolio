@@ -69,7 +69,7 @@ body {
       rgba(242, 181, 176, 0.55) 240px,
       rgba(242, 181, 176, 0) 560px
     ),
-    url("/portfolio/images/paper-texture.png");
+    url("/portfolio/images/paper-texture.webp");
   background-repeat: no-repeat, repeat;
   background-size: auto, 700px 700px;
   background-attachment: scroll, fixed;
@@ -1879,7 +1879,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 .book-loader {
   position: fixed; inset: 0; z-index: 9000;
   background-color: var(--cream);
-  background-image: url("/portfolio/images/paper-texture.png");
+  background-image: url("/portfolio/images/paper-texture.webp");
   background-size: 700px 700px;
   background-blend-mode: multiply;
   display: flex; flex-direction: column;

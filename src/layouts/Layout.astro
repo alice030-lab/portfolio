@@ -13,7 +13,7 @@ const isActive = (p: string) => pathNoLang === p || (p !== "/" && pathNoLang.sta
 const link = (p: string) => href(lang, p);
 const siteOrigin = "https://alice030-lab.github.io";
 const pageUrl = `${siteOrigin}${base}${path}`;
-const ogImage = `${siteOrigin}${base}/images/og-work.png`;
+const ogImage = `${siteOrigin}${base}/images/og-work.jpg`;
 const switchHref = altHref(lang, Astro.url);
 const zhUrl = `${siteOrigin}${href("zh", pathNoLang)}`;
 const enUrl = `${siteOrigin}${href("en", pathNoLang)}`;
@@ -60,7 +60,10 @@ const enUrl = `${siteOrigin}${href("en", pathNoLang)}`;
       const loader = document.getElementById("book-loader");
       if (!loader) return;
       const start = Date.now();
-      const minMs = 1600;
+      // First page of a visit shows the full intro; later pages only flash it briefly.
+      let seen = false;
+      try { seen = sessionStorage.getItem("ao-loader") === "1"; sessionStorage.setItem("ao-loader", "1"); } catch (e) {}
+      const minMs = seen ? 350 : 1600;
       let hidden = false;
       const hide = () => {
         if (hidden) return;
@@ -72,10 +75,17 @@ const enUrl = `${siteOrigin}${href("en", pathNoLang)}`;
           setTimeout(() => loader.remove(), 700);
         }, wait);
       };
-      if (document.readyState === "complete") hide();
-      else window.addEventListener("load", hide, { once: true });
-      // Fallback: never block more than 8 seconds even if some asset stalls
-      setTimeout(hide, 8000);
+      // Ready = page structure parsed + fonts in (so text doesn't jump).
+      // Images keep loading behind/after the loader instead of holding it up.
+      const whenDom = (fn) => document.readyState === "loading"
+        ? document.addEventListener("DOMContentLoaded", fn, { once: true }) : fn();
+      whenDom(() => {
+        const fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+        Promise.race([fonts, new Promise(r => setTimeout(r, 1500))]).then(hide);
+      });
+      window.addEventListener("load", hide, { once: true });
+      // Fallback: never block more than 4 seconds
+      setTimeout(hide, 4000);
     })();
   </script>
 
