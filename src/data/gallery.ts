@@ -10,6 +10,11 @@ export interface GallerySlide {
   title: string;
   src: string;
   kind: "image" | "video";
+  /**
+   * 素材是正方形匯出，但實際版面較扁、上下被補了底色。
+   * crop = [上緣, 下緣]（0–1，佔正方形高度的比例），顯示時只露出這一段。
+   */
+  crop?: [number, number];
 }
 
 export interface GalleryDemo {
@@ -106,24 +111,24 @@ export const categories: GalleryCategory[] = [
         src: "",
         ratio: "16 / 9",
         slides: [
-          { page: "01", title: "專案概覽", src: img("pinpin/pinpin-01.mp4"), kind: "video" },
-          { page: "02", title: "競品研究與取捨", src: img("pinpin/pinpin-02.webp"), kind: "image" },
-          { page: "03", title: "使用情境與問題定義", src: img("pinpin/pinpin-03.webp"), kind: "image" },
-          { page: "04", title: "產品策略與取捨", src: img("pinpin/pinpin-04.webp"), kind: "image" },
-          { page: "05", title: "兩條回訪路徑", src: img("pinpin/pinpin-05.webp"), kind: "image" },
-          { page: "06", title: "適時引導", src: img("pinpin/pinpin-06.webp"), kind: "image" },
-          { page: "07", title: "兩種表達方式", src: img("pinpin/pinpin-07.mp4"), kind: "video" },
-          { page: "08", title: "情緒辨識與主導權", src: img("pinpin/pinpin-08.mp4"), kind: "video" },
-          { page: "09", title: "花獸收藏與微獎勵", src: img("pinpin/pinpin-09.mp4"), kind: "video" },
-          { page: "10", title: "花獸 IP 設計", src: img("pinpin/pinpin-10.webp"), kind: "image" },
-          { page: "11", title: "花獸互動與感官體驗", src: img("pinpin/pinpin-11.mp4"), kind: "video" },
-          { page: "12", title: "低負擔匿名交流", src: img("pinpin/pinpin-12.mp4"), kind: "video" },
-          { page: "13", title: "填色共創與回訪", src: img("pinpin/pinpin-13.mp4"), kind: "video" },
-          { page: "14", title: "圖轉音樂與迭代", src: img("pinpin/pinpin-14.mp4"), kind: "video" },
-          { page: "15", title: "長期紀錄與回看", src: img("pinpin/pinpin-15.webp"), kind: "image" },
-          { page: "16", title: "色彩計畫", src: img("pinpin/pinpin-16.webp"), kind: "image" },
-          { page: "17", title: "產品與行銷策略", src: img("pinpin/pinpin-17.webp"), kind: "image" },
-          { page: "18", title: "產品成果與協作分工", src: img("pinpin/pinpin-18.webp"), kind: "image" },
+          { page: "01", title: "專案概覽", src: img("pinpin/pinpin-01.mp4"), kind: "video", crop: [0.063, 0.937] },
+          { page: "02", title: "競品研究與取捨", src: img("pinpin/pinpin-02.webp"), kind: "image", crop: [0.101, 0.899] },
+          { page: "03", title: "使用情境與問題定義", src: img("pinpin/pinpin-03.webp"), kind: "image", crop: [0.119, 0.881] },
+          { page: "04", title: "產品策略與取捨", src: img("pinpin/pinpin-04.webp"), kind: "image", crop: [0.087, 0.913] },
+          { page: "05", title: "兩條回訪路徑", src: img("pinpin/pinpin-05.webp"), kind: "image", crop: [0.094, 0.906] },
+          { page: "06", title: "適時引導", src: img("pinpin/pinpin-06.webp"), kind: "image", crop: [0.126, 0.874] },
+          { page: "07", title: "兩種表達方式", src: img("pinpin/pinpin-07.mp4"), kind: "video", crop: [0.058, 0.942] },
+          { page: "08", title: "情緒辨識與主導權", src: img("pinpin/pinpin-08.mp4"), kind: "video", crop: [0.092, 0.908] },
+          { page: "09", title: "花獸收藏與微獎勵", src: img("pinpin/pinpin-09.mp4"), kind: "video", crop: [0.092, 0.875] },
+          { page: "10", title: "花獸 IP 設計", src: img("pinpin/pinpin-10.webp"), kind: "image", crop: [0.089, 0.911] },
+          { page: "11", title: "花獸互動與感官體驗", src: img("pinpin/pinpin-11.mp4"), kind: "video", crop: [0.126, 0.874] },
+          { page: "12", title: "低負擔匿名交流", src: img("pinpin/pinpin-12.mp4"), kind: "video", crop: [0.038, 0.962] },
+          { page: "13", title: "填色共創與回訪", src: img("pinpin/pinpin-13.mp4"), kind: "video", crop: [0.064, 0.936] },
+          { page: "14", title: "圖轉音樂與迭代", src: img("pinpin/pinpin-14.mp4"), kind: "video", crop: [0.113, 0.887] },
+          { page: "15", title: "長期紀錄與回看", src: img("pinpin/pinpin-15.webp"), kind: "image", crop: [0.089, 0.911] },
+          { page: "16", title: "色彩計畫", src: img("pinpin/pinpin-16.webp"), kind: "image", crop: [0.079, 0.921] },
+          { page: "17", title: "產品與行銷策略", src: img("pinpin/pinpin-17.webp"), kind: "image", crop: [0.087, 0.913] },
+          { page: "18", title: "產品成果與協作分工", src: img("pinpin/pinpin-18.webp"), kind: "image", crop: [0.103, 0.897] },
         ],
       },
       {

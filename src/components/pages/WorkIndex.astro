@@ -100,7 +100,8 @@ tabs.push({
                     {d.slides ? (
                       <div class="showcase-stack" data-showcase>
                         {d.slides.map((s, si) => (
-                          <figure class="showcase-page-item" data-slide={si}>
+                          <figure class="showcase-page-item" data-slide={si}
+                            style={s.crop ? `aspect-ratio: 1 / ${(s.crop[1] - s.crop[0]).toFixed(4)}; --crop-top: ${(s.crop[0] * 100).toFixed(2)}%;` : undefined}>
                             {s.kind === "video"
                               ? <video src={s.src} muted loop playsinline preload="metadata" aria-label={`${s.page} ${s.title}`}></video>
                               : <img src={s.src} alt={`${s.page} ${s.title}`} loading={si === 0 ? "eager" : "lazy"} />}
