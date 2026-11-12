@@ -8,9 +8,9 @@ const works = localize(worksZh, lang);
 const categories = localize(categoriesZh, lang);
 const L = (p: string) => href(lang, p);
 const ui = {
-  zh: { title: "作品 — Alice Office", eyebrow: "— 作品集", lead: "分類整理的作品集，依主題切換瀏覽。", pieces: "件", openSite: "連到網站查看 ↗", back: "← 返回 作品理念", approach: "作品理念", emptyA: "這件作品的詳細思考還沒整理上來。歡迎直接", emptyLink: "聊聊看", emptyB: "。",
+  zh: { title: "作品 — Alice Office", eyebrow: "— 作品集", lead: "分類整理的作品集，依主題切換瀏覽。", pieces: "件", piece: "件", openSite: "連到網站查看 ↗", back: "← 返回 作品理念", approach: "作品理念", emptyA: "這件作品的詳細思考還沒整理上來。歡迎直接", emptyLink: "聊聊看", emptyB: "。",
     nextHint: "繼續往下滑，接著看", swipe: "左右滑動看下一頁", expand: "展開完整長圖 ↓", collapse: "收合長圖 ↑", casesName: "包裝設計", casesDesc: "需要完整脈絡說明的長篇案例。", casesPhi: "包裝設計需要從結構、平面到插畫一次完成 — 在貨架上、手中、與手機螢幕上都站得住的產品而做。\n\n擅長處理在地品牌、文創、農特產類案件，強調誠實傳達產品本身，不過度包裝成文創樣板。" },
-  en: { title: "Work — Alice Office", eyebrow: "— Portfolio", lead: "The portfolio organised by category — switch topics to browse.", pieces: "pieces", openSite: "Open the site ↗", back: "← Back to approach", approach: "Approach", emptyA: "The thinking behind this piece isn't written up yet. Feel free to ", emptyLink: "get in touch", emptyB: ".",
+  en: { title: "Work — Alice Office", eyebrow: "— Portfolio", lead: "The portfolio organised by category — switch topics to browse.", pieces: "pieces", piece: "piece", openSite: "Open the site ↗", back: "← Back to approach", approach: "Approach", emptyA: "The thinking behind this piece isn't written up yet. Feel free to ", emptyLink: "get in touch", emptyB: ".",
     nextHint: "Keep scrolling for", swipe: "Swipe for the next page", expand: "Show the full image ↓", collapse: "Collapse ↑", casesName: "Packaging", casesDesc: "Long-form cases that need the full context.", casesPhi: "Packaging has to be completed in one pass — structure, graphics and illustration — for products that must hold up on the shelf, in the hand and on a phone screen.\n\nI work mostly with local brands, cultural products and agricultural specialties, and insist on conveying the product honestly rather than over-packaging it into a cultural-creative template." },
 }[lang];
 
@@ -49,6 +49,11 @@ for (const c of categories) {
     tabs.push({ id: c.key, name: c.name, desc: c.desc, philosophy: c.philosophy, catName: c.name, catTag: c.tagline, type: "images", images: c.images });
   }
 }
+const count = (t: Tab) =>
+  t.type === "demos" ? t.demos!.length
+    : t.type === "cases" ? works.length
+    : t.type === "mixed" ? t.demos!.length + t.images!.length
+    : t.images!.length;
 tabs.push({
   id: "cases",
   name: ui.casesName,
@@ -84,12 +89,7 @@ tabs.push({
               <div class="eyebrow" style="margin-bottom: 10px;">{t.catTag} · {t.catName}</div>
               <h2>{t.name}</h2>
             </div>
-            <span class="num">— {
-              t.type === "demos" ? t.demos!.length
-                : t.type === "cases" ? works.length
-                : t.type === "mixed" ? (t.demos!.length + t.images!.length)
-                : t.images!.length
-            } {ui.pieces}</span>
+            <span class="num">— {count(t)} {count(t) === 1 ? ui.piece : ui.pieces}</span>
           </div>
 
           {(t.type === "demos" || t.type === "mixed") && t.demos && (
@@ -348,6 +348,9 @@ tabs.push({
         };
         media.addEventListener("load", measure);
         window.addEventListener("resize", measure);
+        // Images can finish loading while their tab is hidden (height 0) — re-measure
+        // whenever the media's rendered size changes, e.g. when the tab is shown.
+        if ("ResizeObserver" in window) new ResizeObserver(measure).observe(media);
         measure();
         btn.addEventListener("click", (e) => {
           e.stopPropagation();

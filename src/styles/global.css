@@ -1118,14 +1118,17 @@ em, .italic { font-style: italic; font-weight: 500; }
 }
 @media (min-width: 800px) { .pain-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
 
+/* Both faces share one grid cell, so the card grows to fit the longer side
+   (English copy runs longer than Chinese) instead of spilling out of a fixed height. */
 .pain-card {
   position: relative;
   perspective: 1400px;
-  height: 380px;
+  display: grid;
+  min-height: 380px;
 }
 .pain-face {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  grid-area: 1 / 1;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border: 1px solid var(--ink);

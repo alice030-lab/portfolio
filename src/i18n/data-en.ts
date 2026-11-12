@@ -33,23 +33,27 @@ export const dataEn: Record<string, string> = {
   // ===== gallery.ts — 平面設計 =====
   "平面設計": "Graphic Design",
   "DM、宣傳單張、Banner、海報、說明書、社群主視覺與互動企劃 — 所有平面與社群內容類作品。":
-    "DM, flyers, banners, posters, manuals, social key visuals and interactive campaigns — all print and social content work.",
+    "Brochures, flyers, banners, posters, manuals, social key visuals and interactive campaigns — all print and social content work.",
   "平面與社群是品牌跟使用者最直接的兩種對話形式。\n\nDM 在有限的版面內結構化大量資訊；社群則是品牌每天的聲音，需要一套可重複使用的內容系統，讓在地團隊能持續產出。\n\n兩者共用一套思考方式：先決定「該說什麼、不該說什麼」，再決定怎麼說。":
-    "Print and social are the two most direct ways a brand talks to people.\n\nA DM structures a lot of information in a limited space; social is the brand's daily voice, and needs a reusable content system so a local team can keep producing.\n\nBoth share one way of thinking: first decide what to say and what not to say, then decide how to say it.",
-  "BSIS 盲點資訊系統 DM（奇美車電）": "BSIS Blind-Spot Information System DM (Chimei Motor)",
+    "Print and social are the two most direct ways a brand talks to people.\n\nA brochure structures a lot of information in a limited space; social is the brand's daily voice, and needs a reusable content system so a local team can keep producing.\n\nBoth share one way of thinking: first decide what to say and what not to say, then decide how to say it.",
+  "BSIS 盲點資訊系統 DM（奇美車電）": "BSIS Blind-Spot Information System brochure (Chimei Motor)",
   "為奇美車電的 BSIS 盲點資訊系統設計的產品宣傳 DM。\n\n資訊量大、認證徽章多、技術規格繁雜 — 在單頁內結構化呈現「應用情境 → 認證 → 規格 → 功能特色」四大區塊，讓專業客戶能一眼掃讀。\n\n使用紫色為主色凸顯科技感，搭配實際攝影與插畫示意圖。Taiwan Excellence 2022 入選作品。":
-    "A product DM for Chimei Motor's BSIS blind-spot information system.\n\nDense information, many certification badges and complex specs — structured on a single page into four blocks: use cases → certifications → specs → features, so professional buyers can scan it at a glance.\n\nPurple as the main colour for a technological feel, paired with real photography and illustrated diagrams. Selected for Taiwan Excellence 2022.",
-  "場地預約系統 DM（威爾動力）": "Venue Booking System DM (Will Power)",
+    "A product brochure for Chimei Motor's BSIS blind-spot information system.\n\nDense information, many certification badges and complex specs — structured on a single page into four blocks: use cases → certifications → specs → features, so professional buyers can scan it at a glance.\n\nPurple as the main colour for a technological feel, paired with real photography and illustrated diagrams. Selected for Taiwan Excellence 2022.",
+  "場地預約系統 DM（威爾動力）": "Venue Booking System brochure (Will Power)",
   "為威爾動力高爾夫場地預約系統設計的宣傳 DM。\n\n搭配 UI 截圖呈現「我的會員」與「便捷預約」兩大介面亮點，金色標題 + 紫色基底傳達高端俱樂部的調性。\n\n小尺寸 mockup 安排在主視覺四角 — 讓功能展示不搶走核心訊息「場地預約系統」的視覺主導。":
-    "A promotional DM for Will Power's golf venue booking system.\n\nUI screenshots highlight the two key interfaces, 'My Membership' and 'Quick Booking'; gold headlines on a purple base set the tone of a high-end club.\n\nSmall mock-ups sit in the four corners of the key visual so the feature showcase never overpowers the core message: 'venue booking system'.",
-  "AI DSM 數位側視鏡系統 DM（奇美車電 / 日文版）": "AI DSM Digital Side Mirror DM (Chimei Motor / Japanese edition)",
+    "A promotional brochure for Will Power's golf venue booking system.\n\nUI screenshots highlight the two key interfaces, 'My Membership' and 'Quick Booking'; gold headlines on a purple base set the tone of a high-end club.\n\nSmall mock-ups sit in the four corners of the key visual so the feature showcase never overpowers the core message: 'venue booking system'.",
+  "AI DSM 數位側視鏡系統 DM（奇美車電 / 日文版）": "AI DSM Digital Side Mirror brochure (Chimei Motor / Japanese edition)",
   "為奇美車電 AI DSM 系統設計的日文版產品 DM。\n\n上半部用實境攝影 + 設備合成傳達「裝在 A 柱上」的真實使用情境，下半部用 6 個圖示拆解產品優勢，最下方用實機畫面 + 偵測示意圖佐證。\n\n配合日本市場偏好的乾淨高對比版面，黑白為主、加入網點裝飾呼應產品科技感。":
-    "The Japanese-edition product DM for Chimei Motor's AI DSM system.\n\nThe upper half combines location photography with the device to show it mounted on the A-pillar in a real scenario; the lower half breaks the product's advantages into six icons, backed at the bottom by actual screens and detection diagrams.\n\nTo suit the clean, high-contrast layouts the Japanese market prefers: mostly black and white, with halftone-dot details echoing the product's technical character.",
+    "The Japanese-edition product brochure for Chimei Motor's AI DSM system.\n\nThe upper half combines location photography with the device to show it mounted on the A-pillar in a real scenario; the lower half breaks the product's advantages into six icons, backed at the bottom by actual screens and detection diagrams.\n\nTo suit the clean, high-contrast layouts the Japanese market prefers: mostly black and white, with halftone-dot details echoing the product's technical character.",
   "說明書範例（偵測範圍設定）": "Manual sample (detection range settings)",
   "車載感測器的說明書頁面 — 偵測範圍設定。\n\n左側用簡潔線條插圖呈現車輛側視圖與安裝高度，右側用設備正視圖搭配色塊區分偵測範圍、表格列出尺寸數據。\n\n操作手冊的關鍵：每個參數都要能讓現場人員「一眼讀懂、不需查其他頁」。":
     "A manual page for an in-vehicle sensor — detection range settings.\n\nOn the left, clean line illustrations show the vehicle side view and mounting height; on the right, a front view of the device with colour blocks marking detection zones and a table of dimensions.\n\nThe key to an operating manual: every parameter must be readable at a glance by the people on site, without flipping to another page.",
   "DM 改版前後對照。原版資訊擁擠、層次混亂；改版重新組織資訊架構，讓主訴求一眼可見、次要資訊作為支援。":
-    "Before-and-after of a DM redesign. The original was crowded with a muddled hierarchy; the redesign reorganises the information architecture so the main message is seen first and secondary details support it.",
+    "Before-and-after of a brochure redesign. The original was crowded with a muddled hierarchy; the redesign reorganises the information architecture so the main message is seen first and secondary details support it.",
+  "DM": "Brochure",
+  "DM 1": "Brochure 1",
+  "DM 2": "Brochure 2",
+  "DM 3": "Brochure 3",
   "說明書": "Manual",
   "把長篇說明書拆解成模組化的閱讀單位，讓使用者能跳著讀、找到要找的資訊就走。":
     "Breaking a long manual into modular reading units, so people can skip around, find what they need and leave.",
