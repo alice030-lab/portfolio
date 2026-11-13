@@ -279,10 +279,44 @@ tabs.push({
         });
       });
 
+      // Wide screens: the right-hand column follows the demo card on screen,
+      // so its write-up is readable without clicking the card.
+      let autoKey = null, dismissedKey = null;
+      const wide = window.matchMedia("(min-width: 1280px)");
+      let phiTick = false;
+      const syncPhi = () => {
+        phiTick = false;
+        if (!wide.matches) return;
+        const pane = document.querySelector(".tab-pane.active");
+        if (!pane) return;
+        const picked = document.querySelector("[data-img].is-active");
+        if (picked) {
+          const r = picked.getBoundingClientRect();
+          if (r.bottom > 0 && r.top < window.innerHeight) return; // a clicked item still on screen wins
+          picked.classList.remove("is-active");
+        }
+        const mid = window.innerHeight / 2;
+        let key = null;
+        pane.querySelectorAll(".demo-card[data-img]").forEach(c => {
+          const r = c.getBoundingClientRect();
+          if (r.top < mid && r.bottom > mid) key = c.getAttribute("data-img");
+        });
+        if (key !== dismissedKey) dismissedKey = null;
+        const next = key && key !== dismissedKey ? key : pane.id;
+        if (next !== autoKey || !document.querySelector(".phi.active")) { autoKey = next; showPhi(next); }
+      };
+      const queuePhi = () => { if (!phiTick) { phiTick = true; requestAnimationFrame(syncPhi); } };
+      window.addEventListener("scroll", queuePhi, { passive: true });
+      window.addEventListener("resize", queuePhi);
+      buttons.forEach(b => b.addEventListener("click", () => { autoKey = null; dismissedKey = null; setTimeout(queuePhi, 60); }));
+      queuePhi();
+
       // Back button on per-image philosophy
       document.querySelectorAll(".phi-back").forEach(btn => {
         btn.addEventListener("click", () => {
           const parent = btn.closest(".phi")?.dataset.parent;
+          dismissedKey = btn.closest(".phi")?.dataset.pane || null;
+          autoKey = parent || null;
           if (parent) {
             showPhi(parent);
             document.querySelectorAll("[data-img].is-active").forEach(el => el.classList.remove("is-active"));

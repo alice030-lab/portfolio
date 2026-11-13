@@ -120,7 +120,13 @@ em, .italic { font-style: italic; font-weight: 500; }
   background: rgba(251, 250, 245, 0.9);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
+  transition: transform 0.32s ease;
 }
+/* Scrolling down tucks the header away; scrolling up brings it back. */
+:root { --header-off: var(--header-h, 72px); }
+:root.header-hidden { --header-off: 0px; }
+:root.header-hidden .site-header { transform: translateY(-100%); }
+@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 .site-header .inner {
   max-width: var(--max);
   margin: 0 auto;
@@ -891,6 +897,14 @@ em, .italic { font-style: italic; font-weight: 500; }
 .demo-meta p {
   font-size: 14px; color: var(--ink-soft); line-height: 1.65;
 }
+/* Wide screens: the card keeps only its title; the full write-up shows in the
+   right-hand column while that card is on screen. */
+@media (min-width: 1280px) {
+  .demo-meta { padding: 16px 28px 18px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 16px; }
+  .demo-meta h3 { margin-bottom: 0; font-size: clamp(18px, 1.5vw, 22px); order: 1; }
+  .demo-meta .tag { margin-bottom: 0; order: 2; margin-left: auto; }
+  .demo-meta p { display: none; }
+}
 
 /* ========== Scattered geometric blocks (about page) ========== */
 .scatter-stage {
@@ -1375,9 +1389,10 @@ em, .italic { font-style: italic; font-weight: 500; }
     overflow-x: visible;
     overflow-y: auto;
     position: sticky;
-    top: 60px;
+    top: max(0px, calc(var(--header-off, 72px) - 12px));
+    transition: top 0.32s ease;
     align-self: start;
-    max-height: calc(100vh - 60px);
+    max-height: calc(100vh - max(0px, calc(var(--header-off, 72px) - 12px)));
   }
 }
 .vtab {
@@ -1455,9 +1470,10 @@ em, .italic { font-style: italic; font-weight: 500; }
   .work-philosophy {
     border-top: 0;
     position: sticky;
-    top: 60px;
+    top: max(0px, calc(var(--header-off, 72px) - 12px));
+    transition: top 0.32s ease;
     align-self: start;
-    max-height: calc(100vh - 60px);
+    max-height: calc(100vh - max(0px, calc(var(--header-off, 72px) - 12px)));
     overflow-y: auto;
   }
 }
@@ -2018,7 +2034,8 @@ em, .italic { font-style: italic; font-weight: 500; }
 @media (max-width: 899px) {
   .work-tabs-vertical {
     position: sticky;
-    top: calc(var(--header-h, 72px) - 1px);
+    top: calc(var(--header-off, 72px) - 1px);
+    transition: top 0.32s ease;
     z-index: 20;
     background: rgba(251, 250, 245, 0.94);
     backdrop-filter: blur(12px);

@@ -112,6 +112,22 @@ const enUrl = `${siteOrigin}${href("en", pathNoLang)}`;
       set();
       window.addEventListener("resize", set);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
+
+      // Hide the header while scrolling down, bring it back on any scroll up.
+      const root = document.documentElement;
+      let lastY = window.scrollY, ticking = false;
+      const update = () => {
+        ticking = false;
+        const y = Math.max(0, window.scrollY);
+        const dy = y - lastY;
+        if (Math.abs(dy) < 6) return;
+        const hh = h ? h.offsetHeight : 72;
+        if (dy > 0 && y > hh) root.classList.add("header-hidden");
+        else if (dy < 0) root.classList.remove("header-hidden");
+        lastY = y;
+      };
+      window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+      if (h) h.addEventListener("focusin", () => root.classList.remove("header-hidden"));
     })();
   </script>
 
