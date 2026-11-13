@@ -1368,7 +1368,7 @@ em, .italic { font-style: italic; font-weight: 500; }
   .work-layout { grid-template-columns: 220px 1fr; }
 }
 @media (min-width: 1280px) {
-  .work-layout { grid-template-columns: 220px 1fr 320px; }
+  .work-layout { grid-template-columns: 220px 1fr 256px; }
 }
 
 /* Vertical tabs sidebar */
@@ -1469,6 +1469,7 @@ em, .italic { font-style: italic; font-weight: 500; }
 @media (min-width: 1280px) {
   .work-philosophy {
     border-top: 0;
+    padding: 32px 22px;
     position: sticky;
     top: max(0px, calc(var(--header-off, 72px) - 12px));
     transition: top 0.32s ease;
@@ -1498,6 +1499,10 @@ em, .italic { font-style: italic; font-weight: 500; }
   line-height: 1.85;
   color: var(--ink-soft);
   margin-bottom: 1em;
+}
+@media (min-width: 1280px) {
+  .phi-title { font-size: 23px; margin-bottom: 16px; }
+  .phi p { font-size: 13.5px; line-height: 1.8; }
 }
 .phi-desc {
   font-size: 12px !important;
