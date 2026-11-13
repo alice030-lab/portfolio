@@ -866,17 +866,12 @@ em, .italic { font-style: italic; font-weight: 500; }
   display: flex; flex-direction: column;
   width: 100%;
 }
-/* Each source page is a square export with padding above/below the real layout.
-   The figure takes the real layout's ratio and the square media is shifted up by
-   --crop-top (a % of the width = % of the square's height), hiding the padding. */
-.showcase-page-item { margin: 0; width: 100%; overflow: hidden; }
-.showcase-page-item img,
-.showcase-page-item video { margin-top: calc(-1 * var(--crop-top, 0%)); }
+/* Pages have their own heights; each figure reserves its real ratio (set inline from data). */
+.showcase-page-item { margin: 0; width: 100%; overflow: hidden; aspect-ratio: 1 / 1; }
 .showcase-page-item img,
 .showcase-page-item video {
   display: block;
-  width: 100%; height: auto;
-  aspect-ratio: 1 / 1;
+  width: 100%; height: 100%;
   object-fit: cover;
   background: var(--cream);
 }
